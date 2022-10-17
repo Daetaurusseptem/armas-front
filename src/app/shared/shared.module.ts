@@ -31,7 +31,7 @@ import { AppRoutingModule } from '../app-routing.module';
     MatIconModule,
     MatButtonModule,
     MatSidenavModule,
-    MatListModule
+    MatListModule,
   ]
 })
 export class SharedModule { }

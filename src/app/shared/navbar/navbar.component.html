@@ -14,11 +14,29 @@
           <!-- Menus List -->
           <div class="offcanvas offcanvas-start shadow" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
             <div class="offcanvas-body">
-                  <ul class="navbar-nav">
+                  <ul class="navbar-nav mt-5">
+                    <a routerLink="/">
+                        <i class="bi bi-house"></i>
+                        <span routerLink="" class="item-text">Inicio</span>
+                    </a>
+                      <li class="border" *ngFor="let menu of menuItems">
+                          <a class="border" type="button" data-bs-toggle="collapse" attr.data-bs-target="#{{menu.id}}" aria-expanded="false"
+                              attr.aria-controls="{{menu.id}}">
+                              <h5>
+                                <i [class]="menu.icon"></i>
+                                {{menu.title}}
+                              </h5>
+                          </a>
+                        <div class="collapse" id="{{menu.id}}">
+                          <a *ngFor="let item of menu.submenu" routerLink="{{item.url}}">
+                            <i [class]="item.title"></i>
+                            <h5>
+                              {{item.title}}
+                            </h5>
+                          </a>
 
-                      <li class="border"><a href="#"><i class="bi bi-house"></i> <span class="item-text">Inicio</span></a></li>
-                      <li class="border"><a href="#"><i class="bi bi-pencil-square"></i> <span class="item-text">Expedintes</span></a></li>
-                      <li class="border"><a routerLink='crear-usuario' routerLinkActive="router-link-active" ><i class="bi bi-people"></i> <span class="item-text">Registar Usuarios</span></a></li>
+                        </div>
+                      </li>
 
                   </ul>
             </div>
