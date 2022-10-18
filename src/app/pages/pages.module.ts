@@ -13,6 +13,7 @@ import { AreasComponent } from './adminTools/areas/areas.component';
 import { DepartamentosComponent } from './adminTools/departamentos/departamentos.component';
 import { CrearDepartamentosComponent } from './adminTools/crear-departamentos/crear-departamentos.component';
 import { InicioAdminComponent } from './adminTools/inicio-admin/inicio-admin.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -28,12 +29,15 @@ import { InicioAdminComponent } from './adminTools/inicio-admin/inicio-admin.com
        CrearDepartamentosComponent,
        InicioAdminComponent,
 
+
   ],
   imports: [
     CommonModule,
     SharedModule,
     PagesRoutingModule,
-    NgxCaptchaModule
+    NgxCaptchaModule,
+    ReactiveFormsModule,
+    FormsModule
   ]
 })
 export class PagesModule { }
