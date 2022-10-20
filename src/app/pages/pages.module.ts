@@ -14,6 +14,7 @@ import { DepartamentosComponent } from './adminTools/departamentos/departamentos
 import { CrearDepartamentosComponent } from './adminTools/crear-departamentos/crear-departamentos.component';
 import { InicioAdminComponent } from './adminTools/inicio-admin/inicio-admin.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { EditarUsuarioComponent } from './adminTools/editar-usuario/editar-usuario.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
        DepartamentosComponent,
        CrearDepartamentosComponent,
        InicioAdminComponent,
+       EditarUsuarioComponent,
 
 
   ],

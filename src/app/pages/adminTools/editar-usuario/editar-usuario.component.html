@@ -1,0 +1,181 @@
+<div class="row">
+  <div class="col-8 mx-auto">
+    <div class="card text-center">
+      <div class="card-header">
+        <div class="card-title">
+          <h3>
+            Editar Usuario
+          </h3>
+        </div>
+      </div>
+      <div class="card-body">
+        <form id="registerUsuarioForm" [formGroup]="usuarioForm" (ngSubmit)="guardarUsuario()">
+          <div class="mb-3">
+
+            <div class="mb-3">
+              <label for="" class="form-label text-left">Nombre:</label>
+              <input
+                     type="text"
+                     name=""
+                     id=""
+                     class="form-control"
+                     placeholder="Ej: Jose Antonio Ramirez Salas"
+                     formControlName="nombre"
+                     >
+              <small id="" class="text-muted">Ingrese el nombre completo del usuario</small>
+            </div>
+            <div class="mb-3">
+              <label for="" class="form-label">Nombre de Usuario </label>
+              <input
+                    type="text"
+                    name=""
+                    id=""
+                    class="form-control"
+                    placeholder="Ej:Jose1304"
+                    aria-describedby="helpId"
+                    formControlName="usuario"
+                >
+              <small id="" class="text-muted">Ingrese un usuario con el cual iniciar sesion</small>
+            </div>
+
+            <div class="row">
+              <div class="col-6">
+                <!-- Button trigger modal contrasena -->
+                <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#passwordT">
+                  <i class="bi bi-lock-fill"></i>
+                  Cambiar contraseña
+                </button>
+              </div>
+              <div class="col-6">
+                <!-- Button trigger modal Permisos-->
+                <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#permisos">
+                  <i class="bi bi-check-square"></i>
+                  Cambiar Permisos
+                </button>
+
+              </div>
+            </div>
+
+
+          </div>
+          <!-- <div class="card-body">
+            <p *ngIf="campoNoValido('nombre')" class="text-danger">nombre invalido</p>
+            <p *ngIf="campoNoValido('usuario')" class="text-danger">Usuario No valido</p>
+            <p *ngIf="contrasenasNoValidas()" class="text-danger">las contrasenas deben coincidir</p>
+            <p *ngIf="contrasenasNoValidas()" class="text-danger">contrasenas invalidas</p>
+          </div> -->
+          <div class="d-grid gap-2">
+            <button type="submit" name="" id="" class="btn btn-primary">Guardar Cambios</button>
+          </div>
+
+        </form>
+         <!-- MODAL PASSWORD -->
+         <div class="">
+           <div class="modal fade" id="passwordT" tabindex="-1" aria-labelledby="passwordTLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="passwordTLabel">Cambiar contraseña</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <form id="registerUsuarioForm" [formGroup]="passwordForm" (ngSubmit)="guardarPassword()">
+                    <div class="mb3">
+                      <div class="mb-3">
+                        <label for="" class="form-label">Nueva Contraseña </label>
+                        <input
+                              type="password"
+                              name=""
+                              id=""
+                              class="form-control"
+                              placeholder=""
+                              formControlName="password">
+                            <small id="" class="text-muted">Ingrese una contraseña con un minimo de 5 digitos</small>
+                      </div>
+                      <div class="mb-3">
+                        <label for="" class="form-label">Repetir Contraseña </label>
+                        <input type="password" name="" id="" class="form-control" placeholder="" aria-describedby="helpId"
+                          formControlName="password2">
+                        <small id="" class="text-muted">Porfavor repetir contraseña</small>
+                      </div>
+                      <div class="mb-3">
+                        <div class="card-body">
+                          <p *ngIf="contrasenasNoValidas()" class="text-danger">las contrasenas deben coincidir</p>
+                          <p *ngIf="contrasenasNoValidas()" class="text-danger">contrasenas invalidas</p>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                      <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+                    </div>
+                  </form>
+                  </div>
+                </div>
+            </div>
+          </div>
+         </div>
+         <!-- FIN MODAL PASSWORD-->
+         <!-- MODAL PERMISOS -->
+         <div class="">
+           <div class="modal fade" id="permisos" tabindex="-1" aria-labelledby="permisosLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="permisosabel">Cambiar permisos</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <form id="registerUsuarioForm" [formGroup]="passwordForm" (ngSubmit)="guardarPassword()">
+                    <div class="mb3">
+                      <div class="mb-3">
+                        <label for="" class="form-label">Seleccione la opcion que desee </label>
+                        <select
+                              type="password"
+                              name=""
+                              id=""
+                              class="form-control"
+                              placeholder=""
+                              formControlName="password">
+                            <option  value="">Ver Permisos</option>
+                            <option  value="">Agregar Permisos</option>
+                        </select>
+                      </div>
+                      <div class="mb-3">
+                        <div class="chip">
+                          Tag 220
+                          <i class="close fas fa-times"></i>
+                        </div>
+                        <div class="chip">
+                          Tag 220
+                          <i class="close fas fa-times"></i>
+                        </div>
+                        <label for="" class="form-label">Repetir Contraseña </label>
+                        <input type="password" name="" id="" class="form-control" placeholder="" aria-describedby="helpId"
+                          formControlName="password2">
+                        <small id="" class="text-muted">Porfavor repetir contraseña</small>
+                      </div>
+                      <div class="mb-3">
+                        <div class="card-body">
+                          <p *ngIf="contrasenasNoValidas()" class="text-danger">las contrasenas deben coincidir</p>
+                          <p *ngIf="contrasenasNoValidas()" class="text-danger">contrasenas invalidas</p>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                      <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+                    </div>
+                  </form>
+                  </div>
+                </div>
+            </div>
+          </div>
+         </div>
+         <!-- FIN MODAL PERMISOS-->
+      </div>
+    </div>
+  </div>
+</div>

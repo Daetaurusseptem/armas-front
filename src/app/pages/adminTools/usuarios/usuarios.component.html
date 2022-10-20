@@ -8,7 +8,7 @@
       </div>
       <form>
         <div class="m-5">
-          <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+          <input type="text" class="form-control" id="busqueda" aria-describedby="emailHelp">
 
         </div>
       </form>
@@ -25,30 +25,67 @@
         </a>
       </div>
       <div class="card-body">
-        <table class="table">
-          <thead>
-            <tr>
-              <th scope="col">#</th>
-              <th scope="col">Nombre</th>
-              <th scope="col">Usuario</th>
-              <th scope="col">Password</th>
-              <th scope="col">Herramientas</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let usuario of usuarios">
-              <th scope="row">1</th>
-              <td>{{usuario.nombre}}</td>
-              <td>{{usuario.usuario}}</td>
-              <td>{{usuario.password}}</td>
-              <td>
-                <a name="" id="" class="btn btn-primary" href="#" role="button">
-                  <i class="bi bi-pencil"></i>
-                </a>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+        <div class="table-responsive">
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Id</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Usuario</th>
+                <th scope="col">Permisos</th>
+                <th scope="col">Password</th>
+                <th scope="col">Herramientas</th>
+              </tr>
+            </thead>
+            <tbody class="text-left">
+              <tr *ngFor="let usuario of usuarios; index as i">
+                <th scope="row">{{i+1}}</th>
+                <th scope="row">{{usuario.id}}</th>
+                <td>{{usuario.nombre}}</td>
+                <td>{{usuario.usuario}}</td>
+                <td *ngIf="usuario.Areas.length==0">
+                  <ul class="lista-tabla text-start">
+                    <li>
+                      <span>Sin permisos</span>
+                    </li>
+                  </ul>
+                </td>
+                <td *ngIf="usuario.Areas.length>0">
+                    <ul class="lista-tabla text-start">
+                      <li class="pb-2" *ngFor="let area of usuario.Areas">
+                          {{area.nombre}}
+                          <span  class="badge bg-primary" *ngIf="area.Permisos.tipo=='l'">Lectura</span>
+                          <span class="badge bg-success" *ngIf="area.Permisos.tipo=='e'">Escritura</span>
+                      </li>
+                    </ul>
+
+                </td>
+                <td>
+                  <div class="">
+                    <p>
+                      <button class="btn btn-secondary border" type="button" data-bs-toggle="collapse" attr.data-bs-target="#collapsePassword{{usuario.usuario}}" aria-expanded="false" attr.aria-controls="collapsePassword{{usuario.usuario}}">
+                        <i class="bi bi-eye-fill text-light"></i>
+
+                      </button>
+                    </p>
+                    <div class="collapse" id="collapsePassword{{usuario.usuario}}">
+                      <div class="d-flex flex-row-reverse card card-body">
+                        {{usuario.password}}
+                      </div>
+                    </div>
+                  </div>
+                   <!-- {{usuario.password}} -->
+                </td>
+                <td>
+                  <a [routerLink]="['/dashboard/usuarios/editar-usuario',usuario.id]" name="" id="" class="btn btn-primary" role="button">
+                    <i class="bi bi-pencil align-middle"></i>
+                  </a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   </div>

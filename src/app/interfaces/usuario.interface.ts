@@ -1,3 +1,5 @@
+import { Area } from "./area.interface";
+
 export interface Usuario {
   id: string;
   img?: any;
@@ -8,4 +10,5 @@ export interface Usuario {
   actualizo: string;
   creadoEl: Date;
   actualizadoEl: Date;
+  Areas:Area[]
 }

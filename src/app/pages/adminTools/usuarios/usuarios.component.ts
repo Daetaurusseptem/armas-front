@@ -25,13 +25,13 @@ export class UsuariosComponent implements OnInit {
     this.usuarioService.getUsuarios()
     .pipe(
       map(item=>{
+        console.log(item);
         return item.usuarios
       })
     )
     .subscribe(
       r=>{
         this.usuarios = r
-        console.log(this.usuarios);
       }
     )
   }

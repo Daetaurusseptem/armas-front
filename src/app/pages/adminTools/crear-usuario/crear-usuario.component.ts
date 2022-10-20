@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UsuariosService } from 'src/app/services/usuarios.service';
+import Swal from 'sweetalert2';
 
 
 @Component({
@@ -19,7 +20,8 @@ export class CrearUsuarioComponent implements OnInit {
     usuario:['',Validators.required],
     // email:['', [Validators.email, Validators.required]],
     password:['', [Validators.required]],
-    password2:['', [Validators.required]]
+    password2:['', [Validators.required]],
+    actualizo:['admin', [Validators.required]]
 
   },
   {
@@ -56,16 +58,17 @@ export class CrearUsuarioComponent implements OnInit {
     .subscribe(
       resp=>{
         console.log(resp);
+
       // idUsuario= resp.id
       // console.log(idUsuario);
       // return this.usuariosService.addMaestroMateria(materiaId, idUsuario)
       // .subscribe(
       //   resp=>{
-      //     Swal.fire({
-      //       title:'Maestro creado'
-      //     })
+           Swal.fire({
+             title:'Usuario creado'
+           })
 
-      //       this.router.navigateByUrl('/dashboard')
+           this.router.navigateByUrl('dashboard/usuarios')
 
       //   }
       // )

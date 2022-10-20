@@ -1,6 +1,6 @@
 import { Usuario } from "./usuario.interface";
 
-export interface UsuariosResponse {
+export interface UsuarioResponse {
   ok: boolean;
-  usuarios: Usuario[];
+  usuario: Usuario;
 }
