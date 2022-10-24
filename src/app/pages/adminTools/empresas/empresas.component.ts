@@ -1,4 +1,7 @@
+import { Empresa } from './../../../interfaces/empresa.interface';
+import { EmpresaService } from './../../../services/empresa.service';
 import { Component, OnInit } from '@angular/core';
+import {map} from 'rxjs/operators';
 
 @Component({
   selector: 'app-empresas',
@@ -7,9 +10,30 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EmpresasComponent implements OnInit {
 
-  constructor() { }
+  empresas: Empresa[] = [];
 
-  ngOnInit(): void {
+  constructor(private areaService:EmpresaService) {
+    this.cargarAreas();
+
+
   }
 
+  ngOnInit(): void {
+
+  }
+
+  cargarAreas(){
+    this.areaService.getEmpresas()
+    .pipe(
+      map(item=>{
+        console.log(item);
+        return item.empresas
+      })
+    )
+    .subscribe(
+      r=>{
+        this.empresas = r
+      }
+    )
+  }
 }

@@ -72,6 +72,12 @@ export class CrearUsuarioComponent implements OnInit {
 
       //   }
       // )
+    },
+    err=>{
+      console.log(err);
+      Swal.fire({
+        title:'Hubo un error'+err
+      })
     }
     )
 
