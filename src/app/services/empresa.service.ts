@@ -1,10 +1,11 @@
 import { updateEmpresa } from './../interfaces/updateEmpresa.interface';
 import { RegistrarEmpresa } from './../interfaces/empresaRegister.interface';
-import { EmpresaResponse } from './../interfaces/empresaResponse.interface';
-import { EmpresasResponse } from './../interfaces/empresasResponse.interface';
+
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment.prod';
+import { ArrayResponse } from '../interfaces/arrayResponse.interface';
+import { itemResponse } from '../interfaces/itemResponse.interface';
 const UrlBase = environment.urlBack
 @Injectable({
   providedIn: 'root'
@@ -16,10 +17,10 @@ export class EmpresaService {
   constructor(private http:HttpClient) { }
 
   getEmpresas(){
-    return this.http.get<EmpresasResponse>(this.url);
+    return this.http.get<ArrayResponse  >(this.url);
   }
   getEmpresa(id:string){
-    return this.http.get<EmpresaResponse>(`${this.url}/${id}`);
+    return this.http.get<itemResponse>(`${this.url}/${id}`);
   }
   createEmpresa(formData: RegistrarEmpresa){
     return this.http.post(this.url, formData)

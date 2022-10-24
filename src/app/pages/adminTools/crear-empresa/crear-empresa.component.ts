@@ -14,11 +14,11 @@ export class CrearEmpresaComponent implements OnInit {
 
 
   formSubmitted=false;
-  // materias:materias[]=[];
+
 
   public registerEmpresaForm = this.fb.group({
-    id:['', [Validators.required, Validators.minLength(10), Validators.maxLength(20), Validators.pattern(/^(\s+\S+\s*)*(?!\s).*$/)]],
-    nombre:['',[Validators.required, Validators.minLength(10), Validators.maxLength(30)]],
+    id:['', [Validators.required, Validators.minLength(5), Validators.maxLength(20), Validators.pattern(/^(\s+\S+\s*)*(?!\s).*$/)]],
+    nombre:['',[Validators.required, Validators.minLength(5), Validators.maxLength(30)]],
     descripcion:['', [Validators.required, Validators.minLength(10), Validators.maxLength(30)]],
     actualizo:['admin', [Validators.required]]
 

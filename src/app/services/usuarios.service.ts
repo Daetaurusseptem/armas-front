@@ -2,10 +2,12 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { tap } from 'rxjs';
 import { environment } from 'src/environments/environment.prod';
+import { ArrayResponse } from '../interfaces/arrayResponse.interface';
+import { itemResponse } from '../interfaces/itemResponse.interface';
 import { updateDatosUsuario } from '../interfaces/updateDatosUsuario.interface';
 import { registraUsuario } from '../interfaces/userRegister.interface';
-import { UsuarioResponse } from '../interfaces/usuarioResponse.interface';
-import {   UsuariosResponse } from '../interfaces/usuariosResponse.interface';
+
+
 
 const UrlBase= environment.urlBack
 
@@ -19,10 +21,10 @@ export class UsuariosService {
   constructor(private http:HttpClient) { }
 
   getUsuarios(){
-    return this.http.get<UsuariosResponse>(this.url);
+    return this.http.get<ArrayResponse>(this.url);
   }
   getUsuario(id:string){
-    return this.http.get<UsuarioResponse>(`${this.url}/${id}`);
+    return this.http.get<itemResponse>(`${this.url}/${id}`);
   }
   createUser(formData: registraUsuario){
     return this.http.post(this.url, formData)

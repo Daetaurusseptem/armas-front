@@ -32,6 +32,7 @@
                 <th scope="col">#</th>
                 <th scope="col">Id</th>
                 <th scope="col">Nombre</th>
+                <th scope="col">Empresa</th>
                 <th scope="col">Descripcion</th>
                 <th scope="col">Herramientas</th>
               </tr>
@@ -41,6 +42,7 @@
                 <th scope="row">{{i+1}}</th>
                 <th scope="row">{{area.id}}</th>
                 <td>{{area.nombre}}</td>
+                <td>{{area.empresaId}}</td>
                 <td>{{area.descripcion}}</td>
                 <td>
                   <a [routerLink]="['/dashboard/areas/editar-area',area.id]" name="" id="" class="btn btn-primary" role="button">

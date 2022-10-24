@@ -13,7 +13,7 @@ import Swal from 'sweetalert2';
 export class CrearUsuarioComponent implements OnInit {
 
   formSubmitted=false;
-  // materias:materias[]=[];
+
 
   public registerUsuarioForm = this.fb.group({
     nombre:['', Validators.required],
@@ -72,12 +72,6 @@ export class CrearUsuarioComponent implements OnInit {
 
       //   }
       // )
-    },
-    err=>{
-      console.log(err);
-      Swal.fire({
-        title:'Hubo un error'+err
-      })
     }
     )
 
