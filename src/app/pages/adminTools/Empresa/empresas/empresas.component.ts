@@ -1,5 +1,5 @@
-import { Empresa } from './../../../interfaces/empresa.interface';
-import { EmpresaService } from './../../../services/empresa.service';
+import { Empresa } from '../../../../interfaces/empresa.interface';
+import { EmpresaService } from '../../../../services/empresa.service';
 import { Component, OnInit } from '@angular/core';
 import {map} from 'rxjs/operators';
 

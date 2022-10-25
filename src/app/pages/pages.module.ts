@@ -1,22 +1,25 @@
+import { InicioAdminComponent } from './adminTools/adminPages/inicio-admin/inicio-admin.component';
+import { CrearDepartamentosComponent } from './adminTools/Departamento/crear-departamentos/crear-departamentos.component';
+import { DepartamentosComponent } from './adminTools/Departamento/departamentos/departamentos.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PagesComponent } from './pages.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { SharedModule } from '../shared/shared.module';
 import { PagesRoutingModule } from './pages.routing';
-import { CrearUsuarioComponent } from './adminTools/crear-usuario/crear-usuario.component';
+import { CrearUsuarioComponent } from './adminTools/Usuario/crear-usuario/crear-usuario.component';
 import { NgxCaptchaModule } from 'ngx-captcha';
-import { UsuariosComponent } from './adminTools/usuarios/usuarios.component';
-import { EmpresasComponent } from './adminTools/empresas/empresas.component';
-import { CrearEmpresaComponent } from './adminTools/crear-empresa/crear-empresa.component';
-import { AreasComponent } from './adminTools/areas/areas.component';
-import { DepartamentosComponent } from './adminTools/departamentos/departamentos.component';
-import { CrearDepartamentosComponent } from './adminTools/crear-departamentos/crear-departamentos.component';
-import { InicioAdminComponent } from './adminTools/inicio-admin/inicio-admin.component';
+import { UsuariosComponent } from './adminTools/Usuario/usuarios/usuarios.component';
+import { EmpresasComponent } from './adminTools/Empresa/empresas/empresas.component';
+import { CrearEmpresaComponent } from './adminTools/Empresa/crear-empresa/crear-empresa.component';
+import { AreasComponent } from './adminTools/Area/areas/areas.component';
+
+
+
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { EditarUsuarioComponent } from './adminTools/editar-usuario/editar-usuario.component';
-import { EditarEmpresaComponent } from './adminTools/editar-empresa/editar-empresa.component';
-import { CrearAreaComponent } from './adminTools/crear-area/crear-area.component';
+import { EditarUsuarioComponent } from './adminTools/Usuario/editar-usuario/editar-usuario.component';
+import { EditarEmpresaComponent } from './adminTools/Empresa/editar-empresa/editar-empresa.component';
+import { CrearAreaComponent } from './adminTools/Area/crear-area/crear-area.component';
 
 @NgModule({
   declarations: [

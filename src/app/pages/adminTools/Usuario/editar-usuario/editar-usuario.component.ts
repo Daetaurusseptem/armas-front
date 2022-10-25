@@ -72,6 +72,9 @@ export class EditarUsuarioComponent implements OnInit {
       })
     )
   }
+  obtenerPermisos(){
+
+  }
 
   guardarUsuario(){
 
@@ -143,7 +146,6 @@ export class EditarUsuarioComponent implements OnInit {
 
     }
   }
-
    campoNoValidoPassword(campo:string):boolean{
      if ( this.passwordForm.get(campo)?.invalid && this.formSubmitted ) {
        return true;

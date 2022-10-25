@@ -62,16 +62,21 @@
 
                 </td>
                 <td>
-                  <div class="">
-                    <p>
-                      <button class="btn btn-secondary border" type="button" data-bs-toggle="collapse" attr.data-bs-target="#collapsePassword{{usuario.usuario}}" aria-expanded="false" attr.aria-controls="collapsePassword{{usuario.usuario}}">
+                  <div class="text-center">
+                    <div>
+                      <button id="collapsePassword{{usuario.usuario}}"   class="btn btn-secondary border  show" type="button" data-bs-toggle="collapse" attr.data-bs-target="#collapsePassword{{usuario.usuario}}" aria-expanded="false" attr.aria-controls="collapsePassword{{usuario.usuario}}">
                         <i class="bi bi-eye-fill text-light"></i>
 
                       </button>
-                    </p>
+                    </div>
                     <div class="collapse" id="collapsePassword{{usuario.usuario}}">
-                      <div class="d-flex flex-row-reverse card card-body">
-                        {{usuario.password}}
+                      <div class="row">
+                        <div class="card card-body bg-light col-12 text-secondary shadow">
+                          "{{usuario.password}}"
+                          <a class="" type="button" data-bs-toggle="collapse" attr.data-bs-target="#collapsePassword{{usuario.usuario}}" aria-expanded="false" attr.aria-controls="collapsePassword{{usuario.usuario}}">
+                            <i class="bi bi-eye-slash-fill text-secondary"></i>
+                          </a>
+                        </div>
                       </div>
                     </div>
                   </div>

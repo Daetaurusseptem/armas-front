@@ -1,5 +1,5 @@
-import { AreaService } from './../../../services/area.service';
-import { Area } from './../../../interfaces/area.interface';
+import { AreaService } from '../../../../services/area.service';
+import { Area } from '../../../../interfaces/area.interface';
 import { Component, OnInit } from '@angular/core';
 import {map} from 'rxjs/operators';
 

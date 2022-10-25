@@ -1,6 +1,6 @@
-import { EmpresaService } from './../../../services/empresa.service';
+import { EmpresaService } from '../../../../services/empresa.service';
 import { Router } from '@angular/router';
-import { UsuariosService } from './../../../services/usuarios.service';
+import { UsuariosService } from '../../../../services/usuarios.service';
 import Swal from 'sweetalert2';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';

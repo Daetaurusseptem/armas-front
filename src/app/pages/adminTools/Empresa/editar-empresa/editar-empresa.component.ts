@@ -1,5 +1,5 @@
 import Swal from 'sweetalert2';
-import { Empresa } from './../../../interfaces/empresa.interface';
+import { Empresa } from '../../../../interfaces/empresa.interface';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';

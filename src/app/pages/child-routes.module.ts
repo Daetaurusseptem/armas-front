@@ -1,17 +1,18 @@
-import { EditarEmpresaComponent } from './adminTools/editar-empresa/editar-empresa.component';
-import { CrearEmpresaComponent } from './adminTools/crear-empresa/crear-empresa.component';
-import { EmpresasComponent } from './adminTools/empresas/empresas.component';
-import { AreasComponent } from './adminTools/areas/areas.component';
+import { InicioAdminComponent } from './adminTools/adminPages/inicio-admin/inicio-admin.component';
+import { EditarEmpresaComponent } from './adminTools/Empresa/editar-empresa/editar-empresa.component';
+import { CrearEmpresaComponent } from './adminTools/Empresa/crear-empresa/crear-empresa.component';
+import { EmpresasComponent } from './adminTools/Empresa/empresas/empresas.component';
+import { AreasComponent } from './adminTools/Area/areas/areas.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { PagesComponent } from './pages.component';
-import { CrearUsuarioComponent } from './adminTools/crear-usuario/crear-usuario.component';
+import { CrearUsuarioComponent } from './adminTools/Usuario/crear-usuario/crear-usuario.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
-import { InicioAdminComponent } from './adminTools/inicio-admin/inicio-admin.component';
-import { UsuariosComponent } from './adminTools/usuarios/usuarios.component';
-import { EditarUsuarioComponent } from './adminTools/editar-usuario/editar-usuario.component';
-import { CrearAreaComponent } from './adminTools/crear-area/crear-area.component';
+
+import { UsuariosComponent } from './adminTools/Usuario/usuarios/usuarios.component';
+import { EditarUsuarioComponent } from './adminTools/Usuario/editar-usuario/editar-usuario.component';
+import { CrearAreaComponent } from './adminTools/Area/crear-area/crear-area.component';
 
 const childRoutes:Routes=[
   { path: '', component: PagesComponent, data:{title: 'Dashboard'}},
