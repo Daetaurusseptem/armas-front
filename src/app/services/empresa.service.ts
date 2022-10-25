@@ -17,7 +17,7 @@ export class EmpresaService {
   constructor(private http:HttpClient) { }
 
   getEmpresas(){
-    return this.http.get<ArrayResponse  >(this.url);
+    return this.http.get<ArrayResponse>(this.url);
   }
   getEmpresa(id:string){
     return this.http.get<itemResponse>(`${this.url}/${id}`);

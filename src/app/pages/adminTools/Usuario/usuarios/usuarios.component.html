@@ -33,6 +33,7 @@
                 <th scope="col">Id</th>
                 <th scope="col">Nombre</th>
                 <th scope="col">Usuario</th>
+                <th scope="col">Role</th>
                 <th scope="col">Permisos</th>
                 <th scope="col">Password</th>
                 <th scope="col">Herramientas</th>
@@ -44,6 +45,7 @@
                 <th scope="row">{{usuario.id}}</th>
                 <td>{{usuario.nombre}}</td>
                 <td>{{usuario.usuario}}</td>
+                <td>{{usuario.role}}</td>
                 <td *ngIf="usuario.Areas.length==0">
                   <ul class="lista-tabla text-start">
                     <li>

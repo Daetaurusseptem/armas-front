@@ -8,6 +8,7 @@ export interface Usuario {
   password: string;
   status: boolean;
   actualizo: string;
+  role?:'ADMIN_ROLE'|'USER_ROLE';
   creadoEl: Date;
   actualizadoEl: Date;
   Areas:Area[]
