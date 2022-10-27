@@ -20,14 +20,14 @@
                         <span routerLink="" class="item-text">Inicio</span>
                     </a>
                       <li class="border" style="content: none;" *ngFor="let menu of menuItems">
-                          <a class="border" type="button" data-bs-toggle="collapse" attr.data-bs-target="#{{menu.id}}" aria-expanded="false"
-                              attr.aria-controls="{{menu.id}}">
+                          <a class="border" type="button" data-bs-toggle="collapse" attr.data-bs-target="#{{menu.title}}" aria-expanded="false"
+                              attr.aria-controls="{{menu.title}}">
                               <h5>
                                 <i [class]="menu.icon"></i>
                                 {{menu.title}}
                               </h5>
                           </a>
-                        <div class="collapse" id="{{menu.id}}">
+                        <div class="collapse" id="{{menu.title}}">
                           <a *ngFor="let item of menu.submenu" routerLink="{{item.url}}">
                             <i [class]="item.title"></i>
                             <h5>
@@ -46,14 +46,14 @@
               <a href="#" class="dropdown-toggle text-white text-decoration-none" data-bs-toggle="dropdown" aria-expanded="false">
 
                   <span class="usericon"><i class="bi bi-person-circle"></i></span>
-                  <span class="textnone">Usuario_1</span>
+                  <span class="textnone">{{usuario.nombre}}</span>
               </a>
               <ul class="dropdown-menu dropdown-menu-end">
 
 
                   <li><button class="dropdown-item" type="button"><i class="bi bi-gear-wide-connected"></i> Configuracion</button></li>
                   <li><hr class="dropdown-divider"></li>
-                  <li><button class="dropdown-item" type="button"><i class="bi bi-box-arrow-right"></i> Cerrar sesion</button></li>
+                  <li><button class="dropdown-item" type="button" (click)="logOut()"><i class="bi bi-box-arrow-right"></i> Cerrar sesion</button></li>
               </ul>
           </div>
 

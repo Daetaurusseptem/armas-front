@@ -1,6 +1,9 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { MediaMatcher } from '@angular/cdk/layout';
 import { MenuService } from 'src/app/services/menu-service.service';
+import { UsuariosService } from 'src/app/services/usuarios.service';
+import { UsuarioModel } from 'src/app/models/Usuario.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
@@ -9,16 +12,23 @@ import { MenuService } from 'src/app/services/menu-service.service';
 })
 export class NavbarComponent  {
   menuItems: any[]=[];
-  // usuario:Usuario;
+  usuario:UsuarioModel;
   constructor(
-    private menuService:MenuService
+    private menuService:MenuService,
+    private usuarioService:UsuariosService,
+    private router:Router
     ) {
-      // this.usuario = usuarioService.usuario
+      this.usuario = this.usuarioService.usuario
     }
 
     ngOnInit(): void {
       this.menuItems = this.menuService.menu
       console.log(this.menuItems);
+  }
+
+  logOut(){
+    this.usuarioService.borrarLocalStorage();
+    this.router.navigateByUrl('login')
   }
 
 }
