@@ -11,22 +11,8 @@
       <div class="card-body">
         <form id="registerUsuarioForm" [formGroup]="editarempresaForm" (ngSubmit)="guardarEmpresa()">
           <div class="mb-3">
-
             <div class="mb-3">
-              <label for="" class="form-label text-left">ID empresa:</label>
-              <input
-                     type="text"
-                     name=""
-                     id=""
-                     class="form-control"
-                     placeholder="Ej:GRUPO-ARMAS"
-                     formControlName="id"
-                     (keydown.space)="$event.preventDefault();"
-                     >
-                     <small id="" class="text-muted">minimo: 10 caracteres, maximo: 20, no espacios</small>
-            </div>
-            <div class="mb-3">
-              <label for="" class="form-label">Nombre de Usuario </label>
+              <label for="" class="form-label">Nombre de Empresa </label>
               <input
                     type="text"
                     name=""

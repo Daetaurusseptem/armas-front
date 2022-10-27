@@ -31,7 +31,7 @@ export class EmpresaService {
     // );
   }
   updateEmpresa(idArea:string, formData:updateEmpresa ){
-
+    console.log(formData);
     return this.http.put(`${this.url}/${idArea}`, formData);
   }
 }

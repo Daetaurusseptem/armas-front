@@ -19,7 +19,6 @@ export class EditarEmpresaComponent implements OnInit {
   formSubmitted=false;
 
   editarempresaForm = this.fb.group({
-    id:['',[Validators.required]],
     nombre:['',[Validators.required]],
     descripcion:['']
   })
@@ -47,7 +46,6 @@ export class EditarEmpresaComponent implements OnInit {
           this.empresa = empresa
 
           this.editarempresaForm.setValue({
-            id: this.empresa.id,
             nombre: this.empresa.nombre,
             descripcion:this.empresa.descripcion
           })
@@ -82,7 +80,8 @@ export class EditarEmpresaComponent implements OnInit {
 
         this.empresaService.updateEmpresa(this.empresa.id, this.editarempresaForm.value)
         .subscribe(r=>{
-          this.router.navigateByUrl('/dashboard/empresa')
+          this.formSubmitted = false;
+          this.router.navigateByUrl('/dashboard/empresas')
         })
       }
     })
