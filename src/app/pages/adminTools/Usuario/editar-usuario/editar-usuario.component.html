@@ -145,7 +145,7 @@
                         </p>
                       </div>
                     </div>
-                    <table *ngIf="usuario.Areas.length>0" class="table">
+                    <table *ngIf="areasUsuario.length>0" class="table">
                       <thead>
                         <tr>
                           <th scope="col">Area</th>
@@ -154,13 +154,13 @@
                         </tr>
                       </thead>
                       <tbody>
-                        <tr *ngFor="let area of usuario.Areas">
+                        <tr *ngFor="let area of areasUsuario">
 
                           <td>{{area.nombre}}</td>
                           <td *ngIf="area.Permisos.tipo =='l'">Lectura</td>
                           <td *ngIf="area.Permisos.tipo =='e'">Escritura</td>
                           <td>
-                            <button name="" id="" class="btn btn-primary" (click)="eliminarPermiso(area.Permisos.areaId)">
+                            <button name="" id="" class="btn btn-danger" (click)="eliminarPermiso(area.Permisos.areaId)">
                               <i class="bi bi-trash-fill"></i>
                             </button>
                           </td>
@@ -172,7 +172,6 @@
                   <!-- FIN TABLA PERMISOS -->
                   <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                    <button type="submit" class="btn btn-primary">Guardar Cambios</button>
                   </div>
                 </div>
               </div>

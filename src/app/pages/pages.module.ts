@@ -23,6 +23,7 @@ import { CrearAreaComponent } from './adminTools/Area/crear-area/crear-area.comp
 import { EmpleadosComponent } from './userTools/empleados/empleados.component';
 import { CrearEmpleadoComponent } from './userTools/crear-empleado/crear-empleado.component';
 import { EditarEmpleadoComponent } from './userTools/editar-empleado/editar-empleado.component';
+import { EditarAreaComponent } from './adminTools/Area/editar-area/editar-area.component';
 
 @NgModule({
   declarations: [
@@ -43,6 +44,7 @@ import { EditarEmpleadoComponent } from './userTools/editar-empleado/editar-empl
        EmpleadosComponent,
        CrearEmpleadoComponent,
        EditarEmpleadoComponent,
+       EditarAreaComponent,
 
 
   ],

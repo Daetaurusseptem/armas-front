@@ -17,6 +17,7 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { UsuariosComponent } from './adminTools/Usuario/usuarios/usuarios.component';
 import { EditarUsuarioComponent } from './adminTools/Usuario/editar-usuario/editar-usuario.component';
 import { CrearAreaComponent } from './adminTools/Area/crear-area/crear-area.component';
+import { EditarAreaComponent } from './adminTools/Area/editar-area/editar-area.component';
 
 const childRoutes:Routes=[
   { path: '', component: PagesComponent, data:{title: 'Dashboard'}},
@@ -29,6 +30,7 @@ const childRoutes:Routes=[
   //Areas
   { path: 'areas', component: AreasComponent,canActivate:[AdminGuard], data:{title: 'catalogo de areas'}},
   { path: 'areas/crear-area', component: CrearAreaComponent,canActivate:[AdminGuard], data:{title: 'crear Empresa'}},
+  { path: 'areas/editar-area/:id', component: EditarAreaComponent,canActivate:[AdminGuard], data:{title: 'Editar Area'}},
   // { path: 'areas/editar-area/:id', component: editarAre, data:{title: 'Editar Empresa'}},
   //Usuarios
   { path: 'inicio-admin', component: InicioAdminComponent,canActivate:[AdminGuard], data:{title: 'crear Usuario'}},

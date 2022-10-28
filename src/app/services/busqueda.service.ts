@@ -15,7 +15,7 @@ export class BusquedaService {
   constructor(private http: HttpClient) { }
 
   private transformToUsers(resultados: any[] ): UsuarioModel[] {
-
+    console.log(resultados);
     return resultados.map(
       usuario => new UsuarioModel(
         usuario.id,
@@ -25,13 +25,14 @@ export class BusquedaService {
         usuario.password,
         usuario.img,
         usuario.Areas
+
         ));
 
   }
 
   buscar(
 
-    tipo: 'usuario' | 'empresa' | 'area'|'departamento',
+    tipo: 'usuarios' | 'empresas' | 'areas'|'departamentos',
     termino: string
 
     ): any {
@@ -40,19 +41,20 @@ export class BusquedaService {
         return;
       }
 
-      return this.http.get<Busqueda[]>(`${baseUrl}/todo/coleccion/${tipo}/${termino}`,
+      return this.http.get<Busqueda[]>(`${baseUrl}busqueda/coleccion/${tipo}/${termino}`,
       // this.headers
       )
         .pipe(
          map((resp:any)=>{
+          console.log(resp);
            switch (tipo) {
-             case 'usuario':
+             case 'usuarios':
                 return this.transformToUsers( resp.resultados );
-             case 'empresa':
+             case 'empresas':
                 return resp.resultados
-              case 'area':
+              case 'areas':
                 return resp.resultados
-              case 'departamento':
+              case 'departamentos':
                 return resp.resultados
              default:
                return[]
@@ -63,7 +65,7 @@ export class BusquedaService {
     }
 
     buscarGeneral(termino:string){
-      return this.http.get(`${baseUrl}/todo/${termino}`, this.headers)
+      return this.http.get(`${baseUrl}/busqueda/${termino}`, this.headers)
     }
 
   get token(): string{

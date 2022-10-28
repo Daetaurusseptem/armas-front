@@ -8,7 +8,14 @@
       </div>
       <form>
         <div class="m-5">
-          <input type="text" class="form-control" id="busqueda" aria-describedby="emailHelp">
+          <input
+            type="text"
+            class="form-control"
+            id="busqueda"
+            aria-describedby="emailHelp"
+            (keyup)="buscar(termino.value)"
+            #termino
+            >
 
         </div>
       </form>

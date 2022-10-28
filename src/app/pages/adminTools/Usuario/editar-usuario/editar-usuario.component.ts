@@ -10,6 +10,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AreaService } from 'src/app/services/area.service';
 import { Area } from 'src/app/interfaces/area.interface';
 import { PermisosService } from 'src/app/services/permisos.service';
+import { UtilitiesService } from 'src/app/services/utilities.service';
 
 @Component({
   selector: 'app-editar-usuario',
@@ -22,6 +23,7 @@ export class EditarUsuarioComponent implements OnInit {
   areas!: Area[];
   idUsuario:string;
   formSubmitted=false;
+  areasUsuario!:Area[]
 
   usuarioForm = this.fb.group({
     nombre:['',[Validators.required]],
@@ -48,7 +50,8 @@ export class EditarUsuarioComponent implements OnInit {
               private areasService:AreaService,
               private permisosService:PermisosService,
               private fb:FormBuilder,
-              private router:Router
+              private router:Router,
+              private utilitiesService:UtilitiesService
               ) {
 
    }
@@ -58,7 +61,7 @@ export class EditarUsuarioComponent implements OnInit {
       console.log(params['id']);
       this.obtenerUsuario(params['id']).subscribe(
         usuario=>{
-
+          this.areasUsuario = usuario.Areas
           this.usuario = usuario
           this.obtenerAreas();
           this.usuarioForm.setValue({
@@ -97,7 +100,13 @@ export class EditarUsuarioComponent implements OnInit {
         .subscribe(r=>{
           console.log(r);
           this.formSubmitted = false;
-
+          this.utilitiesService.redirectTo(`/dashboard/usuarios/editar-usuario/${this.usuario.id}`)
+          let element = document.querySelector('.modal-backdrop')
+          element.remove();
+          Swal.fire({
+            title:'Cambios Guardados',
+            icon:'success'
+          })
         })
       }
     })
@@ -117,7 +126,13 @@ export class EditarUsuarioComponent implements OnInit {
         .subscribe(r=>{
           console.log(r);
           this.formSubmitted = false;
-
+          this.utilitiesService.redirectTo(`/dashboard/usuarios/editar-usuario/${this.usuario.id}`)
+          let element = document.querySelector('.modal-backdrop')
+          element.remove();
+          Swal.fire({
+            title:'Cambios Guardados',
+            icon:'success'
+          })
         })
       }
     })
@@ -174,6 +189,10 @@ export class EditarUsuarioComponent implements OnInit {
         .subscribe(r=>{
           this.formSubmitted = false;
           this.router.navigateByUrl('/dashboard/usuarios')
+          Swal.fire({
+            title:'Cambios Guardados',
+            icon:'success'
+          })
         })
       }
     })
@@ -198,6 +217,13 @@ export class EditarUsuarioComponent implements OnInit {
         .subscribe(r=>{
           console.log(r);
           this.formSubmitted=false
+          this.utilitiesService.redirectTo(`/dashboard/usuarios/editar-usuario/${this.usuario.id}`)
+          let element = document.querySelector('.modal-backdrop')
+          element.remove();
+          Swal.fire({
+            title:'Cambios Guardados',
+            icon:'success'
+          })
         })
       }
     })
