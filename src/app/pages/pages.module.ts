@@ -20,6 +20,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { EditarUsuarioComponent } from './adminTools/Usuario/editar-usuario/editar-usuario.component';
 import { EditarEmpresaComponent } from './adminTools/Empresa/editar-empresa/editar-empresa.component';
 import { CrearAreaComponent } from './adminTools/Area/crear-area/crear-area.component';
+import { EmpleadosComponent } from './userTools/empleados/empleados.component';
+import { CrearEmpleadoComponent } from './userTools/crear-empleado/crear-empleado.component';
+import { EditarEmpleadoComponent } from './userTools/editar-empleado/editar-empleado.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +40,9 @@ import { CrearAreaComponent } from './adminTools/Area/crear-area/crear-area.comp
        EditarUsuarioComponent,
        EditarEmpresaComponent,
        CrearAreaComponent,
+       EmpleadosComponent,
+       CrearEmpleadoComponent,
+       EditarEmpleadoComponent,
 
 
   ],
