@@ -44,6 +44,7 @@ export class EditarAreaComponent implements OnInit {
       this.obtenerArea(params['id']).subscribe(
         area=>{
           this.area = area
+          console.log(area);
 
           this.editarAreaForm.setValue({
             nombre: this.area.nombre,

@@ -1,3 +1,5 @@
+import { CrearDepartamentosComponent } from './adminTools/Departamento/crear-departamentos/crear-departamentos.component';
+import { DepartamentosComponent } from './adminTools/Departamento/departamentos/departamentos.component';
 import { UserGuard } from './../guards/user.guard';
 import { CrearEmpleadoComponent } from './userTools/crear-empleado/crear-empleado.component';
 import { EmpleadosComponent } from './userTools/empleados/empleados.component';
@@ -22,6 +24,7 @@ import { EditarAreaComponent } from './adminTools/Area/editar-area/editar-area.c
 const childRoutes:Routes=[
   { path: '', component: PagesComponent, data:{title: 'Dashboard'}},
   //Admin Tools
+  { path: 'inicio-admin', component: InicioAdminComponent,canActivate:[AdminGuard], data:{title: 'crear Usuario'}},
 
   //Empresas
   { path: 'empresas', canActivate:[AdminGuard],component: EmpresasComponent, data:{title: 'catalogo de empresas'}},
@@ -33,10 +36,13 @@ const childRoutes:Routes=[
   { path: 'areas/editar-area/:id', component: EditarAreaComponent,canActivate:[AdminGuard], data:{title: 'Editar Area'}},
   // { path: 'areas/editar-area/:id', component: editarAre, data:{title: 'Editar Empresa'}},
   //Usuarios
-  { path: 'inicio-admin', component: InicioAdminComponent,canActivate:[AdminGuard], data:{title: 'crear Usuario'}},
   { path: 'usuarios', component: UsuariosComponent,canActivate:[AdminGuard], data:{title: 'catalogo de usuarios'}},
   { path: 'usuarios/crear-usuario', component: CrearUsuarioComponent,canActivate:[AdminGuard], data:{title: 'crear Usuario'}},
   { path: 'usuarios/editar-usuario/:id', component: EditarUsuarioComponent,canActivate:[AdminGuard], data:{title: 'crear Usuario'}},
+  //Departamentos
+  { path: 'departamentos', component: DepartamentosComponent,canActivate:[AdminGuard], data:{title: 'catalogo de usuarios'}},
+  { path: 'departamentos/crear-departamento', component: CrearDepartamentosComponent,canActivate:[AdminGuard], data:{title: 'crear Usuario'}},
+  { path: 'departamentos/editar-departamento/:id', component: EditarUsuarioComponent,canActivate:[AdminGuard], data:{title: 'crear Usuario'}},
 
 
   //User Tools
