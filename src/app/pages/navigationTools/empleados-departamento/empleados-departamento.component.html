@@ -1,0 +1,83 @@
+<div class="row">
+  <div class="col-12 mx-auto text-center mb-2">
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title text-center">
+          <h5>Busqueda</h5>
+        </div>
+      </div>
+      <form>
+        <div class="m-5">
+          <input
+          type="text"
+          class="form-control"
+          id="busqueda"
+          aria-describedby="emailHelp"
+          (keyup)="buscar(termino.value)"
+          #termino
+          >
+
+
+        </div>
+      </form>
+    </div>
+  </div>
+  <div class="col-12 mx-auto text-center">
+    <div class="card">
+      <div class="card-title p-4">
+        <div class="card-title start">
+          <h5>Empleados de {{this.departamento.nombre}}</h5>
+        </div>
+        <a name="" id="" class="btn btn-primary end" [routerLink]="['/dashboard/empleados/crear-empleado', departamento.id]" role="button">
+          <i class="bi bi-person-plus"></i>
+        </a>
+      </div>
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="table">
+            <thead>
+              <tr>
+
+                <th scope="col">Numero Empleado</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Usuario</th>
+                <th scope="col">Role</th>
+                <th scope="col">Permisos</th>
+                <th scope="col">Password</th>
+                <th scope="col">Herramientas</th>
+              </tr>
+            </thead>
+            <tbody class="text-left">
+              <tr *ngFor="let empleado of empleados; index as i">
+                <th scope="row">{{empleado.numero_empleado}}</th>
+                <td>{{empleado.nombre}}</td>
+                <td *ngIf="empleado.status">Activo</td>
+                <td *ngIf="!empleado.status">Baja</td>
+
+                <td *ngIf="empleado.Empresa.length==0">
+                  <ul class="lista-tabla text-start">
+                    <li>
+                      <span>Sin Empresa</span>
+                    </li>
+                  </ul>
+                </td>
+                <td *ngIf="empleado.Empresa.length>0">
+                    <ul class="lista-tabla text-start">
+                      <li class="pb-2" *ngFor="let area of empleado.Empresa">
+                          {{area.nombre}}
+                      </li>
+                    </ul>
+
+                </td>
+                <td>
+                  <a [routerLink]="['/dashboard/usuarios/editar-empleado',empleado.id]" name="" id="" class="btn btn-primary" role="button">
+                    <i class="bi bi-pencil align-middle"></i>
+                  </a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>

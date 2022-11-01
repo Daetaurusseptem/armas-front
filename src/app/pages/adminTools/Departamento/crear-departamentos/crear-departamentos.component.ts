@@ -6,6 +6,7 @@ import { DepartamentoService } from './../../../../services/departamento.service
 import { Validators, FormBuilder } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import {map} from 'rxjs/operators';
+import { UsuariosService } from 'src/app/services/usuarios.service';
 
 @Component({
   selector: 'app-crear-departamentos',
@@ -30,7 +31,8 @@ export class CrearDepartamentosComponent implements OnInit {
               private fb: FormBuilder,
               private departamentoService:DepartamentoService,
               private empresaService:EmpresaService,
-              private router:Router
+              private router:Router,
+              private usuarioService: UsuariosService
     ) {
 
      }
@@ -42,6 +44,7 @@ export class CrearDepartamentosComponent implements OnInit {
   createArea() {
 
     console.log('entra');
+    this.registerDepartamentoForm.patchValue({actualizo:this.usuarioService.usuario.nombre})
     // const materiaId =this.registerEmpresaForm.get('materia').value;
     this.formSubmitted = true;
 
@@ -52,6 +55,7 @@ export class CrearDepartamentosComponent implements OnInit {
     }
 
     let idUsuario:string;
+
 
     this.departamentoService.createDepartamento(this.registerDepartamentoForm.value)
     .subscribe(

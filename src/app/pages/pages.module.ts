@@ -24,6 +24,10 @@ import { EmpleadosComponent } from './userTools/empleados/empleados.component';
 import { CrearEmpleadoComponent } from './userTools/crear-empleado/crear-empleado.component';
 import { EditarEmpleadoComponent } from './userTools/editar-empleado/editar-empleado.component';
 import { EditarAreaComponent } from './adminTools/Area/editar-area/editar-area.component';
+import { SeleccionEmpresaComponent } from './navigationTools/seleccion-empresa/seleccion-empresa.component';
+import { SeleccionDepartamentosComponent } from './navigationTools/seleccion-departamentos/seleccion-departamentos.component';
+import { EmpleadosDepartamentoComponent } from './navigationTools/empleados-departamento/empleados-departamento.component';
+
 
 @NgModule({
   declarations: [
@@ -45,6 +49,10 @@ import { EditarAreaComponent } from './adminTools/Area/editar-area/editar-area.c
        CrearEmpleadoComponent,
        EditarEmpleadoComponent,
        EditarAreaComponent,
+       SeleccionEmpresaComponent,
+       SeleccionDepartamentosComponent,
+       EmpleadosDepartamentoComponent,
+
 
 
   ],

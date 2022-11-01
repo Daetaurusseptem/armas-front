@@ -11,7 +11,7 @@ const UrlBase = environment.urlBack
 })
 export class DepartamentoService {
 
-  url:string = `${UrlBase}areas`
+  url:string = `${UrlBase}departamentos`
 
   constructor(private http:HttpClient) { }
 

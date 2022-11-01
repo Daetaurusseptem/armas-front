@@ -31,7 +31,7 @@ export class UsuariosComponent implements OnInit {
     .pipe(
       map(item=>{
         console.log(item);
-        this.usuariosTemp=item.usuarios
+        this.usuariosTemp = item.usuarios
         return item.usuarios
       })
     )

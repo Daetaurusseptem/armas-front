@@ -7,5 +7,6 @@ export interface itemResponse {
   empresa?:Empresa,
   area?:Area,
   usuario?:Usuario,
-  departamentos:Departamento
+  departamento?:Departamento
+  empleados?:Departamento
 }

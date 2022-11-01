@@ -9,13 +9,14 @@
       <form>
         <div class="m-5">
           <input
-            type="text"
-            class="form-control"
-            id="busqueda"
-            aria-describedby="emailHelp"
-            (keyup)="buscar(termino.value)"
-            #termino
-            >
+          type="text"
+          class="form-control"
+          id="busqueda"
+          aria-describedby="emailHelp"
+          (keyup)="buscar(termino.value)"
+          #termino
+          >
+
 
         </div>
       </form>
@@ -26,10 +27,8 @@
       <div class="card-title p-4">
         <div class="card-title start">
           <h5>Departamentos del sistema</h5>
+          <p>Seleccione el departamento</p>
         </div>
-        <a name="" id="" class="btn btn-secondary end" routerLink="crear-departamento" role="button">
-          <i class="bi bi-file-plus"></i>
-        </a>
       </div>
       <div class="card-body">
         <div class="table-responsive">
@@ -39,8 +38,6 @@
                 <th scope="col">#</th>
                 <th scope="col">Id</th>
                 <th scope="col">Nombre</th>
-                <th scope="col">Empresa</th>
-                <th scope="col">Descripcion</th>
                 <th scope="col">Herramientas</th>
               </tr>
             </thead>
@@ -49,11 +46,10 @@
                 <th scope="row">{{i+1}}</th>
                 <th scope="row">{{departamento.id}}</th>
                 <td>{{departamento.nombre}}</td>
-                <td>{{departamento.empresaId}}</td>
-                <td>{{departamento.descripcion}}</td>
+
                 <td>
-                  <a [routerLink]="['/dashboard/departamentos/editar-departamento',departamento.id]" name="" id="" class="btn btn-primary" role="button">
-                    <i class="bi bi-pencil align-middle"></i>
+                  <a [routerLink]="['/dashboard/departamento/select-departamento',departamento.id]" name="" id="" class="btn btn-success" role="button">
+                    <i class="bi bi-arrow-right-square"></i>
                   </a>
                 </td>
               </tr>

@@ -1,15 +1,16 @@
-import { BusquedaService } from 'src/app/services/busqueda.service';
-import { Departamento } from './../../../../interfaces/departamento.interface';
 import { Component, OnInit } from '@angular/core';
-import { DepartamentoService } from 'src/app/services/departamento.service';
+import { Departamento } from 'src/app/interfaces/departamento.interface';
 import {map} from 'rxjs/operators';
+import { UsuariosService } from 'src/app/services/usuarios.service';
+import { BusquedaService } from 'src/app/services/busqueda.service';
+import { DepartamentoService } from 'src/app/services/departamento.service';
 
 @Component({
-  selector: 'app-departamentos',
-  templateUrl: './departamentos.component.html',
-  styleUrls: ['./departamentos.component.css']
+  selector: 'app-seleccion-departamentos',
+  templateUrl: './seleccion-departamentos.component.html',
+  styleUrls: ['./seleccion-departamentos.component.css']
 })
-export class DepartamentosComponent implements OnInit {
+export class SeleccionDepartamentosComponent implements OnInit {
   departamentos: Departamento[] = [];
   departamentosTemp: Departamento[] = [];
 
@@ -17,7 +18,7 @@ export class DepartamentosComponent implements OnInit {
               private departamentosService:DepartamentoService,
               private busquedaService:BusquedaService
               ) {
-    this.cargarAreas();
+    this.cargaDepartamentos();
 
 
   }
@@ -26,21 +27,22 @@ export class DepartamentosComponent implements OnInit {
 
   }
 
-  cargarAreas(){
+  cargaDepartamentos(){
     this.departamentosService.getDepartamentos()
     .pipe(
       map(item=>{
         console.log(item);
+        this.departamentosTemp=item.departamentos
         return item.departamentos
       })
     )
     .subscribe(
       r=>{
         this.departamentos = r
-        this.departamentosTemp = r
       }
     )
   }
+
   buscar(termino: string): any{
 
     //si la busqueda es 0 los usuarios guardados en usuarios temp se asignan de nuevo
@@ -55,6 +57,4 @@ export class DepartamentosComponent implements OnInit {
       this.departamentos = resultados;
     });
   }
-
 }
-
