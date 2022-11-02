@@ -27,6 +27,7 @@ import { EditarAreaComponent } from './adminTools/Area/editar-area/editar-area.c
 import { SeleccionEmpresaComponent } from './navigationTools/seleccion-empresa/seleccion-empresa.component';
 import { SeleccionDepartamentosComponent } from './navigationTools/seleccion-departamentos/seleccion-departamentos.component';
 import { EmpleadosDepartamentoComponent } from './navigationTools/empleados-departamento/empleados-departamento.component';
+import { SeleccionAreaComponent } from './navigationTools/seleccion-area/seleccion-area.component';
 
 
 @NgModule({
@@ -52,6 +53,7 @@ import { EmpleadosDepartamentoComponent } from './navigationTools/empleados-depa
        SeleccionEmpresaComponent,
        SeleccionDepartamentosComponent,
        EmpleadosDepartamentoComponent,
+       SeleccionAreaComponent,
 
 
 

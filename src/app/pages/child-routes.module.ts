@@ -1,3 +1,5 @@
+import { SeleccionAreaComponent } from './navigationTools/seleccion-area/seleccion-area.component';
+import { SeleccionEmpresaComponent } from './navigationTools/seleccion-empresa/seleccion-empresa.component';
 import { CrearDepartamentosComponent } from './adminTools/Departamento/crear-departamentos/crear-departamentos.component';
 import { DepartamentosComponent } from './adminTools/Departamento/departamentos/departamentos.component';
 import { UserGuard } from './../guards/user.guard';
@@ -26,41 +28,51 @@ import { EmpleadosDepartamentoComponent } from './navigationTools/empleados-depa
 
 const childRoutes:Routes=[
   { path: '', component: PagesComponent, data:{title: 'Dashboard'}},
-  //Admin Tools
-  { path: 'inicio-admin', component: InicioAdminComponent,canActivate:[AdminGuard], data:{title: 'crear Usuario'}},
+  //INICIO ADMIN TOOLS
 
-  //Empresas
-  { path: 'empresas', canActivate:[AdminGuard],component: EmpresasComponent, data:{title: 'catalogo de empresas'}},
-  { path: 'empresas/crear-empresa', canActivate:[AdminGuard], component: CrearEmpresaComponent, data:{title: 'crear Empresa'}},
-  { path: 'empresas/editar-empresa/:id',canActivate:[AdminGuard], component: EditarEmpresaComponent, data:{title: 'Editar Empresa'}},
-  //Areas
-  { path: 'areas', component: AreasComponent,canActivate:[AdminGuard], data:{title: 'catalogo de areas'}},
-  { path: 'areas/crear-area', component: CrearAreaComponent,canActivate:[AdminGuard], data:{title: 'crear Empresa'}},
-  { path: 'areas/editar-area/:id', component: EditarAreaComponent,canActivate:[AdminGuard], data:{title: 'Editar Area'}},
-  // { path: 'areas/editar-area/:id', component: editarAre, data:{title: 'Editar Empresa'}},
-  //Usuarios
-  { path: 'usuarios', component: UsuariosComponent,canActivate:[AdminGuard], data:{title: 'catalogo de usuarios'}},
-  { path: 'usuarios/crear-usuario', component: CrearUsuarioComponent,canActivate:[AdminGuard], data:{title: 'crear Usuario'}},
-  { path: 'usuarios/editar-usuario/:id', component: EditarUsuarioComponent,canActivate:[AdminGuard], data:{title: 'crear Usuario'}},
-  //Departamentos
-  { path: 'departamentos', component: DepartamentosComponent,canActivate:[AdminGuard], data:{title: 'catalogo de usuarios'}},
-  { path: 'departamentos/crear-departamento', component: CrearDepartamentosComponent,canActivate:[AdminGuard], data:{title: 'crear Usuario'}},
-  { path: 'departamentos/editar-departamento/:id', component: EditarUsuarioComponent,canActivate:[AdminGuard], data:{title: 'crear Usuario'}},
-  { path: 'departamento/select-departamento/:id', component: EmpleadosDepartamentoComponent,canActivate:[AdminGuard], data:{title: 'crear Usuario'}},
+    //ADMIN PAGES
+    { path: 'inicio-admin', component: InicioAdminComponent,canActivate:[AdminGuard], data:{title: 'crear Usuario'}},
+    //Empresas
+    { path: 'admin/empresas', canActivate:[AdminGuard],component: EmpresasComponent, data:{title: 'catalogo de empresas'}},
+    { path: 'admin/empresas/crear-empresa', canActivate:[AdminGuard], component: CrearEmpresaComponent, data:{title: 'crear Empresa'}},
+    { path: 'admin/empresas/editar-empresa/:id',canActivate:[AdminGuard], component: EditarEmpresaComponent, data:{title: 'Editar Empresa'}},
 
+    //Areas
+    { path: 'admin/areas', component: AreasComponent,canActivate:[AdminGuard], data:{title: 'catalogo de areas'}},
+    { path: 'admin/areas/crear-area', component: CrearAreaComponent,canActivate:[AdminGuard], data:{title: 'crear Empresa'}},
+    { path: 'admin/areas/editar-area/:id', component: EditarAreaComponent,canActivate:[AdminGuard], data:{title: 'Editar Area'}},
+    //Usuarios
+    { path: 'admin/usuarios', component: UsuariosComponent,canActivate:[AdminGuard], data:{title: 'catalogo de usuarios'}},
+    { path: 'admin/usuarios/crear-usuario', component: CrearUsuarioComponent,canActivate:[AdminGuard], data:{title: 'crear Usuario'}},
+    { path: 'usuarios/editar-usuario/:id', component: EditarUsuarioComponent,canActivate:[AdminGuard], data:{title: 'crear Usuario'}},
+    //Departaadmin/mentos
+    { path: 'admin/departamentos', component: DepartamentosComponent,canActivate:[AdminGuard], data:{title: 'catalogo de usuarios'}},
+    { path: 'admin/departamentos/crear-departamento', component: CrearDepartamentosComponent,canActivate:[AdminGuard], data:{title: 'crear Usuario'}},
+    { path: 'admin/departamentos/editar-departamento/:id', component: EditarUsuarioComponent,canActivate:[AdminGuard], data:{title: 'crear Usuario'}},
 
-  //User Tools
-
-  //Select MENU
-  { path: 'select-departamento', component: SeleccionDepartamentosComponent,canActivate:[AdminOrUserGuard], data:{title: 'seleccione de empresa'}},
-  { path: 'departamento/select-departamento', component: SeleccionDepartamentosComponent,canActivate:[AdminOrUserGuard], data:{title: 'seleccione de empresa'}},
+  //FINAL ADMIN TOOLS
 
 
-  //Empleados
-  { path: 'empleados', component: EmpleadosComponent,canActivate:[UserGuard], data:{title: 'catalogo de usuarios'}},
-  { path: 'empleados/crear-empleado/:idDepartamento', component: CrearEmpleadoComponent,canActivate:[AdminOrUserGuard], data:{title: 'crear Usuario'}},
-  { path: 'empleados/editar-empleado/:idDepartamento', component: CrearEmpleadoComponent,canActivate:[AdminOrUserGuard], data:{title: 'crear Usuario'}},
 
+
+  //INICIO USER TOOLS
+
+  //*Select MENU
+    //Select departamento - EN DESUSO
+    { path: 'departamentos', component: SeleccionDepartamentosComponent,canActivate:[AdminOrUserGuard], data:{title: 'seleccione de empresa'}},
+    //Select empresa
+    { path: 'empresas', component: SeleccionEmpresaComponent, canActivate:[AdminOrUserGuard], data:{title: 'seleccione de empresa'}},
+    //Select Area de la Empresa
+    { path: 'empresas/:idEmpresa/areas', component: SeleccionAreaComponent, canActivate:[AdminOrUserGuard], data:{title: 'seleccione de empresa'}},
+
+    //*Empleados
+    //Empleados por area
+    { path: 'empresas/:idEmpresa/:idArea', component: EmpleadosComponent, canActivate:[AdminOrUserGuard], data:{title: 'seleccione de empresa'}},
+    //Crear Empleado
+    { path: 'empresas/crear-empleado', component: CrearEmpleadoComponent,canActivate:[AdminOrUserGuard], data:{title: 'crear Empleado'}},
+    { path: 'empleados/editar-empleado/:idDepartamento', component: CrearEmpleadoComponent,canActivate:[AdminOrUserGuard], data:{title: 'crear Usuario'}},
+
+  //FINAL USER TOOLS
 
   //PAGE NOT FOUND
   { path: '**', component: PageNotFoundComponent }

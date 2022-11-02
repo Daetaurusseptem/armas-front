@@ -26,6 +26,9 @@ export class EmpleadosService {
   getEmpleadosDepartamentoId(id:string){
     return this.http.get<ArrayResponse>(`${this.url}/${id}`);
   }
+  getEmpleados(){
+    return this.http.get<ArrayResponse>(`${this.url}`);
+  }
   getEmpleado(id:string){
     return this.http.get<itemResponse>(`${this.url}/${id}`);
   }

@@ -1,3 +1,4 @@
+import { Empleado } from './empleado.interface';
 import { Departamento } from './departamento.interface';
 import { Area } from './area.interface';
 import { Empresa } from './empresa.interface';
@@ -8,5 +9,5 @@ export interface itemResponse {
   area?:Area,
   usuario?:Usuario,
   departamento?:Departamento
-  empleados?:Departamento
+  empleados?:Empleado
 }

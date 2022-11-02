@@ -52,7 +52,7 @@ export class EmpresasComponent implements OnInit {
     }
 
     this.busquedaService.buscar('empresas', termino)
-    .subscribe( (resultados: any[]) => {
+    .subscribe( (resultados: Empresa[]) => {
       console.log(resultados);
       this.empresas = resultados;
     });

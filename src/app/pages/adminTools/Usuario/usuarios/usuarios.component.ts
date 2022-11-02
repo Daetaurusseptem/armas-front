@@ -1,3 +1,4 @@
+import { Busqueda } from './../../../../interfaces/Busqueda.interface';
 import { Component, OnInit } from '@angular/core';
 import { Usuario } from 'src/app/interfaces/usuario.interface';
 import { UsuariosService } from 'src/app/services/usuarios.service';
@@ -51,9 +52,9 @@ export class UsuariosComponent implements OnInit {
     }
 
     this.busquedaService.buscar('usuarios', termino)
-    .subscribe( (resultados: any[]) => {
+    .subscribe( (resultados:Usuario[]) => {
       console.log(resultados);
-      this.usuarios = resultados;
+      this.usuarios = resultados
     });
   }
 }

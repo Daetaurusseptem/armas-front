@@ -32,7 +32,7 @@ export class BusquedaService {
 
   buscar(
 
-    tipo: 'usuarios' | 'empresas' | 'areas'|'departamentos',
+    tipo: 'usuarios' | 'empresas' | 'areas'|'departamentos'|'empleados',
     termino: string
 
     ): any {
@@ -41,21 +41,21 @@ export class BusquedaService {
         return;
       }
 
-      return this.http.get<Busqueda[]>(`${baseUrl}busqueda/coleccion/${tipo}/${termino}`,
+      return this.http.get<Busqueda>(`${baseUrl}busqueda/coleccion/${tipo}/${termino}`,
       // this.headers
       )
         .pipe(
-         map((resp:any)=>{
+         map((resp:Busqueda)=>{
           console.log(resp);
            switch (tipo) {
              case 'usuarios':
-                return this.transformToUsers( resp.resultados );
+                return this.transformToUsers( resp.usuarios );
              case 'empresas':
-                return resp.resultados
+                return resp.empresas
               case 'areas':
-                return resp.resultados
+                return resp.areas
               case 'departamentos':
-                return resp.resultados
+                return resp.departamentos
              default:
                return[]
            }
