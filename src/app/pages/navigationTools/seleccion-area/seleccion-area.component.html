@@ -26,7 +26,7 @@
     <div class="card">
       <div class="card-title p-4">
         <div class="card-title start">
-          <h5>Areas de {{this.empresa.nombre}}</h5>
+          <h5>Areas de {{this.empresa?.nombre}}</h5>
           <p>Seleccione la area a la cual desee accesar</p>
         </div>
       </div>
@@ -45,7 +45,7 @@
               <tr *ngFor="let area of areas; index as i">
                 <th scope="row">{{i+1}}</th>
                 <th scope="row">{{area.id}}</th>
-                <td>{{area.nombre}}</td>
+                <td>{{area!.nombre}}</td>
 
                 <td>
                   <a [routerLink]="['/dashboard/empresas', empresa.id,area.id]" name="" id="" class="btn btn-success" role="button">

@@ -8,6 +8,10 @@ import { Area } from './../../../interfaces/area.interface';
 import { Component, OnInit } from '@angular/core';
 
 import {map} from 'rxjs/operators';
+import { UsuariosService } from 'src/app/services/usuarios.service';
+import { itemResponse } from 'src/app/interfaces/itemResponse.interface';
+import { Usuario } from 'src/app/interfaces/usuario.interface';
+import { UsuarioModel } from 'src/app/models/Usuario.model';
 
 @Component({
   selector: 'app-seleccion-area',
@@ -19,35 +23,54 @@ export class SeleccionAreaComponent implements OnInit {
   areasTemp: Area[] = [];
   empresaId:any
   empresa:Empresa
+  usuario:UsuarioModel
 
   constructor(
               private areasService:AreaService,
               private busquedaService:BusquedaService,
               private activatedRoute:ActivatedRoute,
-              private EmpresaService:EmpresaService
+              private EmpresaService:EmpresaService,
+              private usuarioService:UsuariosService
               ) {
-    this.cargaareas();
+
 
 
   }
 
   ngOnInit(): void {
-
+    this.usuario = this.usuarioService.usuario
+    console.log(this.usuario);
     this.getEmpresaId()
   }
 
-  cargaareas(){
-    this.areasService.getAreas()
+  cargaAreas(){
+
+    this.areasService.getAreasEmpresa(this.empresaId)
     .pipe(
       map((item:ArrayResponse)=>{
         console.log(item);
+
         this.areasTemp=item.areas
+
+
         return item.areas
       })
     )
     .subscribe(
-      (r:Area[])=>{
-        this.areas = r
+      r=>{
+        let filtroAreas:any[]=[];
+        this.usuarioService.usuario.Areas.forEach(e=>{
+          console.log(r);
+        })
+        const areasFiltradas = r.filter(obj=>{
+          if(filtroAreas.includes(obj.id)){
+            return ''
+          }
+          else{
+            return obj
+          }
+        })
+        this.areas = areasFiltradas
       }
     )
   }
@@ -71,11 +94,12 @@ export class SeleccionAreaComponent implements OnInit {
     this.activatedRoute.params.subscribe(param=>{
       this.empresaId=param['idEmpresa']
       this.getEmpresa(this.empresaId)
+      this.cargaAreas();
     })
   }
   getEmpresa(id:string){
     this.EmpresaService.getEmpresa(id).subscribe(
-      r=>{
+      (r:itemResponse)=>{
         console.log(id);
         this.empresa = r.empresa
         console.log(this.empresa);

@@ -4,6 +4,9 @@ import { EmpleadosService } from './../../../services/empleados.service';
 import { Component, OnInit } from '@angular/core';
 
 import {map} from 'rxjs/operators';
+import { ActivatedRoute } from '@angular/router';
+import { Empresa } from 'src/app/interfaces/empresa.interface';
+import { EmpresaService } from 'src/app/services/empresa.service';
 
 @Component({
   selector: 'app-empleados',
@@ -13,10 +16,14 @@ import {map} from 'rxjs/operators';
 export class EmpleadosComponent implements OnInit {
   empleados: Empleado[] = [];
   empleadosTemp: Empleado[] = [];
+  empresa:Empresa;
+  empresaId:string
 
   constructor(
               private empleadoservice:EmpleadosService,
-              private busquedaService:BusquedaService
+              private empresasService:EmpresaService,
+              private busquedaService:BusquedaService,
+              private activatedRoute:ActivatedRoute
               ) {
     this.cargarempleados();
 
@@ -24,6 +31,11 @@ export class EmpleadosComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.activatedRoute.params.subscribe(params=>{
+
+      this.empresaId=params['idEmpresa']
+      this.obtenerEmpresa(this.empresaId)
+    })
 
   }
 
@@ -56,6 +68,18 @@ export class EmpleadosComponent implements OnInit {
       console.log(resultados);
       this.empleados = resultados
     });
+  }
+
+  obtenerEmpresa(id:string){
+    this.empresasService.getEmpresa(id)
+    .pipe(
+      map(item=>{
+        return item.empresa
+      })
+    )
+    .subscribe(empresa=>{
+      this.empresa = empresa
+    })
   }
 
 }

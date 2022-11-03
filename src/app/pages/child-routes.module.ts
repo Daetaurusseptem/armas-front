@@ -2,7 +2,6 @@ import { SeleccionAreaComponent } from './navigationTools/seleccion-area/selecci
 import { SeleccionEmpresaComponent } from './navigationTools/seleccion-empresa/seleccion-empresa.component';
 import { CrearDepartamentosComponent } from './adminTools/Departamento/crear-departamentos/crear-departamentos.component';
 import { DepartamentosComponent } from './adminTools/Departamento/departamentos/departamentos.component';
-import { UserGuard } from './../guards/user.guard';
 import { CrearEmpleadoComponent } from './userTools/crear-empleado/crear-empleado.component';
 import { EmpleadosComponent } from './userTools/empleados/empleados.component';
 import { AdminGuard } from './../guards/admin.guard';
@@ -12,7 +11,6 @@ import { CrearEmpresaComponent } from './adminTools/Empresa/crear-empresa/crear-
 import { EmpresasComponent } from './adminTools/Empresa/empresas/empresas.component';
 import { AreasComponent } from './adminTools/Area/areas/areas.component';
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { PagesComponent } from './pages.component';
 import { CrearUsuarioComponent } from './adminTools/Usuario/crear-usuario/crear-usuario.component';
@@ -69,7 +67,8 @@ const childRoutes:Routes=[
     //Empleados por area
     { path: 'empresas/:idEmpresa/:idArea', component: EmpleadosComponent, canActivate:[AdminOrUserGuard], data:{title: 'seleccione de empresa'}},
     //Crear Empleado
-    { path: 'empresas/crear-empleado', component: CrearEmpleadoComponent,canActivate:[AdminOrUserGuard], data:{title: 'crear Empleado'}},
+    //Desde catalogo empleados
+    { path: 'empresas/empleados/crear-empleado/:idEmpresa', component: CrearEmpleadoComponent,canActivate:[AdminOrUserGuard], data:{title: 'crear Empleado'}},
     { path: 'empleados/editar-empleado/:idDepartamento', component: CrearEmpleadoComponent,canActivate:[AdminOrUserGuard], data:{title: 'crear Usuario'}},
 
   //FINAL USER TOOLS

@@ -22,6 +22,9 @@ export class AreaService {
   getAreas(){
     return this.http.get<ArrayResponse>(this.url);
   }
+    getAreasEmpresa(empresaId:string){
+    return this.http.get<ArrayResponse>(`${this.url}/empresa/${empresaId}`);
+  }
   getArea(id:string){
     return this.http.get<itemResponse>(`${this.url}/${id}`);
   }

@@ -16,7 +16,9 @@ route: ActivatedRouteSnapshot,
 state: RouterStateSnapshot):  boolean  {
   console.log(this.usuarioService.role);
 if(this.usuarioService.role=='USER_ROLE'){
-return true;
+  console.log('es user');
+  this.router.navigateByUrl('/dashboard/empresas')
+  return true;
 }else{
   console.log('nel');
 this.router.navigateByUrl('/dashboard')

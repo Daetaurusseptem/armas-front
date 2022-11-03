@@ -63,7 +63,7 @@ export class CrearAreaComponent implements OnInit {
              title:'Empresa creada'
            })
 
-           this.router.navigateByUrl('dashboard/areas')
+           this.router.navigateByUrl('dashboard/admin/areas')
 
       //   }
       // )

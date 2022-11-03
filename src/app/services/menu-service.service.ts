@@ -36,7 +36,7 @@ export class MenuService {
     //     ]
     //   }
     // ];
-    console.log(this.menu);
+
   }
 
 }

@@ -23,7 +23,6 @@ export class NavbarComponent  {
 
     ngOnInit(): void {
       this.menuItems = this.menuService.menu
-      console.log(this.menuItems);
   }
 
   logOut(){
