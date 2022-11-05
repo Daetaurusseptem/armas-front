@@ -7,7 +7,7 @@ import { AreaService } from './../../../services/area.service';
 import { Area } from './../../../interfaces/area.interface';
 import { Component, OnInit } from '@angular/core';
 
-import {map} from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 import { UsuariosService } from 'src/app/services/usuarios.service';
 import { itemResponse } from 'src/app/interfaces/itemResponse.interface';
 import { Usuario } from 'src/app/interfaces/usuario.interface';
@@ -20,90 +20,83 @@ import { UsuarioModel } from 'src/app/models/Usuario.model';
 })
 export class SeleccionAreaComponent implements OnInit {
   areas: Area[] = [];
+  areasConPermiso: any[] = [];
   areasTemp: Area[] = [];
-  empresaId:any
-  empresa:Empresa
-  usuario:UsuarioModel
+  empresaId: any
+  empresa: Empresa
+  usuarioModel: UsuarioModel
+  empresas: Empresa[] = [];
+  empresasTemp: Empresa[] = [];
+
+
 
   constructor(
               private areasService:AreaService,
               private busquedaService:BusquedaService,
+              private usuarioService:UsuariosService,
               private activatedRoute:ActivatedRoute,
-              private EmpresaService:EmpresaService,
-              private usuarioService:UsuariosService
-              ) {
+              private empresasService:EmpresaService,
 
+              ) {
+                this.activatedRoute.params.subscribe(
+                  params=>{
+                    this.empresaId = params['idEmpresa']
+                    this.empresasService.getEmpresa(this.empresaId)
+                    .subscribe(
+                      empresa=>{
+                        this.empresa = empresa.empresa
+                      }
+                    )
+                    this.cargaAreas(this.empresaId);
+
+                  }
+                )
 
 
   }
 
   ngOnInit(): void {
-    this.usuario = this.usuarioService.usuario
-    console.log(this.usuario);
-    this.getEmpresaId()
+
   }
 
-  cargaAreas(){
-
+  cargaAreas(idEmpresa:string){
     this.areasService.getAreasEmpresa(this.empresaId)
     .pipe(
-      map((item:ArrayResponse)=>{
+      map(item=>{
         console.log(item);
 
-        this.areasTemp=item.areas
 
 
         return item.areas
       })
     )
     .subscribe(
-      r=>{
-        let filtroAreas:any[]=[];
-        this.usuarioService.usuario.Areas.forEach(e=>{
-          console.log(r);
+      (r:Area[])=>{
+
+
+        this.usuarioModel = this.usuarioService.usuario
+        //obtener array de empresas en las que cuenta algun tipo de permiso
+        this.usuarioModel.Areas.map(r=>{
+          this.areasConPermiso.push(r.id)
         })
-        const areasFiltradas = r.filter(obj=>{
-          if(filtroAreas.includes(obj.id)){
-            return ''
-          }
-          else{
-            return obj
-          }
-        })
-        this.areas = areasFiltradas
+
+        this.areas = r.filter( i =>
+          this.areasConPermiso.includes( i.id )
+          );
+        this.areasTemp = this.areas
+
+
+        console.info('Empresas permitidas' ,this.areasConPermiso );
+
+
+
       }
     )
   }
 
-  buscar(termino: string): any{
 
-    //si la busqueda es 0 los usuarios guardados en usuarios temp se asignan de nuevo
-    if (termino.length === 0 ){
-      this.areas = [...this.areasTemp];
-      return;
-    }
 
-    this.busquedaService.buscar('areas', termino)
-    .subscribe( (resultados: any[]) => {
-      console.log(resultados);
-      this.areas = resultados;
-    });
-  }
-
-  getEmpresaId(){
-    this.activatedRoute.params.subscribe(param=>{
-      this.empresaId=param['idEmpresa']
-      this.getEmpresa(this.empresaId)
-      this.cargaAreas();
-    })
-  }
-  getEmpresa(id:string){
-    this.EmpresaService.getEmpresa(id).subscribe(
-      (r:itemResponse)=>{
-        console.log(id);
-        this.empresa = r.empresa
-        console.log(this.empresa);
-      }
-    )
-  }
 }
+
+
+
