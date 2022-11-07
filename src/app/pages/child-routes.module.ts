@@ -1,3 +1,5 @@
+import { EmpresaPermisoGuard } from './../guards/empresa-permiso.guard';
+import { AreaPermisosGuard } from './../guards/area-permisos.guard';
 import { SeleccionAreaComponent } from './navigationTools/seleccion-area/seleccion-area.component';
 import { SeleccionEmpresaComponent } from './navigationTools/seleccion-empresa/seleccion-empresa.component';
 import { CrearDepartamentosComponent } from './adminTools/Departamento/crear-departamentos/crear-departamentos.component';
@@ -61,15 +63,18 @@ const childRoutes:Routes=[
     //Select empresa
     { path: 'empresas', component: SeleccionEmpresaComponent, canActivate:[AdminOrUserGuard], data:{title: 'seleccione de empresa'}},
     //Select Area de la Empresa
-    { path: 'empresas/:idEmpresa/areas', component: SeleccionAreaComponent, canActivate:[AdminOrUserGuard], data:{title: 'seleccione de empresa'}},
+    { path: 'empresas/:idEmpresa/areas-select', component: SeleccionAreaComponent, canActivate:[EmpresaPermisoGuard], data:{title: 'seleccione de empresa'}},
+    { path: 'empresas/:idEmpresa/:idArea/empleados', component: EmpleadosComponent, canActivate:[AreaPermisosGuard], data:{title: 'seleccione de empresa'}},
 
     //*Empleados
-    //Empleados por area
-    { path: 'empresas/:idEmpresa/:idArea', component: EmpleadosComponent, canActivate:[AdminOrUserGuard], data:{title: 'seleccione de empresa'}},
+
     //Crear Empleado
-    //Desde catalogo empleados
-    { path: 'empresas/empleados/crear-empleado/:idEmpresa', component: CrearEmpleadoComponent,canActivate:[AdminOrUserGuard], data:{title: 'crear Empleado'}},
-    { path: 'empleados/editar-empleado/:idDepartamento', component: CrearEmpleadoComponent,canActivate:[AdminOrUserGuard], data:{title: 'crear Usuario'}},
+    //Desde catalogo empleados con empresaId disponible en parametro
+    { path: 'empresas/empleados/crear-empleado/:idEmpresa/:idArea', component: CrearEmpleadoComponent,canActivate:[AdminOrUserGuard, EmpresaPermisoGuard], data:{title: 'crear Empleado'}},
+    //Desde crear empleado sin parametro empresaId
+    { path: 'empleados/crear-empleado/:idEmpresa/:idDepartamento', component: CrearEmpleadoComponent,canActivate:[AdminOrUserGuard], data:{title: 'crear Empleado'}},
+
+
 
   //FINAL USER TOOLS
 

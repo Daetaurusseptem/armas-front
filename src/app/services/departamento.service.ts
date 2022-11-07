@@ -18,6 +18,9 @@ export class DepartamentoService {
   getDepartamentos(){
     return this.http.get<ArrayResponse>(this.url);
   }
+  getDepartamentosEmpresa(idEmpresa:string){
+    return this.http.get<ArrayResponse>(`${this.url}/empresa/${idEmpresa}`);
+  }
   getDepartamento(id:string){
     return this.http.get<itemResponse>(`${this.url}/${id}`);
   }

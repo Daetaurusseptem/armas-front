@@ -1,3 +1,4 @@
+import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { Departamento } from 'src/app/interfaces/departamento.interface';
 import {map} from 'rxjs/operators';
@@ -13,10 +14,12 @@ import { DepartamentoService } from 'src/app/services/departamento.service';
 export class SeleccionDepartamentosComponent implements OnInit {
   departamentos: Departamento[] = [];
   departamentosTemp: Departamento[] = [];
+  empresaId:string
 
   constructor(
               private departamentosService:DepartamentoService,
-              private busquedaService:BusquedaService
+              private busquedaService:BusquedaService,
+              private activatedRoute:ActivatedRoute
               ) {
     this.cargaDepartamentos();
 
@@ -24,6 +27,10 @@ export class SeleccionDepartamentosComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
+    this.activatedRoute.params.subscribe(params=>{
+      this.empresaId=params['idEmpresa']
+    })
 
   }
 

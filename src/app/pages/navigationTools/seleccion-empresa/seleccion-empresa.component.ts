@@ -9,63 +9,47 @@ import { UsuariosService } from 'src/app/services/usuarios.service';
 @Component({
   selector: 'app-seleccion-empresa',
   templateUrl: './seleccion-empresa.component.html',
-  styleUrls: ['./seleccion-empresa.component.css']
+  styleUrls: ['./seleccion-empresa.component.css'],
 })
 export class SeleccionEmpresaComponent implements OnInit {
   empresasConPermisos: any[] = [];
   empresas: Empresa[] = [];
   empresasTemp: Empresa[] = [];
 
-  usuarioModel:UsuarioModel
+  usuarioModel: UsuarioModel;
 
   constructor(
-              private empresasService:EmpresaService,
-              private busquedaService:BusquedaService,
-              private usuarioService:UsuariosService
-              ) {
+    private empresasService: EmpresaService,
+    private busquedaService: BusquedaService,
+    private usuarioService: UsuariosService
+  ) {
     this.cargaEmpresas();
-
-
   }
 
-  ngOnInit(): void {
+  ngOnInit(): void {}
 
-  }
-
-  cargaEmpresas(){
-    this.empresasService.getEmpresas()
-    .pipe(
-      map(item=>{
-        console.log(item);
-
-
-
-        return item.empresas
-      })
-    )
-    .subscribe(
-      (r:Empresa[])=>{
-
-
-        this.usuarioModel = this.usuarioService.usuario
-        //obtener array de empresas en las que cuenta algun tipo de permiso
-        this.usuarioModel.Areas.map(r=>{
-          this.empresasConPermisos.push(r.empresaId)
+  cargaEmpresas() {
+    //Obtener empresas
+    this.empresasService
+      .getEmpresas()
+      .pipe(
+        map((item) => {
+          return item.empresas;
         })
+      )
+      .subscribe((r: Empresa[]) => {
+        this.usuarioModel = this.usuarioService.usuario;
+        //obtener array de empresas en las que cuenta algun tipo de permiso
+        this.usuarioModel.Areas.map((r) => {
+          this.empresasConPermisos.push(r.empresaId);
+        });
 
-        this.empresas = r.filter( i =>
-          this.empresasConPermisos.includes( i.id )
-          );
-        this.empresasTemp = this.empresas
+        this.empresas = r.filter((i) =>
+          this.empresasConPermisos.includes(i.id)
+        );
+        this.empresasTemp = this.empresas;
 
-
-        console.info('Empresas permitidas' ,this.empresas );
-
-
-      }
-    )
+        console.info('Empresas permitidas', this.empresas);
+      });
   }
-
-
-
 }

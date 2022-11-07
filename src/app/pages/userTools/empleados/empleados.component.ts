@@ -18,7 +18,7 @@ export class EmpleadosComponent implements OnInit {
   empleadosTemp: Empleado[] = [];
   empresa:Empresa;
   empresaId:string
-
+  areaId:string
   constructor(
               private empleadoservice:EmpleadosService,
               private empresasService:EmpresaService,
@@ -32,8 +32,8 @@ export class EmpleadosComponent implements OnInit {
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe(params=>{
-
       this.empresaId=params['idEmpresa']
+      this.areaId=params['idArea']
       this.obtenerEmpresa(this.empresaId)
     })
 

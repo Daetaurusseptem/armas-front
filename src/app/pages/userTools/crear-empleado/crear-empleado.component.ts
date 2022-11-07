@@ -1,8 +1,15 @@
+import { Departamento } from 'src/app/interfaces/departamento.interface';
+import { DepartamentoService } from 'src/app/services/departamento.service';
+import { Empresa } from 'src/app/interfaces/empresa.interface';
+import { EmpresaService } from 'src/app/services/empresa.service';
+import { UsuarioModel } from 'src/app/models/Usuario.model';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { EmpleadosService } from 'src/app/services/empleados.service';
 import Swal from 'sweetalert2';
+
+import {map} from 'rxjs/operators';
 
 @Component({
   selector: 'app-crear-empleado',
@@ -12,6 +19,12 @@ import Swal from 'sweetalert2';
 export class CrearEmpleadoComponent implements OnInit {
 
   formSubmitted=false;
+
+  empresaId='';
+  empresaSeleccionada='';
+  departamentos:Departamento[];
+  empresas:Empresa[];
+  departamentoId:string
 
 
   public registerEmpleadoForm = this.fb.group({
@@ -23,6 +36,9 @@ export class CrearEmpleadoComponent implements OnInit {
     status:[true, [Validators.required]],
     actualizo:['admin', [Validators.required]],
 
+  },
+  {
+    validators:[this.comprobarExistenciaEmpleado('numero_empleado', 'empresaId')]
   }
   )
 
@@ -30,12 +46,41 @@ export class CrearEmpleadoComponent implements OnInit {
   constructor(
               private fb: FormBuilder,
               private empleadosService:EmpleadosService,
-              private router:Router
+              private empresasService:EmpresaService,
+              private departamentoService:DepartamentoService,
+              private router:Router,
+              private activatedRoute: ActivatedRoute
     ) {
+
+      this.registerEmpleadoForm.get('empresaId').valueChanges
+      .subscribe(idEmpresa=>{
+        this.getDepartamentos(idEmpresa)
+      })
+      this.registerEmpleadoForm.get('numero_empleado').valueChanges
+      .subscribe(validar=>{
+
+      })
+      this.registerEmpleadoForm.get('jefeId').valueChanges
+      .subscribe(idEmpresa=>{
+        this.getDepartamentos(idEmpresa)
+      })
+
 
      }
 
   ngOnInit(): void {
+    this.activatedRoute.params.subscribe(params=>{
+      console.log('sadasdasdasda',params);
+      this.empresaId=params['idEmpresa']
+      this.departamentoId=params['idDepartamento']
+
+    })
+
+    this.empresaIdDisponible()
+    if(this.empresaId===''){
+      console.log('No empresa pre seleccionada');
+      this.getEmpresas();
+    }
   }
 
   createEmpleado() {
@@ -49,6 +94,7 @@ export class CrearEmpleadoComponent implements OnInit {
       console.log(this.registerEmpleadoForm);
       return;
     }
+
 
     let idUsuario:string;
 
@@ -66,7 +112,7 @@ export class CrearEmpleadoComponent implements OnInit {
              title:'Usuario creado'
            })
 
-           this.router.navigateByUrl('dashboard/usuarios')
+           this.router.navigateByUrl('dashboard/usuarios');
 
       //   }
       // )
@@ -93,5 +139,69 @@ export class CrearEmpleadoComponent implements OnInit {
   //    this.materias = items
   //   })
   // }
+
+  empresaIdDisponible(){
+    this.activatedRoute.params.subscribe(
+      params=>{
+        this.empresaId = params['idEmpresa']
+        if (this.empresaId === undefined){
+          this.empresaId=''
+        }
+      })
+  }
+
+  getDepartamentos(id:string){
+    this.departamentoService.getDepartamentosEmpresa(id)
+    .pipe(
+      map(item=>{
+        console.log(item);
+        return item.departamentos
+      })
+    )
+    .subscribe(departamentos=>{
+      this.departamentos = departamentos
+      console.log(departamentos);
+    })
+
+  }
+
+  getEmpresas(){
+    this.empresasService.getEmpresas()
+    .pipe(
+      map(item=>{
+        return item.empresas
+      })
+    )
+    .subscribe(empresas=>{
+      this.empresas=empresas
+    })
+  }
+
+  existeEmpleadoEmpresa(numero_empleado:string){
+    return this.empleadosService.existeEmpleadoEmpresa(this.empresaId, numero_empleado)
+    .pipe(
+      map(item=>{
+        return item.ok
+      })
+    )
+    .subscribe(resp=>{
+      console.log(resp);
+      return resp
+    })
+  }
+
+
+  comprobarExistenciaEmpleado(numero_empleado: string, idEmpresa:string ) {
+    return (formGroup:FormGroup)=>{
+      const numeroId = formGroup.get(numero_empleado);
+      if(numeroId.value==''){
+        return
+      }else(
+        this.existeEmpleadoEmpresa(numeroId.value)
+      )
+
+
+    }
+  }
 
 }

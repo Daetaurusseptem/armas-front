@@ -22,7 +22,10 @@ export class EmpleadosService {
   constructor(private http:HttpClient) { }
 
 
+  existeEmpleadoEmpresa(idEmpresa:string, idEmpleado:string){
+    return this.http.get<itemResponse>(`${this.url}/comprobar/empresa/${idEmpresa}/${idEmpleado}`);
 
+  }
   getEmpleadosDepartamentoId(id:string){
     return this.http.get<ArrayResponse>(`${this.url}/${id}`);
   }

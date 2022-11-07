@@ -38,24 +38,25 @@ export class SeleccionAreaComponent implements OnInit {
               private empresasService:EmpresaService,
 
               ) {
-                this.activatedRoute.params.subscribe(
-                  params=>{
-                    this.empresaId = params['idEmpresa']
-                    this.empresasService.getEmpresa(this.empresaId)
-                    .subscribe(
-                      empresa=>{
-                        this.empresa = empresa.empresa
-                      }
-                    )
-                    this.cargaAreas(this.empresaId);
-
-                  }
-                )
 
 
   }
 
   ngOnInit(): void {
+    this.activatedRoute.params.subscribe(
+      params=>{
+        this.empresaId = params['idEmpresa']
+        this.empresasService.getEmpresa(this.empresaId)
+        .subscribe(
+          empresa=>{
+            this.empresa = empresa.empresa
+          }
+        )
+        this.cargaAreas(this.empresaId);
+
+      }
+    )
+
 
   }
 
