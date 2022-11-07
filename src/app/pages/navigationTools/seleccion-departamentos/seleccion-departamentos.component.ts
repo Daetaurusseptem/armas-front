@@ -5,6 +5,8 @@ import {map} from 'rxjs/operators';
 import { UsuariosService } from 'src/app/services/usuarios.service';
 import { BusquedaService } from 'src/app/services/busqueda.service';
 import { DepartamentoService } from 'src/app/services/departamento.service';
+import { Empresa } from 'src/app/interfaces/empresa.interface';
+import { EmpresaService } from 'src/app/services/empresa.service';
 
 @Component({
   selector: 'app-seleccion-departamentos',
@@ -15,13 +17,15 @@ export class SeleccionDepartamentosComponent implements OnInit {
   departamentos: Departamento[] = [];
   departamentosTemp: Departamento[] = [];
   empresaId:string
+  empresa:Empresa
 
   constructor(
               private departamentosService:DepartamentoService,
+              private empresaService:EmpresaService,
               private busquedaService:BusquedaService,
               private activatedRoute:ActivatedRoute
               ) {
-    this.cargaDepartamentos();
+
 
 
   }
@@ -29,13 +33,24 @@ export class SeleccionDepartamentosComponent implements OnInit {
   ngOnInit(): void {
 
     this.activatedRoute.params.subscribe(params=>{
-      this.empresaId=params['idEmpresa']
+      this.empresaId=params['empresaId']
+      this.cargaDepartamentos(this.empresaId);
+      this.empresaService.getEmpresa(this.empresaId)
+      .pipe(
+        map(item=>{
+          return item.empresa
+        }
+        )
+      )
+      .subscribe(empresa=>{
+        this.empresa = empresa
+      })
     })
 
   }
 
-  cargaDepartamentos(){
-    this.departamentosService.getDepartamentos()
+  cargaDepartamentos(id:string){
+    this.departamentosService.getDepartamentosEmpresa(id)
     .pipe(
       map(item=>{
         console.log(item);

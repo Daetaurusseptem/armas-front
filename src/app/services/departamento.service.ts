@@ -16,6 +16,7 @@ export class DepartamentoService {
   constructor(private http:HttpClient) { }
 
   getDepartamentos(){
+
     return this.http.get<ArrayResponse>(this.url);
   }
   getDepartamentosEmpresa(idEmpresa:string){

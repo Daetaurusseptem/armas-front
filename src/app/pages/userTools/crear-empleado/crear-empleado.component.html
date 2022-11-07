@@ -25,12 +25,12 @@
             <div class="mb-3">
               <label for="" class="form-label">Numero de Empleado de Jefe inmediato</label>
               <input maxlength="8" type="text" name="" id="" class="form-control" placeholder="Ej:201" aria-describedby="helpId"
-                formControlName="jefeId">
+                formControlName="numero_jefe">
               <small id="" class="text-muted">Ingrese el numero del empleado</small>
             </div>
             <div *ngIf="!empresaId" class="mb-3">
               <label for="" class="form-label">Empresa</label>
-              <select class="form-control" name="" id="" formControlName="empresaId">
+              <select class="form-select" name="" id="" formControlName="empresaId">
                 <option value="">Seleccione Empresa</option>
                 <option *ngFor="let empresa of empresas" [value]="empresa.id">{{empresa.nombre}}</option>
               </select>
@@ -38,9 +38,9 @@
             </div>
             <div class="mb-3">
               <label for="" class="form-label">Departamento</label>
-              <select class="form-control" name="" id="" formControlName="departamentoId">
+              <select class="form-select" name="" id="" formControlName="departamentoId">
                 <option value="">Seleccione El departamento</option>
-                <option *ngFor="let departamento of departamentos" [value]="departamento">{{departamento.nombre}}</option>
+                <option *ngFor="let departamento of departamentos" [value]="departamento.id">{{departamento.nombre}}</option>
               </select>
               <small id="" class="text-muted">Ingrese el numero del empleado</small>
             </div>
@@ -50,8 +50,8 @@
           </div>
           <div class="card-body">
             <p *ngIf="campoNoValido('nombre')" class="text-danger">nombre invalido</p>
-            <p *ngIf="campoNoValido('numero_empleado')" class="text-danger">Numero Empleado requerido</p>
-            <p *ngIf="campoNoValido('jefeId')" class="text-danger">Jefe inmediato requerido</p>
+            <p *ngIf="campoNoValido('numero_empleado')" class="text-danger">Numero Empleado invalido</p>
+            <p *ngIf="campoNoValido('jefeId')" class="text-danger">Jefe inmediato invalido</p>
             <p *ngIf="campoNoValido('departamentoId')" class="text-danger">Departamento requerido</p>
             <div *ngIf="!empresaId">
               <p *ngIf="campoNoValido('empresaId')" class="text-danger">Empresa requerida</p>

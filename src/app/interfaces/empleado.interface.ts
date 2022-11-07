@@ -12,8 +12,8 @@ export interface Empleado {
   status: boolean;
   actualizo: string;
   creadoEl: Date;
-  jefeId:string,
+  numero_jefe:string,
   actualizadoEl: Date;
-  Departamento?:Departamento[];
+  Departamento?:Departamento;
   Empresa?:Empresa[];
 }

@@ -25,7 +25,7 @@ export class EmpleadosComponent implements OnInit {
               private busquedaService:BusquedaService,
               private activatedRoute:ActivatedRoute
               ) {
-    this.cargarempleados();
+
 
 
   }
@@ -34,13 +34,14 @@ export class EmpleadosComponent implements OnInit {
     this.activatedRoute.params.subscribe(params=>{
       this.empresaId=params['idEmpresa']
       this.areaId=params['idArea']
+      this.cargarEmpleados(this.empresaId);
       this.obtenerEmpresa(this.empresaId)
     })
 
   }
 
-  cargarempleados(){
-    this.empleadoservice.getEmpleados()
+  cargarEmpleados(id:string){
+    this.empleadoservice.getEmpleadosEmpresaId(id)
     .pipe(
       map(item=>{
         console.log(item);

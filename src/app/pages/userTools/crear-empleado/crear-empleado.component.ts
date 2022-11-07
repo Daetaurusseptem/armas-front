@@ -19,7 +19,6 @@ import {map} from 'rxjs/operators';
 export class CrearEmpleadoComponent implements OnInit {
 
   formSubmitted=false;
-
   empresaId='';
   empresaSeleccionada='';
   departamentos:Departamento[];
@@ -30,10 +29,10 @@ export class CrearEmpleadoComponent implements OnInit {
   public registerEmpleadoForm = this.fb.group({
     nombre:['', Validators.required],
     numero_empleado:['',Validators.required],
-    jefeId:['', [Validators.required]],
+    numero_jefe:['', []],
     departamentoId:['', [Validators.required]],
     empresaId:['', [Validators.required]],
-    status:[true, [Validators.required]],
+    status:[1, [Validators.required]],
     actualizo:['admin', [Validators.required]],
 
   },
@@ -56,23 +55,19 @@ export class CrearEmpleadoComponent implements OnInit {
       .subscribe(idEmpresa=>{
         this.getDepartamentos(idEmpresa)
       })
-      this.registerEmpleadoForm.get('numero_empleado').valueChanges
-      .subscribe(validar=>{
-
-      })
-      this.registerEmpleadoForm.get('jefeId').valueChanges
-      .subscribe(idEmpresa=>{
-        this.getDepartamentos(idEmpresa)
-      })
-
 
      }
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe(params=>{
       console.log('sadasdasdasda',params);
-      this.empresaId=params['idEmpresa']
-      this.departamentoId=params['idDepartamento']
+      this.empresaId=params['idEmpresa']||'';
+      this.departamentoId=params['idDepartamento'] ||'';
+      if(this.empresaId){
+        this.registerEmpleadoForm.get('empresaId').patchValue(this.empresaId)
+
+        this.getDepartamentos(this.empresaId)
+      }
 
     })
 
@@ -98,21 +93,18 @@ export class CrearEmpleadoComponent implements OnInit {
 
     let idUsuario:string;
 
+    console.log(this.registerEmpleadoForm.value);
+
     this.empleadosService.createEmpleado(this.registerEmpleadoForm.value)
     .subscribe(
       resp=>{
         console.log(resp);
 
-      // idUsuario= resp.id
-      // console.log(idUsuario);
-      // return this.usuariosService.addMaestroMateria(materiaId, idUsuario)
-      // .subscribe(
-      //   resp=>{
            Swal.fire({
              title:'Usuario creado'
            })
 
-           this.router.navigateByUrl('dashboard/usuarios');
+           this.router.navigateByUrl('dashboard');
 
       //   }
       // )
@@ -178,16 +170,21 @@ export class CrearEmpleadoComponent implements OnInit {
   }
 
   existeEmpleadoEmpresa(numero_empleado:string){
-    return this.empleadosService.existeEmpleadoEmpresa(this.empresaId, numero_empleado)
-    .pipe(
-      map(item=>{
-        return item.ok
+    if(this.empresaId==''){
+      return null
+    }else{
+      return this.empleadosService.existeEmpleadoEmpresa(this.empresaId, numero_empleado)
+      .pipe(
+        map(item=>{
+          return item.ok
+        })
+      )
+      .subscribe(resp=>{
+        console.log(resp);
+        return resp
       })
-    )
-    .subscribe(resp=>{
-      console.log(resp);
-      return resp
-    })
+    }
+
   }
 
 

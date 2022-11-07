@@ -58,8 +58,8 @@ const childRoutes:Routes=[
   //INICIO USER TOOLS
 
   //*Select MENU
-    //Select departamento - EN DESUSO
-    { path: 'departamentos', component: SeleccionDepartamentosComponent,canActivate:[AdminOrUserGuard], data:{title: 'seleccione de empresa'}},
+    //Select departamento
+    { path: 'departamentos/:empresaId', component: SeleccionDepartamentosComponent,canActivate:[AdminOrUserGuard], data:{title: 'seleccione de empresa'}},
     //Select empresa
     { path: 'empresas', component: SeleccionEmpresaComponent, canActivate:[AdminOrUserGuard], data:{title: 'seleccione de empresa'}},
     //Select Area de la Empresa
@@ -72,7 +72,7 @@ const childRoutes:Routes=[
     //Desde catalogo empleados con empresaId disponible en parametro
     { path: 'empresas/empleados/crear-empleado/:idEmpresa/:idArea', component: CrearEmpleadoComponent,canActivate:[AdminOrUserGuard, EmpresaPermisoGuard], data:{title: 'crear Empleado'}},
     //Desde crear empleado sin parametro empresaId
-    { path: 'empleados/crear-empleado/:idEmpresa/:idDepartamento', component: CrearEmpleadoComponent,canActivate:[AdminOrUserGuard], data:{title: 'crear Empleado'}},
+    { path: 'empleados/crear-empleado', component: CrearEmpleadoComponent,canActivate:[AdminOrUserGuard], data:{title: 'crear Empleado'}},
 
 
 

@@ -16,7 +16,8 @@
                 <th scope="col">#</th>
                 <th scope="col">Id</th>
                 <th scope="col">Nombre</th>
-                <th scope="col">Herramientas</th>
+                <th scope="col">Areas</th>
+                <th scope="col">Departamentos</th>
               </tr>
             </thead>
             <tbody class="text-left">
@@ -27,6 +28,11 @@
 
                 <td>
                   <a [routerLink]="['/dashboard/empresas/', empresa.id,'areas-select']" name="" id="" class="btn btn-success" role="button">
+                    <i class="bi bi-building"></i>
+                  </a>
+                </td>
+                <td>
+                  <a [routerLink]="['/dashboard/departamentos/', empresa.id]" name="" id="" class="btn btn-success" role="button">
                     <i class="bi bi-arrow-right-square"></i>
                   </a>
                 </td>
