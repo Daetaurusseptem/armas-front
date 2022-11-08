@@ -102,15 +102,26 @@
         <!-- MODAL PERMISOS -->
         <div class="">
           <div class="modal fade" id="permisos" tabindex="-1" aria-labelledby="permisosLabel" aria-hidden="true">
-            <div class="modal-dialog">
+            <div class="modal-dialog modal-lg">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h5 class="modal-title" id="permisosabel">Cambiar permisos</h5>
+                  <h5 class="modal-title" id="permisosabel">Cambiar/Agregar Permisos de <span class="text-primary">{{usuario.nombre}}</span></h5>
                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
+                  <form [formGroup]="empresaSelect">
+                    <div class="row mb-3">
+                      <div class="col-12">
+                        <select class="form-select" formControlName="empresa" name="" id="">
+                          <option disabled [selected]="true" value="">Seleccione el Empresa</option>
+                          <option *ngFor="let empresa of empresas" [value]="empresa.id">{{empresa!.nombre}}</option>
+                        </select>
+                      </div>
+                    </div>
+                  </form>
+
                   <div class="mb-3">
-                    <form [formGroup]="permisosForm" (ngSubmit)="actualizarPermiso()">
+                    <form  [formGroup]="permisosForm" (ngSubmit)="actualizarPermiso()">
                       <div class="row">
                         <div class="col-4">
                           <select class="form-select" formControlName="idArea" name="" id="">
@@ -126,60 +137,67 @@
                           </select>
                         </div>
                         <div class="col-4">
-                          <button type="submit" name="" id="" class="btn btn-primary">
-                            <i class="bi bi-plus-circle" style="padding-left: 2rem; padding-right: 2rem;"></i>
-                          </button>
+                          <div class="d-grid gap-2">
+                            <button [disabled]="this.permisosForm.get('idArea').value=='' || this.permisosForm.get('tipo').value==''" type="submit" name="" id="" class="btn btn-primary btn-block">
+                             Agregar    <i class="bi bi-plus-circle"></i>
+                            </button>
+                            </div>
+
+
                         </div>
                       </div>
+
+
                     </form>
+
                   </div>
-                  <!-- TABLA PERMISOS -->
+                <!-- TABLA PERMISOS -->
 
-                  <div class="mb3">
-                    <div *ngIf="usuario.Areas.length<=0" class="justified">
+                <div class="mb3">
+                  <div *ngIf="usuario.Areas.length<=0" class="justified">
 
-                      <div class="col-12 card bg-light">
+                    <div class="col-12 card bg-light">
 
-                        <p class="text-danger p-4">
-                          No se encontraron permisos
-                        </p>
-                      </div>
+                      <p class="text-danger p-4">
+                        No se encontraron permisos
+                      </p>
                     </div>
-                    <table *ngIf="areasUsuario.length>0" class="table">
-                      <thead>
-                        <tr>
-                          <th scope="col">Area</th>
-                          <th scope="col">Permiso</th>
-                          <th scope="col">Herramientas</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr *ngFor="let area of areasUsuario">
-
-                          <td>{{area.nombre}}</td>
-                          <td *ngIf="area.Permisos.tipo =='l'">Lectura</td>
-                          <td *ngIf="area.Permisos.tipo =='e'">Escritura</td>
-                          <td>
-                            <button name="" id="" class="btn btn-danger" (click)="eliminarPermiso(area.Permisos.areaId)">
-                              <i class="bi bi-trash-fill"></i>
-                            </button>
-                          </td>
-                        </tr>
-
-                      </tbody>
-                    </table>
                   </div>
-                  <!-- FIN TABLA PERMISOS -->
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                  </div>
+                  <table *ngIf="areasUsuario.length>0" class="table">
+                    <thead>
+                      <tr>
+                        <th scope="col">Area</th>
+                        <th scope="col">Permiso</th>
+                        <th scope="col">Herramientas</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let area of areasUsuario">
+
+                        <td>{{area.nombre}}</td>
+                        <td *ngIf="area.Permisos.tipo =='l'">Lectura</td>
+                        <td *ngIf="area.Permisos.tipo =='e'">Escritura</td>
+                        <td>
+                          <button name="" id="" class="btn btn-danger" (click)="eliminarPermiso(area.Permisos.areaId)">
+                            <i class="bi bi-trash-fill"></i>
+                          </button>
+                        </td>
+                      </tr>
+
+                    </tbody>
+                  </table>
+                </div>
+                <!-- FIN TABLA PERMISOS -->
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <!-- FIN MODAL PERMISOS-->
       </div>
+      <!-- FIN MODAL PERMISOS-->
     </div>
   </div>
+</div>
 </div>

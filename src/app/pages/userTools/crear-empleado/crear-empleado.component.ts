@@ -106,9 +106,16 @@ export class CrearEmpleadoComponent implements OnInit {
 
            this.router.navigateByUrl('dashboard');
 
-      //   }
-      // )
+           //   }
+           // )
+          },err=>{
+            console.log(err);
+            Swal.fire({
+              title:'Hubo un error',
+              text:err.error.msg
+            })
     }
+
     )
 
 

@@ -1,3 +1,5 @@
+import { Empresa } from 'src/app/interfaces/empresa.interface';
+import { EmpresaService } from 'src/app/services/empresa.service';
 
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -24,6 +26,8 @@ export class EditarUsuarioComponent implements OnInit {
   idUsuario:string;
   formSubmitted=false;
   areasUsuario!:Area[]
+  empresas:Empresa[]
+  empresaSeleccionada:string
 
   usuarioForm = this.fb.group({
     nombre:['',[Validators.required]],
@@ -38,6 +42,11 @@ export class EditarUsuarioComponent implements OnInit {
   }
   )
 
+  empresaSelect = this.fb.group({
+    empresa:['', [Validators.required]]
+  })
+
+
   permisosForm = this.fb.group({
     idArea:['', [Validators.required]],
     tipo:['', [Validators.required]]
@@ -48,6 +57,7 @@ export class EditarUsuarioComponent implements OnInit {
               private activatedRoute:ActivatedRoute,
               private usuariosService:UsuariosService,
               private areasService:AreaService,
+              private empresaService:EmpresaService,
               private permisosService:PermisosService,
               private fb:FormBuilder,
               private router:Router,
@@ -57,13 +67,13 @@ export class EditarUsuarioComponent implements OnInit {
    }
 
   ngOnInit(): void {
+    this.obtenerEmpresas()
     this.activatedRoute.params.subscribe(params=>{
       console.log(params['id']);
       this.obtenerUsuario(params['id']).subscribe(
         usuario=>{
           this.areasUsuario = usuario.Areas
           this.usuario = usuario
-          this.obtenerAreas();
           this.usuarioForm.setValue({
             nombre: this.usuario.nombre,
             usuario: this.usuario.usuario,
@@ -71,6 +81,13 @@ export class EditarUsuarioComponent implements OnInit {
 
         }
       )
+    })
+    this.permisosForm.get('idArea').valueChanges.subscribe(areaSeleccionada=>{
+      console.log(areaSeleccionada);
+    })
+    this.empresaSelect.get('empresa').valueChanges.subscribe(empresaSeleccionada=>{
+
+      this.obtenerAreas(empresaSeleccionada)
     })
   }
 
@@ -101,8 +118,7 @@ export class EditarUsuarioComponent implements OnInit {
           console.log(r);
           this.formSubmitted = false;
           this.utilitiesService.redirectTo(`/dashboard/usuarios/editar-usuario/${this.usuario.id}`)
-          let element = document.querySelector('.modal-backdrop')
-          element.remove();
+
           Swal.fire({
             title:'Cambios Guardados',
             icon:'success'
@@ -139,8 +155,20 @@ export class EditarUsuarioComponent implements OnInit {
 
 
   }
-  obtenerAreas(){
-    this.areasService.getAreas()
+  obtenerEmpresas(){
+    this.empresaService.getEmpresas()
+    .pipe(
+      map(item=>{
+        return item.empresas
+      }
+      )
+    )
+    .subscribe(empresas=>{
+      this.empresas = empresas
+    })
+  }
+  obtenerAreas(id:string){
+    this.areasService.getAreasEmpresa(id)
     .pipe(
       map(item=>{
         return item.areas
@@ -164,7 +192,7 @@ export class EditarUsuarioComponent implements OnInit {
       });
       console.log('array que quiero obtener: ', permisosFiltrados);
 
-      this.areas =permisosFiltrados
+      this.areas = permisosFiltrados
       console.log(this.areas);
     })
 
