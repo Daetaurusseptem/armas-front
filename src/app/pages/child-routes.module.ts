@@ -65,10 +65,10 @@ const childRoutes:Routes=[
     //Select empresa
     { path: 'empresas', component: SeleccionEmpresaComponent, canActivate:[AdminOrUserGuard], data:{title: 'seleccione de empresa'}},
     //Select Area de la Empresa
-    { path: 'empresas/:idEmpresa/areas-select', component: SeleccionAreaComponent, canActivate:[EmpresaPermisoGuard], data:{title: 'seleccione de empresa'}},
+    { path: ':idEmpresa/areas-select', component: SeleccionAreaComponent, canActivate:[EmpresaPermisoGuard], data:{title: 'seleccione de empresa'}},
     //Pantalla empleados con area
-    { path: '/:idEmpresa/:idDepartamento/:idArea/empleados', component: EmpleadosComponent, canActivate:[AreaPermisosGuard], data:{title: 'seleccione de empresa'}},
-    { path: '/:idEmpresa/:idDepartamento/:idArea/empleados', component: EmpleadosComponent, canActivate:[AreaPermisosGuard], data:{title: 'seleccione de empresa'}},
+    { path: ':idEmpresa/:idArea/empleados', component: EmpleadosComponent, canActivate:[AreaPermisosGuard], data:{title: 'seleccione de empresa'}},
+
 
     //*Empleados
 
