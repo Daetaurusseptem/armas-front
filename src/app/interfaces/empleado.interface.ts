@@ -4,7 +4,7 @@ import { Empresa } from "./empresa.interface";
 
 export interface Empleado {
   id: string;
-  numero_empleado: string;
+  numero_empleado?: string;
   nombre: string;
   img?: any;
   areaId:string;
@@ -15,5 +15,5 @@ export interface Empleado {
   numero_jefe:string,
   actualizadoEl: Date;
   Departamento?:Departamento;
-  Empresa?:Empresa[];
+  Empresa?:Empresa;
 }

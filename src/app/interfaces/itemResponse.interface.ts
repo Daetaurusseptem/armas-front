@@ -9,5 +9,5 @@ export interface itemResponse {
   area?:Area,
   usuario?:Usuario,
   departamento?:Departamento
-  empleados?:Empleado
+  empleado?:Empleado
 }

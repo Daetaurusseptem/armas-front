@@ -7,6 +7,8 @@ import {map} from 'rxjs/operators';
 import { ActivatedRoute } from '@angular/router';
 import { Empresa } from 'src/app/interfaces/empresa.interface';
 import { EmpresaService } from 'src/app/services/empresa.service';
+import { AreaService } from 'src/app/services/area.service';
+import { Area } from 'src/app/interfaces/area.interface';
 
 @Component({
   selector: 'app-empleados',
@@ -16,12 +18,14 @@ import { EmpresaService } from 'src/app/services/empresa.service';
 export class EmpleadosComponent implements OnInit {
   empleados: Empleado[] = [];
   empleadosTemp: Empleado[] = [];
-  empresa:Empresa;
-  empresaId:string
   areaId:string
+  empresaId:string
+  area:Area;
+  empresa:Empresa;
   constructor(
               private empleadoservice:EmpleadosService,
               private empresasService:EmpresaService,
+              private areaService:AreaService,
               private busquedaService:BusquedaService,
               private activatedRoute:ActivatedRoute
               ) {
@@ -36,6 +40,15 @@ export class EmpleadosComponent implements OnInit {
       this.areaId=params['idArea']
       this.cargarEmpleados(this.empresaId);
       this.obtenerEmpresa(this.empresaId)
+      this.areaService.getArea(this.areaId)
+      .pipe(
+        map(item=>{
+          return item.area
+        })
+      )
+      .subscribe(area=>{
+        this.area =area
+      })
     })
 
   }

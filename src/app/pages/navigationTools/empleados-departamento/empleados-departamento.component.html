@@ -13,7 +13,7 @@
           class="form-control"
           id="busqueda"
           aria-describedby="emailHelp"
-          (keyup)="buscar(termino.value)"
+          (keyup)="buscar(empresa.id,departamento.id,termino.value)"
           #termino
           >
 
@@ -54,23 +54,17 @@
                 <td *ngIf="empleado.status">Activo</td>
                 <td *ngIf="!empleado.status">Baja</td>
 
-                <td *ngIf="empleado.Empresa.length==0">
-                  <ul class="lista-tabla text-start">
-                    <li>
-                      <span>Sin Empresa</span>
-                    </li>
-                  </ul>
-                </td>
-                <td *ngIf="empleado.Empresa.length>0">
+
+                <td *ngIf="empleado.Empresa">
                     <ul class="lista-tabla text-start">
-                      <li class="pb-2" *ngFor="let area of empleado.Empresa">
-                          {{area.nombre}}
+                      <li class="pb-2">
+                          {{empleado.Empresa.nombre}}
                       </li>
                     </ul>
 
                 </td>
                 <td>
-                  <a [routerLink]="['/dashboard/usuarios/editar-empleado',empleado.id]" name="" id="" class="btn btn-primary" role="button">
+                  <a [routerLink]="['/dashboard/usuarios/editar-empleado',empleado.id,'sss']" name="" id="" class="btn btn-primary" role="button">
                     <i class="bi bi-pencil align-middle"></i>
                   </a>
                 </td>

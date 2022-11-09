@@ -26,11 +26,12 @@
     <div class="card">
       <div class="card-title p-4">
         <div class="card-title start">
-          <h5>empleados del sistema</h5>
+          <h5>Empleados {{empresa.nombre}} - Area {{area.nombre}}</h5>
         </div>
         <a name="" id="" class="btn btn-primary end" [routerLink]="['/dashboard/empresas/empleados/crear-empleado',  empresaId, areaId]" role="button">
-          <i class="bi bi-person-plus"></i>
+          <i class="bi bi-person-plus"></i>  Añadir Empleado
         </a>
+        <hr>
       </div>
       <div class="card-body">
         <div class="table-responsive">
@@ -42,6 +43,7 @@
                 <th scope="col">Nombre</th>
                 <th scope="col">Numero Empleado</th>
                 <th scope="col">Jefe Directo</th>
+                <th scope="col">Estatus</th>
                 <th scope="col">Departamento</th>
 
                 <th scope="col">Herramientas</th>
@@ -54,9 +56,13 @@
                 <td>{{empleado.nombre}}</td>
                 <td>{{empleado.numero_empleado}}</td>
                 <td>{{empleado.numero_jefe}}</td>
+                <td *ngIf="empleado.status"> <span class="badge bg-success">Activo</span></td>
+                <td *ngIf="!empleado.status"> <span class="badge bg-secondary">Baja</span></td>
+
+
                 <td>{{empleado.Departamento.nombre}}</td>
                 <td>
-                  <a [routerLink]="['/dashboard/empleados/editar-empleado',empleado.id]" name="" id="" class="btn btn-primary" role="button">
+                  <a [routerLink]="['/dashboard/empleados/editar-empleado',empleado.Empresa.id,areaId, empleado.id]" name="" id="" class="btn btn-primary" role="button">
                     <i class="bi bi-pencil align-middle"></i>
                   </a>
                 </td>
