@@ -167,6 +167,7 @@
                     <thead>
                       <tr>
                         <th scope="col">Area</th>
+                        <!-- <th scope="col">Empresa</th> -->
                         <th scope="col">Permiso</th>
                         <th scope="col">Herramientas</th>
                       </tr>
@@ -175,6 +176,7 @@
                       <tr *ngFor="let area of areasUsuario">
 
                         <td>{{area.nombre}}</td>
+                        <!-- <td>{{area.Empresas.nombre}}</td> -->
                         <td *ngIf="area.Permisos.tipo =='l'">Lectura</td>
                         <td *ngIf="area.Permisos.tipo =='e'">Escritura</td>
                         <td>

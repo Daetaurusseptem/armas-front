@@ -6,7 +6,7 @@
           <h5>Busqueda</h5>
         </div>
       </div>
-      <form>
+      <form  [formGroup]="departamentoBusquedaSelect">
         <div class="m-5">
           <input
           type="text"
@@ -18,6 +18,14 @@
           >
 
 
+
+        </div>
+        <div class="m-5">
+          <select class="form-select" name="" id="" formControlName="empresaId">
+            <option value="">Seleccione Empresa</option>
+            <option *ngFor="let departamento of departamentos" [value]="departamento.id">{{departamento.nombre}}</option>
+          </select>
+          <small id="" class="text-muted">Ingrese el numero del empleado</small>
         </div>
       </form>
     </div>
@@ -25,12 +33,23 @@
   <div class="col-12 mx-auto text-center">
     <div class="card">
       <div class="card-title p-4">
-        <div class="card-title start">
+        <div class="card-title">
           <h5>Empleados {{empresa.nombre}} - Area {{area.nombre}}</h5>
+
         </div>
-        <a name="" id="" class="btn btn-primary end" [routerLink]="['/dashboard/empresas/empleados/crear-empleado',  empresaId, areaId]" role="button">
-          <i class="bi bi-person-plus"></i>  Añadir Empleado
-        </a>
+
+        <div class="col">
+          <div class="text-start">
+            <a name="" id="" class="btn btn-dark" [routerLink]="['/dashboard/',empresaId, 'areas-select']" role="button">
+              <i class="bi bi-arrow-left-circle"></i> Volver
+            </a>
+          </div>
+          <div class="text-end">
+            <a name="" id="" class="btn btn-success" [routerLink]="['/dashboard/',empresaId,areaId, 'crear-empleado']" role="button">
+              <i class="bi bi-person-plus"></i>  Añadir Empleado
+            </a>
+          </div>
+        </div>
         <hr>
       </div>
       <div class="card-body">
@@ -62,7 +81,7 @@
 
                 <td>{{empleado.Departamento.nombre}}</td>
                 <td>
-                  <a [routerLink]="['/dashboard/empleados/editar-empleado',empleado.Empresa.id,areaId, empleado.id]" name="" id="" class="btn btn-primary" role="button">
+                  <a [routerLink]="['/dashboard/',empleado.Empresa.id,areaId, empleado.id,'editar-empleado']" name="" id="" class="btn btn-primary" role="button">
                     <i class="bi bi-pencil align-middle"></i>
                   </a>
                 </td>

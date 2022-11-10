@@ -98,7 +98,7 @@ export class EditarEmpleadoComponent implements OnInit {
           })
           this.formSubmitted = false;
 
-          this.router.navigateByUrl(`/dashboard/empresas/${this.empresaId}/${this.areaId}/empleados`)
+          this.router.navigateByUrl(`/dashboard/${this.empresaId}/${this.areaId}/empleados-area`)
         },
         err=>{
           console.log(err.error.msg);

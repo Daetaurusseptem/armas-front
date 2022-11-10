@@ -1,3 +1,4 @@
+import { Empresa } from "./empresa.interface";
 import { Permisos } from "./permisos.interface";
 
 export interface Area {
@@ -9,4 +10,5 @@ export interface Area {
   actualizadoEl?: Date;
   empresaId?: string;
   Permisos?: Permisos;
+  Empresas?:Empresa;
 }

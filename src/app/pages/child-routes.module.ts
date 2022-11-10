@@ -59,26 +59,31 @@ const childRoutes:Routes=[
   //INICIO USER TOOLS
 
   //*Select MENU
-    //Select departamento
-    { path: 'departamentos/:empresaId', component: SeleccionDepartamentosComponent,canActivate:[AdminOrUserGuard], data:{title: 'seleccione de empresa'}},
-    { path: 'departamentos/:empresaId/:departamentoId/empleados', component: EmpleadosDepartamentoComponent,canActivate:[AdminOrUserGuard], data:{title: 'seleccione de empresa'}},
-    //Select empresa
-    { path: 'empresas', component: SeleccionEmpresaComponent, canActivate:[AdminOrUserGuard], data:{title: 'seleccione de empresa'}},
-    //Select Area de la Empresa
-    { path: ':idEmpresa/areas-select', component: SeleccionAreaComponent, canActivate:[EmpresaPermisoGuard], data:{title: 'seleccione de empresa'}},
-    //Pantalla empleados con area
-    { path: ':idEmpresa/:idArea/empleados', component: EmpleadosComponent, canActivate:[AreaPermisosGuard], data:{title: 'seleccione de empresa'}},
 
+
+  //*Select Area de la Empresa
 
     //*Empleados
+      { path: ':idEmpresa/areas-select', component: SeleccionAreaComponent, canActivate:[EmpresaPermisoGuard], data:{title: 'seleccione de empresa'}},
+        //*Select Empresa
+          { path: 'empresas', component: SeleccionEmpresaComponent, canActivate:[AdminOrUserGuard], data:{title: 'seleccione de empresa'}},
+          //*Select departamento
+            { path: 'departamentos/:empresaId', component: SeleccionDepartamentosComponent,canActivate:[AdminOrUserGuard], data:{title: 'seleccione de empresa'}},
+            	//*Catalogo empleados por departamento
+            	  { path: ':empresaId/:departamentoId/empleados-departamento', component: EmpleadosDepartamentoComponent,canActivate:[AdminOrUserGuard], data:{title: 'seleccione de empresa'}},
+                  //*Departamentos seleccion
+                    { path: ':idEmpresa/:idArea/:idEmpleado/editar-empleado', component: EditarEmpleadoComponent,canActivate:[AdminOrUserGuard], data:{title: 'crear Empleado'}},
+
+          //*Select Area
+          { path: ':idEmpresa/:idArea/empleados-area', component: EmpleadosComponent, canActivate:[AreaPermisosGuard], data:{title: 'seleccione de empresa'}},
+
+
 
     //Crear Empleado
     //Desde catalogo empleados con empresaId disponible en parametro
-    { path: 'empresas/empleados/crear-empleado/:idEmpresa/:idArea', component: CrearEmpleadoComponent,canActivate:[AdminOrUserGuard, EmpresaPermisoGuard], data:{title: 'crear Empleado'}},
+    { path: ':idEmpresa/:idArea/crear-empleado', component: CrearEmpleadoComponent,canActivate:[AdminOrUserGuard, EmpresaPermisoGuard], data:{title: 'crear Empleado'}},
     //Desde crear empleado sin parametro empresaId
     { path: 'empleados/crear-empleado', component: CrearEmpleadoComponent,canActivate:[AdminOrUserGuard], data:{title: 'crear Empleado'}},
-    //Departamentos seleccion
-    { path: 'empleados/editar-empleado/:idEmpresa/:idArea/:idEmpleado', component: EditarEmpleadoComponent,canActivate:[AdminOrUserGuard], data:{title: 'crear Empleado'}},
 
 
   //FINAL USER TOOLS

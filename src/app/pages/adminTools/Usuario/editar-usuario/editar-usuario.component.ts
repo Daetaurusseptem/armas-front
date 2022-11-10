@@ -118,7 +118,9 @@ export class EditarUsuarioComponent implements OnInit {
           console.log(r);
           this.formSubmitted = false;
           this.utilitiesService.redirectTo(`/dashboard/usuarios/editar-usuario/${this.usuario.id}`)
+          let element = document.querySelector('.modal-backdrop')
 
+          element.remove();
           Swal.fire({
             title:'Cambios Guardados',
             icon:'success'
@@ -126,7 +128,9 @@ export class EditarUsuarioComponent implements OnInit {
         })
       }
     })
-
+    let claseModal = document.querySelector('.modal-open')
+    claseModal.classList.remove('.modal-open')
+    console.log(claseModal);
 
   }
   eliminarPermiso(areaId:string){
@@ -149,6 +153,8 @@ export class EditarUsuarioComponent implements OnInit {
             title:'Cambios Guardados',
             icon:'success'
           })
+          let element2 = document.querySelector('.modal-open')
+
         })
       }
     })
@@ -215,12 +221,17 @@ export class EditarUsuarioComponent implements OnInit {
 
         this.usuariosService.updateUser(this.usuario.id, this.usuarioForm.value)
         .subscribe(r=>{
-          this.formSubmitted = false;
-          this.router.navigateByUrl('/dashboard/usuarios')
+
+          this.formSubmitted=false
+          this.utilitiesService.redirectTo(`/dashboard/usuarios/editar-usuario/${this.usuario.id}`)
+          let element = document.querySelector('.modal-backdrop')
+          element.remove();
           Swal.fire({
             title:'Cambios Guardados',
             icon:'success'
           })
+
+
         })
       }
     })

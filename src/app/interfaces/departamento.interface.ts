@@ -1,3 +1,4 @@
+import { Empleado } from "./empleado.interface";
 
 
 export interface Departamento {
@@ -7,4 +8,5 @@ export interface Departamento {
   creadoEl?: Date;
   actualizadoEl?: Date;
   empresaId?: string;
+  empleados:Empleado[]
 }

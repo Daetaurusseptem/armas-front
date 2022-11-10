@@ -21,6 +21,7 @@ export class CrearEmpleadoComponent implements OnInit {
   formSubmitted=false;
   empresaId='';
   empresaSeleccionada='';
+  areaId:string
   departamentos:Departamento[];
   empresas:Empresa[];
   departamentoId:string
@@ -62,6 +63,7 @@ export class CrearEmpleadoComponent implements OnInit {
     this.activatedRoute.params.subscribe(params=>{
       console.log('sadasdasdasda',params);
       this.empresaId=params['idEmpresa']||'';
+      this.areaId=params['idArea']||'';
       this.departamentoId=params['idDepartamento'] ||'';
       if(this.empresaId){
         this.registerEmpleadoForm.get('empresaId').patchValue(this.empresaId)
@@ -103,8 +105,12 @@ export class CrearEmpleadoComponent implements OnInit {
            Swal.fire({
              title:'Usuario creado'
            })
+           if( this.empresaId!== '' || undefined  || null ){
+             this.router.navigateByUrl(`/dashboard/${this.empresaId}/${this.areaId}/empleados-area`)
+            }else{
 
-           this.router.navigateByUrl('dashboard');
+              this.router.navigateByUrl(`/dashboard`)
+           }
 
            //   }
            // )

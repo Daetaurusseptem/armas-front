@@ -22,6 +22,7 @@ export class EmpleadosDepartamentoComponent implements OnInit {
   departamento:Departamento
   empresa:Empresa;
 
+
   constructor(
               private departamentosService:DepartamentoService,
               private busquedaService:BusquedaService,
@@ -30,16 +31,11 @@ export class EmpleadosDepartamentoComponent implements OnInit {
               private empresaService:EmpresaService
               ) {
                 this.activatedRoute.params.subscribe(params=>{
-                  this.empresaService.getEmpresa(params['empresaId'])
+                  this.departamentosService.getDepartamento(params['empresaId'])
                   .pipe(map(i=>i.empresa))
                   .subscribe(e=>{this.empresa=e})
-                  this.obtenerEmpleados(params['id']).subscribe(
-                    empleados=>{
-                      this.empleados = empleados
-                    }
-
-                  )
-                  this.departamentosService.getDepartamento(params['id'])
+                  this.obtenerEmpleados(params['departamentoId'])
+                  this.departamentosService.getDepartamento(params['departamentoId'])
                       .pipe(map(item=>{
                         return item.departamento
                       }))
@@ -60,12 +56,11 @@ export class EmpleadosDepartamentoComponent implements OnInit {
   obtenerEmpleados(id:string){
     return this.empleadoService.getEmpleadosDepartamentoId(id)
     .pipe(
-      map(item=>{
-        console.log(item);
-        return item.empleados
-      })
-    )
+      map(item=>item.empleados))
+    .subscribe(empleados=>this.empleados = empleados)
   }
+
+
   cargarEmpleadosDepartamento(){
     this.departamentosService.getDepartamentos()
     .pipe(

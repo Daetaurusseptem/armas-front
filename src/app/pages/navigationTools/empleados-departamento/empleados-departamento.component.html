@@ -37,34 +37,31 @@
           <table class="table">
             <thead>
               <tr>
-
-                <th scope="col">Numero Empleado</th>
+                <th scope="col">#</th>
+                <th scope="col">Id</th>
                 <th scope="col">Nombre</th>
-                <th scope="col">Usuario</th>
-                <th scope="col">Role</th>
-                <th scope="col">Permisos</th>
-                <th scope="col">Password</th>
+                <th scope="col">Numero Empleado</th>
+                <th scope="col">Jefe Directo</th>
+                <th scope="col">Estatus</th>
+                <th scope="col">Departamento</th>
+
                 <th scope="col">Herramientas</th>
               </tr>
             </thead>
             <tbody class="text-left">
               <tr *ngFor="let empleado of empleados; index as i">
-                <th scope="row">{{empleado.numero_empleado}}</th>
+                <th scope="row">{{i+1}}</th>
+                <th scope="row">{{empleado.id}}</th>
                 <td>{{empleado.nombre}}</td>
-                <td *ngIf="empleado.status">Activo</td>
-                <td *ngIf="!empleado.status">Baja</td>
+                <td>{{empleado.numero_empleado}}</td>
+                <td>{{empleado.numero_jefe}}</td>
+                <td *ngIf="empleado.status"> <span class="badge bg-success">Activo</span></td>
+                <td *ngIf="!empleado.status"> <span class="badge bg-secondary">Baja</span></td>
 
 
-                <td *ngIf="empleado.Empresa">
-                    <ul class="lista-tabla text-start">
-                      <li class="pb-2">
-                          {{empleado.Empresa.nombre}}
-                      </li>
-                    </ul>
-
-                </td>
+                <td>{{empleado.Departamento.nombre}}</td>
                 <td>
-                  <a [routerLink]="['/dashboard/usuarios/editar-empleado',empleado.id,'sss']" name="" id="" class="btn btn-primary" role="button">
+                  <a [routerLink]="['/dashboard/',empleado.Empresa.id, empleado.id,'editar-empleado']" name="" id="" class="btn btn-primary" role="button">
                     <i class="bi bi-pencil align-middle"></i>
                   </a>
                 </td>
