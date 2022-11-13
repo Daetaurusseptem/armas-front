@@ -48,12 +48,11 @@ export class EmpleadosService {
     //   })
     // );
   }
-  buscarEmpleadoEmpresa(idEmpresa: string, termino: string, idDepartamento?:string) {
+  buscarEmpleadoEmpresa(idEmpresa: string, termino?: string, idDepartamento?:string) {
     if(idDepartamento){
-      return this.http.get<Busqueda>(`${urlBase}/busqueda/${idEmpresa}/${termino}?departamentoId=${idDepartamento}`, this.headers)
+      return this.http.get<Busqueda>(`${this.url}/busqueda/${idEmpresa}?busqueda=${termino}?departamentoId=${idDepartamento}`, this.headers)
     }
-
-    return this.http.get<Busqueda>(`${urlBase}/busqueda/${idEmpresa}/${termino}`, this.headers)
+    return this.http.get<Busqueda>(`${this.url}/busqueda/${idEmpresa}/${termino}`, this.headers)
   }
 
 

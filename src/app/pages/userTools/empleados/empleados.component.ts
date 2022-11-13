@@ -31,7 +31,8 @@ export class EmpleadosComponent implements OnInit {
   departamentoSelected:string;
   departamentos:Departamento[]
   departamentoBusquedaSelect = this.fb.group({
-    departamentoId:['', [Validators.required]]
+    departamentoId:['', [Validators.required]],
+    termino:['', [Validators.required]]
   })
   constructor(
               private empleadoService:EmpleadosService,
@@ -52,6 +53,7 @@ export class EmpleadosComponent implements OnInit {
     this.activatedRoute.params.subscribe(params=>{
       this.empresaId=params['idEmpresa']
       this.areaId=params['idArea']
+
 
       this.obtenerDepartamentos(this.empresaId);
       this.cambioDepartamento();
@@ -81,18 +83,21 @@ export class EmpleadosComponent implements OnInit {
   buscar(termino: string): any{
 
     //si la busqueda es 0 los empleados guardados en empleados temp se asignan de nuevo
-    if (termino.length === 0 ){
+    if (termino.length === 0 && this.departamentoSelected==''||undefined){
       this.empleados = [...this.empleadosTemp];
       return;
     }
-    if(this.departamentoSelected!==''){
+    if(this.departamentoSelected!==''||undefined && this.departamentoBusquedaSelect.get('termino').value !== ''||undefined){
       this.empleadoService.buscarEmpleadoEmpresa(this.empresaId, termino, this.departamentoSelected )
       .pipe(
-        map(item=>item.empleados)
+        map(item=>{
+          console.log(item);
+          return item.empleados
+        })
         )
-      .subscribe( (resultados:Empleado[]) => {
-        console.log(resultados);
-        this.empleados = resultados
+      .subscribe( empleados => {
+        console.log(empleados);
+        this.empleados = empleados
       });
     }
     this.empleadoService.buscarEmpleadoEmpresa(this.empresaId, termino )
@@ -146,6 +151,8 @@ export class EmpleadosComponent implements OnInit {
     .subscribe(departamento=>{
       console.log(departamento);
       this.departamentoSelected = departamento
+      this.buscar(this.departamentoBusquedaSelect.get('termino').value || '')
+
     })
   }
 }
