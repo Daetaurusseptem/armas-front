@@ -14,6 +14,7 @@
           id="busqueda"
           aria-describedby="emailHelp"
           (keyup)="buscar(termino.value)"
+          formControlName="termino"
           #termino
           >
 
@@ -22,10 +23,10 @@
         </div>
         <div class="m-5">
           <select class="form-select" name="" id="" formControlName="departamentoId">
-            <option value="">Seleccione Empresa</option>
+            <option [selected]="true" value="nodep">Sin departamento</option>
             <option *ngFor="let departamento of departamentos" [value]="departamento.id">{{departamento.nombre}}</option>
           </select>
-          <small id="" class="text-muted">Ingrese el numero del empleado</small>
+          <small id="" class="text-muted">Seleccione el departamento que desee</small>
         </div>
       </form>
     </div>

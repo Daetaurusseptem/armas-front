@@ -19,140 +19,213 @@ import { ArrayResponse } from 'src/app/interfaces/arrayResponse.interface';
 @Component({
   selector: 'app-empleados',
   templateUrl: './empleados.component.html',
-  styleUrls: ['./empleados.component.css']
+  styleUrls: ['./empleados.component.css'],
 })
 export class EmpleadosComponent implements OnInit {
   empleados: Empleado[] = [];
   empleadosTemp: Empleado[] = [];
-  areaId:string
-  empresaId:string
-  area:Area;
-  empresa:Empresa;
-  departamentoSelected:string;
-  departamentos:Departamento[]
+  areaId: string;
+  empresaId: string;
+  area: Area;
+  empresa: Empresa;
+  departamentoSelected: string;
+  departamentos: Departamento[];
   departamentoBusquedaSelect = this.fb.group({
-    departamentoId:['', [Validators.required]],
-    termino:['', [Validators.required]]
-  })
+    departamentoId: ['nodep', [Validators.required]],
+    termino: ['', [Validators.required]],
+  });
   constructor(
-              private empleadoService:EmpleadosService,
-              private empresasService:EmpresaService,
-              private areaService:AreaService,
-              private departamentosService:DepartamentoService,
-              private busquedaService:BusquedaService,
-              private activatedRoute:ActivatedRoute,
-              private fb: FormBuilder
-              ) {
-
-
-
-  }
+    private empleadoService: EmpleadosService,
+    private empresasService: EmpresaService,
+    private areaService: AreaService,
+    private departamentosService: DepartamentoService,
+    private busquedaService: BusquedaService,
+    private activatedRoute: ActivatedRoute,
+    private fb: FormBuilder
+  ) {}
 
   ngOnInit(): void {
+    this.activatedRoute.params.subscribe((params) => {
+      this.empresaId = params['idEmpresa'];
+      this.areaId = params['idArea'];
 
-    this.activatedRoute.params.subscribe(params=>{
-      this.empresaId=params['idEmpresa']
-      this.areaId=params['idArea']
-
-
-      this.obtenerDepartamentos(this.empresaId);
-      this.cambioDepartamento();
       this.cargarEmpleados(this.empresaId);
+      this.obtenerDepartamentos(this.empresaId);
       this.obtenerEmpresa(this.empresaId);
       this.obtenerArea(this.areaId);
-    })
-
-  }
-
-  cargarEmpleados(id:string){
-    this.empleadoService.getEmpleadosEmpresaId(id)
-    .pipe(
-      map(item=>{
-        console.log(item);
-        this.empleadosTemp = item.empleados
-        return item.empleados
-      })
-    )
-    .subscribe(
-      r=>{
-        this.empleados = r
-      }
-    )
-  }
-
-  buscar(termino: string): any{
-
-    //si la busqueda es 0 los empleados guardados en empleados temp se asignan de nuevo
-    if (termino.length === 0 && this.departamentoSelected==''||undefined){
-      this.empleados = [...this.empleadosTemp];
-      return;
-    }
-    if(this.departamentoSelected!==''||undefined && this.departamentoBusquedaSelect.get('termino').value !== ''||undefined){
-      this.empleadoService.buscarEmpleadoEmpresa(this.empresaId, termino, this.departamentoSelected )
-      .pipe(
-        map(item=>{
-          console.log(item);
-          return item.empleados
-        })
-        )
-      .subscribe( empleados => {
-        console.log(empleados);
-        this.empleados = empleados
-      });
-    }
-    this.empleadoService.buscarEmpleadoEmpresa(this.empresaId, termino )
-    .pipe(
-      map(item=>item.empleados)
-      )
-    .subscribe( (resultados:Empleado[]) => {
-      console.log(resultados);
-      this.empleados = resultados
+      this.cambioDepartamento();
     });
   }
 
-  obtenerEmpresa(id:string){
-    this.empresasService.getEmpresa(id)
-    .pipe(
-      map(item=>{
-        return item.empresa
-      })
-    )
-    .subscribe(empresa=>{
-      this.empresa = empresa
-    })
-  }
-  obtenerArea(id:string){
-    this.areaService.getArea(id)
+  cargarEmpleados(id: string) {
+    this.empleadoService
+      .getEmpleadosEmpresaId(id)
       .pipe(
-        map(item=>{
-          return item.area
+        map((item) => {
+          console.log(item);
+
+          return item.empleados;
         })
       )
-      .subscribe(area=>{
-        this.area =area
-      })
+      .subscribe((r) => {
+        this.empleadosTemp = r;
+        this.empleados = r;
+      });
   }
-  obtenerDepartamentos(id:string){
-    this.departamentosService.getDepartamentosEmpresa(id)
-    .pipe(
-      map((r:ArrayResponse)=>{
-        console.log(r);
-        return r.departamentos
-      })
+
+  buscar(termino?: string): any {
+
+    console.log(termino, this.departamentoSelected);
+
+
+    if (termino.length === 0 && this.departamentoSelected=='nodep'){
+      this.empleados = [...this.empleadosTemp];
+      return
+    }
+
+   //* TERMINO y DEPARTAMENTO
+    if(
+      this.departamentoBusquedaSelect.get('termino').value !== ''
+      &&
+      this.departamentoBusquedaSelect.get('departamentoId').value!=='nodep'
+
+      ){
+        console.log('TERMINO y DEPARTAMENTO');
+        this.empleadoService.buscarEmpleadoEmpresa(
+          this.empresaId,
+          this.departamentoBusquedaSelect.get('termino').value,
+          this.departamentoSelected
+           )
+          .pipe(
+            map(r=>{
+              console.log(r);
+              return r.empleados
+            })
+          )
+          .subscribe(empleados=>{
+            this.empleados = empleados
+          })
+          return
+      }
+
+  //* TERMINO y NO DEPARTAMENTO
+  if(
+    this.departamentoBusquedaSelect.get('termino').value !== ''
+    &&
+    (this.departamentoBusquedaSelect.get('departamentoId').value == 'nodep'
+    ||
+    this.departamentoBusquedaSelect.get('departamentoId').value == ''
     )
-    .subscribe(departamentos=>{
-      this.departamentos=departamentos
-    })
+
+
+
+    ){
+      console.log('TERMINO y NO DEPARTAMENTO');
+
+
+      this.empleadoService.buscarEmpleadoEmpresa(
+        this.empresaId,
+        this.departamentoBusquedaSelect.get('termino').value,
+        null
+         )
+        .pipe(
+          map(r=>{
+            console.log(r);
+            return r.empleados
+          })
+        )
+        .subscribe(empleados=>{
+          this.empleados = empleados
+        })
+
+
+
+
+    }
+    //* NO TERMINO y SI DEPARTAMENTO
+    if(
+
+        this.departamentoBusquedaSelect.get('termino').value == ''||undefined
+
+      &&
+      (this.departamentoBusquedaSelect.get('departamentoId').value !== 'nodep'
+      ||
+      this.departamentoBusquedaSelect.get('departamentoId').value !== ''
+       )
+
+      ){
+        console.log('NO TERMINO y SI DEPARTAMENTO');
+
+
+
+        this.empleadoService.buscarEmpleadoEmpresa(
+          this.empresaId,
+          null,
+          this.departamentoBusquedaSelect.get('departamentoId').value
+           )
+          .pipe(
+            map(r=>{
+              console.log(r);
+              return r.empleados
+            })
+            )
+            .subscribe(empleados=>{
+              this.empleados = empleados
+              console.log(empleados);
+          })
+      }
+
   }
 
-  cambioDepartamento(){
-    this.departamentoBusquedaSelect.get('departamentoId')
-    .valueChanges
-    .subscribe(departamento=>{
-      console.log(departamento);
-      this.departamentoSelected = departamento
-      this.buscar(this.departamentoBusquedaSelect.get('termino').value || '')
+  cambioDepartamento() {
+    this.departamentoBusquedaSelect
+      .get('departamentoId')
+      .valueChanges.subscribe((departamento) => {
+        console.log(departamento);
+        this.departamentoSelected = departamento;
 
-    })
+          this.buscar(this.departamentoBusquedaSelect.get('termino').value)
+
+      });
+  }
+
+  obtenerArea(id: string) {
+    this.areaService
+      .getArea(id)
+      .pipe(
+        map((item) => {
+          return item.area;
+        })
+      )
+      .subscribe((area) => {
+        this.area = area;
+      });
+  }
+
+  obtenerDepartamentos(id: string) {
+    this.departamentosService
+      .getDepartamentosEmpresa(id)
+      .pipe(
+        map((r: ArrayResponse) => {
+          console.log(r);
+          return r.departamentos;
+        })
+      )
+      .subscribe((departamentos) => {
+        this.departamentos = departamentos;
+      });
+  }
+
+  obtenerEmpresa(id: string) {
+    this.empresasService
+      .getEmpresa(id)
+      .pipe(
+        map((item) => {
+          return item.empresa;
+        })
+      )
+      .subscribe((empresa) => {
+        this.empresa = empresa;
+      });
   }
 }
