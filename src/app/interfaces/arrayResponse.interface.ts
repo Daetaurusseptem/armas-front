@@ -4,6 +4,7 @@ import { Empresa } from "./empresa.interface";
 import { Usuario } from "./usuario.interface";
 import { Empleado } from './empleado.interface';
 import { Expediente } from './empresa.interface copy';
+import { TipoExpediente } from './tipo_expediente.interface';
 
 export interface ArrayResponse {
   ok: boolean;
@@ -12,5 +13,7 @@ export interface ArrayResponse {
   areas?: Area[];
   empleados?: Empleado[];
   departamentos?: Departamento[];
-  expedientes?:Expediente[]
+  expedientes?:Expediente[];
+  tiposExpediente:TipoExpediente[]
+
 }

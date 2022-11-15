@@ -1,1 +1,46 @@
-<p>agregar-expediente works!</p>
+<div class="row">
+  <div class="col-12 mx-auto">
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">
+          Agregar Expediente
+        </div>
+      </div>
+      <div class="card-body">
+        <form id="registerUsuarioForm">
+          <div class="mb-3">
+
+            <div class="mb-3">
+              <label for="" class="form-label">Nota expediente</label>
+              <input type="text" name="" id="" class="form-control" placeholder="Ej: Revisar identificacion adscrita"
+                aria-describedby="helpId" formControlName="nombre">
+              <small id="" class="text-muted">Ingrese una nota sobre el expediente</small>
+            </div>
+            <div class="mb-3">
+              <label for="" class="form-label">Archivo📄:  </label>
+              <input class="form-control" type="file" id="fileUploadInput">
+                        <!-- (change)="subirArchivo($event.target.files)"> -->
+              <br><small id="" class="text-muted">(archivos aceptados: ['png', 'jpg', 'jpeg', 'xls', 'xlsx', 'pdf', 'doc', 'docx'])</small>
+            </div>
+            <div class="mb-3">
+              <label for="" class="form-label">Seleccione el tipo de archivo</label>
+              <select class="form-select" placeholder="Ej:201" aria-describedby="helpId"
+                formControlName="numero_jefe">
+                <option disabled [defaultSelected]="true" value="" >Seleccione el tipo de expediente</option>
+                <option *ngFor="let tipo of tipoExpedientes" [value]="tipo.id_tipo">{{tipo.tipo}}</option>
+              </select>
+              <small id="" class="text-muted">Ingrese el tipo de documentacion</small>
+            </div>
+
+
+
+          </div>
+
+          <div class="d-grid gap-2">
+            <button type="submit" name="" id="" class="btn btn-primary">Registrar</button>
+          </div>
+
+        </form>
+      </div>
+    </div>
+  </div>
