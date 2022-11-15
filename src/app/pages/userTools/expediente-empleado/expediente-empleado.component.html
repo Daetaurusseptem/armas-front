@@ -1,0 +1,61 @@
+<div class="row">
+
+  <div class="col-12 mx-auto text-center">
+    <div class="card">
+      <div class="card-title p-4">
+        <div class="card-title">
+          <!-- <h5>Expediente de  {{empleado.nombre}} - Area {{this.area.nombre}}</h5> -->
+
+        </div>
+
+        <div class="col">
+          <div class="text-start">
+            <a name="" id="" class="btn btn-dark" [routerLink]="['/dashboard/',empresaId, 'areas-select']" role="button">
+              <i class="bi bi-arrow-left-circle"></i> Volver
+            </a>
+          </div>
+          <div class="text-end">
+            <a name="" id="" class="btn btn-success" [routerLink]="['/dashboard/',empresaId,areaId, 'crear-empleado']" role="button">
+              <i class="bi bi-person-plus"></i>  Añadir Empleado
+            </a>
+          </div>
+        </div>
+        <hr>
+      </div>
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="table">
+            <thead>
+              <tr>
+
+                <th scope="col">Nota</th>
+                <th scope="col">Tipo</th>
+
+
+                <th scope="col">Herramientas</th>
+
+              </tr>
+            </thead>
+            <tbody class="text-left">
+              <tr *ngFor="let expediente of expedientes; index as i">
+
+                <td>{{expediente.nota}}</td>
+                <td>{{expediente.tipo_expediente}}</td>
+
+
+                <td>
+                  <a style="margin-right: .5rem;" [routerLink]="['/dashboard/',empleado.Empresa.id,areaId, empleado.id,'editar-empleado']" name="" id="" class="btn btn-primary" role="button">
+                    <i class="bi bi-pencil align-middle"></i>
+                  </a>
+                  <a (click)="download(expediente.path)" name="" id="" class="btn btn-primary" role="button">
+                    <i class="bi bi-cloud-download"></i>
+                  </a>
+                </td>
+
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>

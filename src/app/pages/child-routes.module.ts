@@ -1,3 +1,4 @@
+import { ExpedienteEmpleadoComponent } from './userTools/expediente-empleado/expediente-empleado.component';
 import { EmpresaPermisoGuard } from './../guards/empresa-permiso.guard';
 import { AreaPermisosGuard } from './../guards/area-permisos.guard';
 import { SeleccionAreaComponent } from './navigationTools/seleccion-area/seleccion-area.component';
@@ -74,8 +75,11 @@ const childRoutes:Routes=[
                   //*Departamentos seleccion
                     { path: ':idEmpresa/:idArea/:idEmpleado/editar-empleado', component: EditarEmpleadoComponent,canActivate:[AdminOrUserGuard], data:{title: 'crear Empleado'}},
 
+
           //*Select Area
           { path: ':idEmpresa/:idArea/empleados-area', component: EmpleadosComponent, canActivate:[AreaPermisosGuard], data:{title: 'seleccione de empresa'}},
+          //*Expediente Empleado
+          { path: ':idEmpresa/:idArea/:idEmpleado/expediente', component: ExpedienteEmpleadoComponent, canActivate:[AreaPermisosGuard], data:{title: 'seleccione de empresa'}},
 
 
 

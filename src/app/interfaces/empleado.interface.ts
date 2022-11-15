@@ -1,6 +1,7 @@
 import { Area } from "./area.interface";
 import { Departamento } from "./departamento.interface";
 import { Empresa } from "./empresa.interface";
+import { Expediente } from "./empresa.interface copy";
 
 export interface Empleado {
   id: string;
@@ -16,4 +17,5 @@ export interface Empleado {
   actualizadoEl: Date;
   Departamento?:Departamento;
   Empresa?:Empresa;
+  Expedientes:Expediente[]
 }
