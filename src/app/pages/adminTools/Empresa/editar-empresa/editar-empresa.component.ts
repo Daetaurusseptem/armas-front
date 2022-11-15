@@ -81,7 +81,7 @@ export class EditarEmpresaComponent implements OnInit {
         this.empresaService.updateEmpresa(this.empresa.id, this.editarempresaForm.value)
         .subscribe(r=>{
           this.formSubmitted = false;
-          this.router.navigateByUrl('/dashboard/empresas')
+          this.router.navigateByUrl('/dashboard/admin/empresas')
         })
       }
     })

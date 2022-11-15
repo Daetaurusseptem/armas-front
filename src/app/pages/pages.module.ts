@@ -29,6 +29,8 @@ import { SeleccionDepartamentosComponent } from './navigationTools/seleccion-dep
 import { EmpleadosDepartamentoComponent } from './navigationTools/empleados-departamento/empleados-departamento.component';
 import { SeleccionAreaComponent } from './navigationTools/seleccion-area/seleccion-area.component';
 import { ExpedienteEmpleadoComponent } from './userTools/expediente-empleado/expediente-empleado.component';
+import { AgregarExpedienteComponent } from './userTools/agregar-expediente/agregar-expediente.component';
+import { EditarDepartamentoComponent } from './adminTools/departamento/editar-departamento/editar-departamento.component';
 
 
 @NgModule({
@@ -56,6 +58,8 @@ import { ExpedienteEmpleadoComponent } from './userTools/expediente-empleado/exp
        EmpleadosDepartamentoComponent,
        SeleccionAreaComponent,
        ExpedienteEmpleadoComponent,
+       AgregarExpedienteComponent,
+       EditarDepartamentoComponent,
 
 
 

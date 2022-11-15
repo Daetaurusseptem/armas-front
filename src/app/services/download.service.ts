@@ -6,7 +6,7 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class DownloadService {
-  urlFileServer = 'http://127.0.0.1:8080/'
+  urlFileServer = 'http://localhost:8080/'
   constructor(private http: HttpClient) {}
 
   download(url: string): Observable<Blob> {

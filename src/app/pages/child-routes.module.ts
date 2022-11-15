@@ -1,3 +1,4 @@
+import { AgregarExpedienteComponent } from './userTools/agregar-expediente/agregar-expediente.component';
 import { ExpedienteEmpleadoComponent } from './userTools/expediente-empleado/expediente-empleado.component';
 import { EmpresaPermisoGuard } from './../guards/empresa-permiso.guard';
 import { AreaPermisosGuard } from './../guards/area-permisos.guard';
@@ -80,6 +81,8 @@ const childRoutes:Routes=[
           { path: ':idEmpresa/:idArea/empleados-area', component: EmpleadosComponent, canActivate:[AreaPermisosGuard], data:{title: 'seleccione de empresa'}},
           //*Expediente Empleado
           { path: ':idEmpresa/:idArea/:idEmpleado/expediente', component: ExpedienteEmpleadoComponent, canActivate:[AreaPermisosGuard], data:{title: 'seleccione de empresa'}},
+          //*Agregar Expediente
+          { path: ':idEmpresa/:idArea/:idEmpleado/agregar-expediente', component: AgregarExpedienteComponent, canActivate:[AreaPermisosGuard], data:{title: 'seleccione de empresa'}},
 
 
 

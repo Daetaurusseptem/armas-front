@@ -72,9 +72,10 @@ export class AreaPermisosGuard implements CanActivate {
           console.log('si');
 
           resp = true
-
+          this.areasConPermiso=[]
         }else{
-            resp = false
+          resp = false
+          this.areasConPermiso=[]
         }
         return resp
 

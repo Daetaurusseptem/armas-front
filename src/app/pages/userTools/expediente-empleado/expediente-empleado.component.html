@@ -15,8 +15,8 @@
             </a>
           </div>
           <div class="text-end">
-            <a name="" id="" class="btn btn-success" [routerLink]="['/dashboard/',empresaId,areaId, 'crear-empleado']" role="button">
-              <i class="bi bi-person-plus"></i>  Añadir Empleado
+            <a name="" id="" class="btn btn-success" [routerLink]="['/dashboard/',empresaId,areaId,empleadoId,'crear-empleado']" role="button">
+              <i class="bi bi-file-earmark-plus"></i>  Añadir Expediente
             </a>
           </div>
         </div>
@@ -44,8 +44,8 @@
 
 
                 <td>
-                  <a style="margin-right: .5rem;" [routerLink]="['/dashboard/',empleado.Empresa.id,areaId, empleado.id,'editar-empleado']" name="" id="" class="btn btn-primary" role="button">
-                    <i class="bi bi-pencil align-middle"></i>
+                  <a style="margin-right: .5rem;"  name="" id="" class="btn btn-danger" role="button">
+                    <i class="bi bi-trash align-middle"></i>
                   </a>
                   <a (click)="download(expediente.path)" name="" id="" class="btn btn-primary" role="button">
                     <i class="bi bi-cloud-download"></i>
