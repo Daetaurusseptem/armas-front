@@ -10,6 +10,7 @@ export class DownloadService {
   constructor(private http: HttpClient) {}
 
   download(url: string): Observable<Blob> {
+    console.log(`${this.urlFileServer}${url}`);
     return this.http.get(`${this.urlFileServer}${url}`, {
       responseType: 'blob',
       headers:{

@@ -11,6 +11,8 @@ import { Component, OnInit } from '@angular/core';
 import { ExpedientesService } from 'src/app/services/expedientes.service';
 import {map} from 'rxjs/operators';
 import { Expediente } from 'src/app/interfaces/empresa.interface copy';
+import { saveAs } from 'file-saver';
+
 
 @Component({
   selector: 'app-expediente-empleado',
@@ -91,16 +93,9 @@ export class ExpedienteEmpleadoComponent implements OnInit {
   }
 
   download(filePath:string): void {
+    console.log(filePath);
     this.downloadService
       .download(filePath)
-      .subscribe(blob => {
-        console.log(blob);
-        const a = document.createElement('a')
-        const objectUrl = URL.createObjectURL(blob)
-        a.href = objectUrl
-        a.download = 'archive.zip';
-        a.click();
-        URL.revokeObjectURL(objectUrl);
-      })
+      .subscribe(blob => {saveAs(blob, 'archivo')})
   }
 }

@@ -32,6 +32,7 @@ import { ExpedienteEmpleadoComponent } from './userTools/expediente-empleado/exp
 import { AgregarExpedienteComponent } from './userTools/agregar-expediente/agregar-expediente.component';
 import { EditarDepartamentoComponent } from './adminTools/departamento/editar-departamento/editar-departamento.component';
 import { CrearTipoExpedientesComponent } from './userTools/crear-tipo-expedientes/crear-tipo-expedientes.component';
+import { DepartamentosUsuarioComponent } from './userTools/departamentos-usuario/departamentos-usuario.component';
 
 
 @NgModule({
@@ -62,6 +63,7 @@ import { CrearTipoExpedientesComponent } from './userTools/crear-tipo-expediente
        AgregarExpedienteComponent,
        EditarDepartamentoComponent,
        CrearTipoExpedientesComponent,
+       DepartamentosUsuarioComponent,
 
 
 
