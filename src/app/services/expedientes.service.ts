@@ -12,7 +12,7 @@ const UrlBase = environment.urlBack
 export class ExpedientesService {
 
   url:string = `${UrlBase}expedientes`
-  urlFS:string = `${UrlBase}upload`
+  urlFS:string = `${UrlBase}uploads`
 
   constructor(
               private http:HttpClient,
@@ -28,15 +28,22 @@ export class ExpedientesService {
     idEmpresa: string,
     idArea: string,
     idEmpleado: string,
-    formData:FormData
+    idDepartamento:string,
+    archivo:File,
+    nota:string,
+    tipo_expediente:string
 
 
   ) {
 
 
       const actualizo=this.usuarioService.usuario.nombre
+      const formData = new FormData()
       formData.append('actualizo', actualizo)
-      const url = `${ this.urlFS }/${ idEmpresa }/${ idArea }/${ idEmpleado }`;
+      formData.append('archivo', archivo)
+      formData.append('nota', nota)
+      formData.append('tipo_expediente', tipo_expediente)
+      const url = `${ this.urlFS }/${ idEmpresa }/${ idArea }/${idDepartamento}/${ idEmpleado }`;
 
 
 
@@ -44,7 +51,7 @@ export class ExpedientesService {
 
 
       return this.http.post<ExpedienteCreacionResponse>(
-        `${url}/${idEmpresa}/${idArea}/${idEmpleado}`,
+        url,
         formData);
       }
 

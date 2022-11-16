@@ -31,6 +31,7 @@ import { SeleccionAreaComponent } from './navigationTools/seleccion-area/selecci
 import { ExpedienteEmpleadoComponent } from './userTools/expediente-empleado/expediente-empleado.component';
 import { AgregarExpedienteComponent } from './userTools/agregar-expediente/agregar-expediente.component';
 import { EditarDepartamentoComponent } from './adminTools/departamento/editar-departamento/editar-departamento.component';
+import { CrearTipoExpedientesComponent } from './userTools/crear-tipo-expedientes/crear-tipo-expedientes.component';
 
 
 @NgModule({
@@ -60,6 +61,7 @@ import { EditarDepartamentoComponent } from './adminTools/departamento/editar-de
        ExpedienteEmpleadoComponent,
        AgregarExpedienteComponent,
        EditarDepartamentoComponent,
+       CrearTipoExpedientesComponent,
 
 
 
