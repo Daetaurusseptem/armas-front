@@ -30,11 +30,11 @@ import { EmpleadosDepartamentoComponent } from './navigationTools/empleados-depa
 import { EditarEmpleadoComponent } from './userTools/editar-empleado/editar-empleado.component';
 
 const childRoutes:Routes=[
-  { path: '', component: PagesComponent, data:{title: 'Dashboard'}},
+  { path: '', component: InicioAdminComponent, data:{title: 'Dashboard'}},
   //INICIO ADMIN TOOLS
 
     //ADMIN PAGES
-    { path: 'inicio-admin', component: InicioAdminComponent,canActivate:[AdminGuard], data:{title: 'crear Usuario'}},
+
     //Empresas
     { path: 'admin/empresas', canActivate:[AdminGuard],component: EmpresasComponent, data:{title: 'catalogo de empresas'}},
     { path: 'admin/empresas/crear-empresa', canActivate:[AdminGuard], component: CrearEmpresaComponent, data:{title: 'crear Empresa'}},

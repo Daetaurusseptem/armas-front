@@ -30,7 +30,6 @@ import { EmpleadosDepartamentoComponent } from './navigationTools/empleados-depa
 import { SeleccionAreaComponent } from './navigationTools/seleccion-area/seleccion-area.component';
 import { ExpedienteEmpleadoComponent } from './userTools/expediente-empleado/expediente-empleado.component';
 import { AgregarExpedienteComponent } from './userTools/agregar-expediente/agregar-expediente.component';
-import { EditarDepartamentoComponent } from './adminTools/departamento/editar-departamento/editar-departamento.component';
 import { CrearTipoExpedientesComponent } from './userTools/crear-tipo-expedientes/crear-tipo-expedientes.component';
 import { DepartamentosUsuarioComponent } from './userTools/departamentos-usuario/departamentos-usuario.component';
 
@@ -61,9 +60,9 @@ import { DepartamentosUsuarioComponent } from './userTools/departamentos-usuario
        SeleccionAreaComponent,
        ExpedienteEmpleadoComponent,
        AgregarExpedienteComponent,
-       EditarDepartamentoComponent,
        CrearTipoExpedientesComponent,
        DepartamentosUsuarioComponent,
+
 
 
 
@@ -74,7 +73,8 @@ import { DepartamentosUsuarioComponent } from './userTools/departamentos-usuario
     PagesRoutingModule,
     NgxCaptchaModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    SharedModule
   ]
 })
 export class PagesModule { }

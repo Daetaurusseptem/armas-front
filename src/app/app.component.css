@@ -7,3 +7,11 @@ mat-sidenav {
 main {
   padding: 10px;
 }
+
+#main{
+  border:solid;
+  min-height: calc(100vh - 40px);
+}
+#footer{
+  border:solid;
+}
