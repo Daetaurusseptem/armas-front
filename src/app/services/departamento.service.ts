@@ -33,8 +33,8 @@ export class DepartamentoService {
     //   })
     // );
   }
-  updateDepartamento(idArea:string, formData: updateDatosArea){
+  updateDepartamento(idDepartamento:string, formData: updateDatosArea){
 
-    return this.http.put(`${this.url}/${idArea}`, formData);
+    return this.http.put(`${this.url}/${idDepartamento}`, formData);
   }
 }

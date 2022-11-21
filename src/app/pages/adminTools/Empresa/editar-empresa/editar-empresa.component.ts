@@ -19,8 +19,8 @@ export class EditarEmpresaComponent implements OnInit {
   formSubmitted=false;
 
   editarempresaForm = this.fb.group({
-    nombre:['',[Validators.required]],
-    descripcion:['']
+    nombre:['',[Validators.required, Validators.minLength(5), Validators.maxLength(30)]],
+    descripcion:['', [Validators.minLength(5), Validators.maxLength(30)]]
   })
 
 
@@ -93,7 +93,7 @@ export class EditarEmpresaComponent implements OnInit {
 
 
    campoNoValido(campo:string):boolean{
-     if ( this.editarempresaForm.get(campo)?.invalid && this.formSubmitted ) {
+     if ( this.editarempresaForm.get(campo)?.invalid) {
        return true;
      } else {
        return false;

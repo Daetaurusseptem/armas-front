@@ -16,13 +16,12 @@ export class CrearUsuarioComponent implements OnInit {
 
 
   public registerUsuarioForm = this.fb.group({
-    nombre:['', Validators.required],
-    usuario:['',Validators.required],
+    nombre:['', Validators.required, Validators.minLength(5),Validators.maxLength(30)],
+    usuario:['',Validators.required, Validators.minLength(5),Validators.maxLength(11)],
     // email:['', [Validators.email, Validators.required]],
-    password:['', [Validators.required]],
-    password2:['', [Validators.required]],
+    password:['', [Validators.required, Validators.minLength(5),Validators.maxLength(64)]],
+    password2:['', [Validators.required, Validators.minLength(5),Validators.maxLength(64)]],
     actualizo:['admin', [Validators.required]]
-
   },
   {
     validators:this.passwordsIguales('password','password2')}
@@ -68,7 +67,7 @@ export class CrearUsuarioComponent implements OnInit {
              title:'Usuario creado'
            })
 
-           this.router.navigateByUrl('dashboard/usuarios')
+           this.router.navigateByUrl('dashboard/admin/usuarios')
 
       //   }
       // )
@@ -110,7 +109,7 @@ export class CrearUsuarioComponent implements OnInit {
     }
   }
   campoNoValido(campo:string):boolean{
-    if ( this.registerUsuarioForm.get(campo)?.invalid && this.formSubmitted ) {
+    if ( this.registerUsuarioForm.get(campo)?.invalid ) {
       return true;
     } else {
       return false;

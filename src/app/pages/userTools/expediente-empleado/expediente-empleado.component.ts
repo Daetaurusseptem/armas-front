@@ -99,3 +99,5 @@ export class ExpedienteEmpleadoComponent implements OnInit {
       .subscribe(blob => {saveAs(blob, 'archivo')})
   }
 }
+
+

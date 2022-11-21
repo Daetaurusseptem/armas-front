@@ -30,8 +30,8 @@ export class EditarUsuarioComponent implements OnInit {
   empresaSeleccionada:string
 
   usuarioForm = this.fb.group({
-    nombre:['',[Validators.required]],
-    usuario:['',[Validators.required]],
+    nombre:['',[Validators.required, Validators.minLength(5), Validators.maxLength(30)]],
+    usuario:['',[Validators.required, Validators.minLength(5), Validators.maxLength(11)]],
   })
   passwordForm = this.fb.group({
     password:['',[Validators.required]],
@@ -297,14 +297,14 @@ export class EditarUsuarioComponent implements OnInit {
     }
   }
    campoNoValidoPassword(campo:string):boolean{
-     if ( this.passwordForm.get(campo)?.invalid && this.formSubmitted ) {
+     if ( this.passwordForm.get(campo)?.invalid) {
        return true;
      } else {
        return false;
      }
    }
    campoNoValidoDatosUsuario(campo:string):boolean{
-     if ( this.usuarioForm.get(campo)?.invalid && this.formSubmitted ) {
+     if ( this.usuarioForm.get(campo)?.invalid) {
        return true;
      } else {
        return false;

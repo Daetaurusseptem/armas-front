@@ -19,7 +19,7 @@ export class CrearEmpresaComponent implements OnInit {
   public registerEmpresaForm = this.fb.group({
     id:['', [Validators.required, Validators.minLength(5), Validators.maxLength(20), Validators.pattern(/^(\s+\S+\s*)*(?!\s).*$/)]],
     nombre:['',[Validators.required, Validators.minLength(5), Validators.maxLength(30)]],
-    descripcion:['', [Validators.required, Validators.minLength(10), Validators.maxLength(30)]],
+    descripcion:['', [Validators.required, Validators.minLength(5), Validators.maxLength(30)]],
     actualizo:['admin', [Validators.required]]
 
   },
@@ -62,7 +62,7 @@ export class CrearEmpresaComponent implements OnInit {
              title:'Empresa creada'
            })
 
-           this.router.navigateByUrl('dashboard/empresas')
+           this.router.navigateByUrl('dashboard/admin/empresas')
 
       //   }
       // )

@@ -1,3 +1,4 @@
+import { EditarDepartamentoComponent } from './adminTools/Departamento/editar-departamento/editar-departamento.component';
 import { AgregarExpedienteComponent } from './userTools/agregar-expediente/agregar-expediente.component';
 import { ExpedienteEmpleadoComponent } from './userTools/expediente-empleado/expediente-empleado.component';
 import { EmpresaPermisoGuard } from './../guards/empresa-permiso.guard';
@@ -51,7 +52,7 @@ const childRoutes:Routes=[
     //Departaadmin/mentos
     { path: 'admin/departamentos', component: DepartamentosComponent,canActivate:[AdminOrUserGuard], data:{title: 'catalogo de usuarios'}},
     { path: 'admin/departamentos/crear-departamento', component: CrearDepartamentosComponent,canActivate:[AdminOrUserGuard], data:{title: 'crear Usuario'}},
-    { path: 'admin/departamentos/editar-departamento/:id', component: EditarUsuarioComponent,canActivate:[AdminOrUserGuard], data:{title: 'crear Usuario'}},
+    { path: 'admin/departamentos/editar-departamento/:id', component: EditarDepartamentoComponent,canActivate:[AdminOrUserGuard], data:{title: 'crear Usuario'}},
 
   //FINAL ADMIN TOOLS
 

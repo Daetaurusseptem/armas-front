@@ -37,19 +37,23 @@
                     formControlName="descripcion"
 
                 >
-                <small id="" class="text-muted" >Ingrese una descripcion breve, maximo 30 caracteres</small>
+                <small id="" class="text-muted" >Ingrese una descripcion breve, minimo 5 caracteres, maximo 30 caracteres</small>
             </div>
 
 
           </div>
-          <!-- <div class="card-body">
+          <div class="card-body">
             <p *ngIf="campoNoValido('nombre')" class="text-danger">nombre invalido</p>
+            <p *ngIf="campoNoValido('descripcion')" class="text-danger">descripcion invalida</p>
+
+          </div>
+          <!-- <div class="card-body">
             <p *ngIf="campoNoValido('usuario')" class="text-danger">Usuario No valido</p>
             <p *ngIf="contrasenasNoValidas()" class="text-danger">las contrasenas deben coincidir</p>
             <p *ngIf="contrasenasNoValidas()" class="text-danger">contrasenas invalidas</p>
           </div> -->
           <div class="d-grid gap-2">
-            <button type="submit" name="" id="" class="btn btn-primary">Guardar Cambios</button>
+            <button [disabled]="editarempresaForm.invalid" type="submit" name="" id="" class="btn btn-primary">Guardar Cambios</button>
           </div>
 
         </form>

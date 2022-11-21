@@ -1,3 +1,4 @@
+import { EditarDepartamentoComponent } from './adminTools/Departamento/editar-departamento/editar-departamento.component';
 import { InicioAdminComponent } from './adminTools/adminPages/inicio-admin/inicio-admin.component';
 import { CrearDepartamentosComponent } from './adminTools/Departamento/crear-departamentos/crear-departamentos.component';
 import { DepartamentosComponent } from './adminTools/Departamento/departamentos/departamentos.component';
@@ -62,6 +63,7 @@ import { DepartamentosUsuarioComponent } from './userTools/departamentos-usuario
        AgregarExpedienteComponent,
        CrearTipoExpedientesComponent,
        DepartamentosUsuarioComponent,
+       EditarDepartamentoComponent
 
 
 
