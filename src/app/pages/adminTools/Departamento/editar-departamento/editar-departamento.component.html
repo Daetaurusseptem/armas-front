@@ -21,9 +21,8 @@
                     placeholder="Ej: Grupo Armas"
                     aria-describedby="helpId"
                     formControlName="nombre"
-                    (keydown.space)="$event.preventDefault();"
                 >
-                <small id="" class="text-muted" >minimo 10 carcateres, maximo 30, no espacios</small>
+                <small id="" class="text-muted" >minimo 5 carcateres, maximo 30.</small>
             </div>
             <div class="mb-3">
               <label for="" class="form-label">Descripcion </label>
@@ -37,7 +36,7 @@
                     formControlName="descripcion"
 
                 >
-                <small id="" class="text-muted" >Ingrese una descripcion breve, maximo 30 caracteres</small>
+                <small id="" class="text-muted" >Ingrese una descripcion breve,minimo 10 caracteres, maximo 30 caracteres</small>
             </div>
 
 
@@ -53,7 +52,7 @@
             <p *ngIf="contrasenasNoValidas()" class="text-danger">contrasenas invalidas</p>
           </div> -->
           <div class="d-grid gap-2">
-            <button type="submit" name="" id="" class="btn btn-primary">Guardar Cambios</button>
+            <button [disabled]="editarDepartamentoForm.invalid" type="submit" name="" id="" class="btn btn-primary">Guardar Cambios</button>
           </div>
 
         </form>

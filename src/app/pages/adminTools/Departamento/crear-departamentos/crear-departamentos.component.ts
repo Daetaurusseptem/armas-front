@@ -65,7 +65,7 @@ export class CrearDepartamentosComponent implements OnInit {
              title:'Empresa creada'
            })
 
-           this.router.navigateByUrl('dashboard/areas')
+           this.router.navigateByUrl('dashboard/admin/departamentos')
 
       //   }
       // )

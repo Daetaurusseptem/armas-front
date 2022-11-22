@@ -60,7 +60,7 @@ export class CrearAreaComponent implements OnInit {
       resp=>{
         console.log(resp);
            Swal.fire({
-             title:'Empresa creada'
+             title:'Area creada'
            })
 
            this.router.navigateByUrl('dashboard/admin/areas')

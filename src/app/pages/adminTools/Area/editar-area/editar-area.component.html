@@ -12,7 +12,7 @@
         <form id="registerUsuarioForm" [formGroup]="editarAreaForm" (ngSubmit)="guardarArea()">
           <div class="mb-3">
             <div class="mb-3">
-              <label for="" class="form-label">Nombre de Empresa </label>
+              <label for="" class="form-label">Nombre de Area </label>
               <input
                     type="text"
                     name=""
@@ -23,10 +23,10 @@
                     formControlName="nombre"
                     (keydown.space)="$event.preventDefault();"
                 >
-                <small id="" class="text-muted" >minimo 10 carcateres, maximo 30, no espacios</small>
+                <small id="" class="text-muted" >minimo 10 carcateres, maximo 30</small>
             </div>
             <div class="mb-3">
-              <label for="" class="form-label">Descripcion </label>
+              <label for="" class="form-label">Descripcion</label>
               <input
                     type=""
                     name=""
