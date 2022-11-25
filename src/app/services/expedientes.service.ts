@@ -62,6 +62,16 @@ export class ExpedientesService {
   getTipoExpedientesArea(empresaId:string, areaId:string){
     return this.http.get<ArrayResponse>(`${this.url}/tipos/todo/${empresaId}/${areaId}`);
   }
+  getTipoObligatorioExpedientesArea(empresaId:string, areaId:string){
+    return this.http.get<ArrayResponse>(`${this.url}/tipos/todo/obligatorio/${empresaId}/${areaId}`);
+  }
+
+  crearTipoExpediente(empresaId:string,areaId:string, formdata:{tipo?:string, descripcion?:string, obligatorio?:boolean, areaId?:string, actualizo?:string }){
+    formdata.actualizo = this.usuarioService.usuario.nombre.slice(0,8)
+    console.log(formdata);
+    return this.http.post(`${this.url}/tipos/todo/crear-tipo/${empresaId}/${areaId}`,formdata )
+
+  }
 
 
 }

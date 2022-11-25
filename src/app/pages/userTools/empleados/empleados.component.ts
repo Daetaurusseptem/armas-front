@@ -1,3 +1,4 @@
+import { Expediente } from 'src/app/interfaces/empresa.interface copy';
 import { Empleado } from './../../../interfaces/empleado.interface';
 import { BusquedaService } from 'src/app/services/busqueda.service';
 import { EmpleadosService } from './../../../services/empleados.service';
@@ -15,6 +16,8 @@ import { Departamento } from 'src/app/interfaces/departamento.interface';
 import { DepartamentoService } from 'src/app/services/departamento.service';
 import { itemResponse } from 'src/app/interfaces/itemResponse.interface';
 import { ArrayResponse } from 'src/app/interfaces/arrayResponse.interface';
+import { ExpedientesService } from 'src/app/services/expedientes.service';
+import { TipoExpediente } from 'src/app/interfaces/tipo_expediente.interface';
 
 @Component({
   selector: 'app-empleados',
@@ -30,6 +33,7 @@ export class EmpleadosComponent implements OnInit {
   empresa: Empresa;
   departamentoSelected: string;
   departamentos: Departamento[];
+  tiposExpedientesObligatorios:TipoExpediente[]=[]
   departamentoBusquedaSelect = this.fb.group({
     departamentoId: ['nodep', [Validators.required]],
     termino: ['', [Validators.required]],
@@ -39,6 +43,7 @@ export class EmpleadosComponent implements OnInit {
     private empresasService: EmpresaService,
     private areaService: AreaService,
     private departamentosService: DepartamentoService,
+    private expedientesService: ExpedientesService,
     private busquedaService: BusquedaService,
     private activatedRoute: ActivatedRoute,
     private fb: FormBuilder
@@ -48,7 +53,7 @@ export class EmpleadosComponent implements OnInit {
     this.activatedRoute.params.subscribe((params) => {
       this.empresaId = params['idEmpresa'];
       this.areaId = params['idArea'];
-
+      this.getTiposObligaorios(this.areaId, this.empresaId)
       this.cargarEmpleados(this.empresaId);
       this.obtenerDepartamentos(this.empresaId);
       this.obtenerEmpresa(this.empresaId);
@@ -177,6 +182,21 @@ export class EmpleadosComponent implements OnInit {
 
   }
 
+  getTiposObligaorios(idArea:string, idEmpresas:string){
+
+    this.expedientesService.getTipoObligatorioExpedientesArea(this.empresaId, this.areaId)
+    .pipe(
+      map(r=>{
+        console.log('asdasdas');
+        console.log('asdasdas'+r);
+        return r.tiposExpediente})
+    )
+    .subscribe(tiposObligarios=>{
+      this.tiposExpedientesObligatorios = tiposObligarios
+    })
+
+  }
+
   cambioDepartamento() {
     this.departamentoBusquedaSelect
       .get('departamentoId')
@@ -228,4 +248,12 @@ export class EmpleadosComponent implements OnInit {
         this.empresa = empresa;
       });
   }
+
+  entregado(tipoOb:string, expedientesEmpleado:Expediente[]){
+    if(expedientesEmpleado
+      .some(exp=>exp.tipo_expediente==tipoOb)){
+      return true
+    }
+    return false
+}
 }

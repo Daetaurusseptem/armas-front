@@ -23,4 +23,17 @@ export class PermisosService {
 
       return this.http.post(`${this.url}/${idUsuario}/${idArea}/${tipo}`,{});
     }
+
+
+    get headers(): object{
+      return {
+        headers: {
+          'x-token': this.token
+        }
+      };
+    }
+    get token(): string{
+      return localStorage.getItem('token') || '';
+    }
+
 }

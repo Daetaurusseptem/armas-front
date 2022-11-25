@@ -35,13 +35,14 @@ export class UsuariosService {
     );
   }
   validarToken(): Observable<boolean> {
-
+    console.log(this.headers);
     return this.http.get(`${ urlBase }auth/renew`, this.headers)
     .pipe(
       map( (resp: any) => {
-        const id = resp.uid;
+        const id = resp.id;
+        console.log(resp);
+        console.log(id);
         const {nombre, usuario, img= '', role, Areas} = resp.usuario;
-
         this.usuario = new UsuarioModel(id,usuario, nombre, role,'', img, Areas);
         console.log(this.usuario);
         this.guardarLocalStorage(resp.token, resp.menu)
