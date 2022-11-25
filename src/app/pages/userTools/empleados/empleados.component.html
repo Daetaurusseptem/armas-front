@@ -46,8 +46,14 @@
             </a>
           </div>
           <div class="text-end">
-            <a name="" id="" class="btn btn-success" [routerLink]="['/dashboard/',empresaId,areaId, 'crear-empleado']" role="button">
+            <a name="" id="" class="btn btn-success m-2" [routerLink]="['/dashboard/',empresaId,areaId, 'crear-empleado']" role="button">
               <i class="bi bi-person-plus"></i>  Añadir Empleado
+            </a>
+            <a name="" id="" class="btn btn-success m-2" [routerLink]="['/dashboard/',empresaId,areaId, 'crear-empleado']" role="button">
+              <i class="bi bi-briefcase"></i>  Añadir Departamento
+            </a>
+            <a name="" id="" class="btn btn-success m-2" [routerLink]="['/dashboard/',empresaId,areaId, 'crear-empleado']" role="button">
+              <i class="bi bi-archive"></i>  Añadir Tipo Expediente
             </a>
           </div>
         </div>
@@ -64,9 +70,9 @@
                 <th scope="col">Jefe Directo</th>
                 <th scope="col">Estatus</th>
                 <th scope="col">Departamento</th>
-
-                <th scope="col">Herramientas</th>
-                <th scope="col">Expedientes</th>
+                <th scope="col">Editar</th>
+                <th scope="col">Expediente</th>
+                <th scope="col">Documentacion obligatoria</th>
               </tr>
             </thead>
             <tbody class="text-left">
@@ -84,11 +90,63 @@
                   <a style="margin-right: .5rem;" [routerLink]="['/dashboard/',empleado.Empresa.id,areaId, empleado.id,'editar-empleado']" name="" id="" class="btn btn-primary" role="button">
                     <i class="bi bi-pencil align-middle"></i>
                   </a>
+                </td>
+                <td>
                   <a [routerLink]="['/dashboard/',empleado.Empresa.id,areaId, empleado.id,'expediente']" name="" id="" class="btn btn-primary" role="button">
                     <i class="bi bi-file-earmark"></i>
                   </a>
                 </td>
+                <td>
 
+
+
+                    <table class="table table-bordered">
+                      <thead>
+                        <tr>
+                          <th scope="col">
+                            INE
+                            <a href=""><span class="badge bg-secondary m-2">
+                              Sin Entregar
+                            </span></a>
+                          </th>
+                          <th scope="col">
+                            ACTA
+                            <a href=""><span class="badge bg-secondary m-2">
+                              Sin Entregar
+                            </span></a>
+                          </th>
+                          <th scope="col">
+                            {{'SOLICITUD DE TRABAJO' | slice:0:13}}...
+                            <a href=""><span class="badge bg-secondary m-2">
+                              Sin Entregar
+                            </span></a>
+                          <th scope="col">
+                            {{'SOLICITUD DE TRABAJO' | slice:0:13}}...
+                            <a href=""><span class="badge bg-secondary m-2">
+                              Sin Entregar
+                            </span></a>
+                          <th scope="col">
+                            {{'SOLICITUD DE TRABAJO' | slice:0:13}}...
+                            <a href=""><span class="badge bg-secondary m-2">
+                              Sin Entregar
+                            </span></a>
+                          </th>
+
+                          <th scope="col">
+                            Comprobante
+                            <a href="">
+                              <span class="badge bg-success m-2">
+                                Entregado
+                              </span>
+                            </a>
+                          </th>
+                        </tr>
+                      </thead>
+
+
+
+                    </table>
+                </td>
               </tr>
             </tbody>
           </table>

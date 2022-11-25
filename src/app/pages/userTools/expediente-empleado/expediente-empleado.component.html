@@ -42,14 +42,14 @@
 
                 <td>{{expediente.nota}}</td>
                 <td>{{expediente.nombre}}</td>
-                <td>{{expediente.tipo_expediente}}</td>
+                <td>{{expediente.Tipo_Expediente.tipo}}</td>
 
 
                 <td>
-                  <a style="margin-right: .5rem;"  name="" id="" class="btn btn-danger" role="button">
+                  <a (click)="eliminarExpediente(expediente.id)" style="margin-right: .5rem;"  name="" id="" class="btn btn-danger" role="button">
                     <i class="bi bi-trash align-middle"></i>
                   </a>
-                  <a (click)="download(expediente.path)" name="" id="" class="btn btn-primary" role="button">
+                  <a (click)="download(expediente.path, expediente.nombre)" name="" id="" class="btn btn-primary" role="button">
                     <i class="bi bi-cloud-download"></i>
                   </a>
                 </td>

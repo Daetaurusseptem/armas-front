@@ -12,6 +12,7 @@ import { ExpedientesService } from 'src/app/services/expedientes.service';
 import {map} from 'rxjs/operators';
 import { Expediente } from 'src/app/interfaces/empresa.interface copy';
 import { saveAs } from 'file-saver';
+import Swal from 'sweetalert2';
 
 
 @Component({
@@ -92,11 +93,35 @@ export class ExpedienteEmpleadoComponent implements OnInit {
       });
   }
 
-  download(filePath:string): void {
+  download(filePath:string, nombreArchivo:string): void {
     console.log(filePath);
     this.downloadService
       .download(filePath)
-      .subscribe(blob => {saveAs(blob, 'archivo')})
+      .subscribe(blob => {
+        console.log(filePath);
+        saveAs(blob, nombreArchivo)
+      })
+  }
+  eliminarExpediente(idExpediente:string){
+    Swal.fire({
+      title:'Estas Seguro',
+      icon:'question'
+    })
+    .then(r=>{
+      if(r.isConfirmed){
+        this.expedienteService.eliminarExpediente(idExpediente)
+        .subscribe(r=>{
+          if(r.ok){
+
+          }
+          Swal.fire({
+            icon:'success',
+            title:r.msg,
+          })
+        })
+      }
+    })
+
   }
 }
 

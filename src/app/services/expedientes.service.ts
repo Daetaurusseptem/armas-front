@@ -5,6 +5,7 @@ import { environment } from 'src/environments/environment.prod';
 import { UsuariosService } from './usuarios.service';
 import { ExpedienteCreacionResponse } from '../interfaces/expedienteUploadResponse.interface';
 import { TipoExpediente } from '../interfaces/tipo_expediente.interface';
+import { binaryResponse } from '../interfaces/binaryResponse.interface';
 const UrlBase = environment.urlBack
 @Injectable({
   providedIn: 'root'
@@ -23,7 +24,7 @@ export class ExpedientesService {
     return this.http.get<ArrayResponse>(`${this.url}/${empresaId}/${areaId}/${empleadoId}`);
   }
 
-   subirExpediente(
+  subirExpediente(
 
     idEmpresa: string,
     idArea: string,
@@ -54,6 +55,9 @@ export class ExpedientesService {
         url,
         formData);
       }
+  eliminarExpediente(idExpediente:string){
+    return this.http.delete<binaryResponse>(`${this.url}/${idExpediente}`)
+  }
 
   getTipoExpedientesArea(empresaId:string, areaId:string){
     return this.http.get<ArrayResponse>(`${this.url}/tipos/todo/${empresaId}/${areaId}`);
