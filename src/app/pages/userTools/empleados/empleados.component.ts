@@ -67,7 +67,7 @@ export class EmpleadosComponent implements OnInit {
       .getEmpleadosEmpresaId(id)
       .pipe(
         map((item) => {
-          console.log(item);
+
 
           return item.empleados;
         })
@@ -80,14 +80,15 @@ export class EmpleadosComponent implements OnInit {
 
   buscar(termino?: string): any {
 
-    console.log(termino, this.departamentoSelected);
 
 
-    if (termino.length === 0 && this.departamentoSelected=='nodep'){
+
+
+    if (termino.length === 0 && this.departamentoBusquedaSelect.get('departamentoId').value=='nodep'){
+
       this.empleados = [...this.empleadosTemp];
       return
     }
-
    //* TERMINO y DEPARTAMENTO
     if(
       this.departamentoBusquedaSelect.get('termino').value !== ''
@@ -95,21 +96,15 @@ export class EmpleadosComponent implements OnInit {
       this.departamentoBusquedaSelect.get('departamentoId').value!=='nodep'
 
       ){
-        console.log('TERMINO y DEPARTAMENTO');
+        // console.log('TERMINO y DEPARTAMENTO');
         this.empleadoService.buscarEmpleadoEmpresa(
           this.empresaId,
           this.departamentoBusquedaSelect.get('termino').value,
           this.departamentoSelected
            )
           .pipe(
-            map(r=>{
-              console.log(r);
-              return r.empleados
-            })
-          )
-          .subscribe(empleados=>{
-            this.empleados = empleados
-          })
+            map(r=>r.empleados))
+          .subscribe(empleados=>this.empleados = empleados)
           return
       }
 
@@ -125,7 +120,7 @@ export class EmpleadosComponent implements OnInit {
 
 
     ){
-      console.log('TERMINO y NO DEPARTAMENTO');
+      // console.log('TERMINO y NO DEPARTAMENTO');
 
 
       this.empleadoService.buscarEmpleadoEmpresa(
@@ -134,10 +129,7 @@ export class EmpleadosComponent implements OnInit {
         null
          )
         .pipe(
-          map(r=>{
-            console.log(r);
-            return r.empleados
-          })
+          map(r=> r.empleados)
         )
         .subscribe(empleados=>{
           this.empleados = empleados
@@ -159,6 +151,8 @@ export class EmpleadosComponent implements OnInit {
        )
 
       ){
+        console.log(this.departamentoBusquedaSelect.get('departamentoId').value);
+
         console.log('NO TERMINO y SI DEPARTAMENTO');
 
 

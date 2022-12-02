@@ -184,7 +184,6 @@ export class AgregarExpedienteComponent implements OnInit {
         this.empleado = empleado;
       });
   }
-
   obtenerEmpresa(id: string) {
     this.empresasService
       .getEmpresa(id)

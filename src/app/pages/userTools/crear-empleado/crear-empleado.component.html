@@ -6,7 +6,12 @@
           Registro de usuarios
         </div>
       </div>
-      <div class="card-body">
+      <div *ngIf="departamentos.length<=0" class="card-body">
+        <div class="alert alert-danger" role="alert">
+          No se encontraron departamentos registrados, porfavor registre uno, antes de proceder a registra empleados, en este area
+        </div>
+      </div>
+      <div *ngIf="departamentos.length>0" class="card-body">
         <form id="registerUsuarioForm" [formGroup]="registerEmpleadoForm" (ngSubmit)="createEmpleado()">
           <div class="mb-3">
 
