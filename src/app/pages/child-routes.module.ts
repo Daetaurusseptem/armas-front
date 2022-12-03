@@ -30,6 +30,7 @@ import { AdminOrUserGuard } from '../guards/admin-or-user.guard';
 import { EmpleadosDepartamentoComponent } from './navigationTools/empleados-departamento/empleados-departamento.component';
 import { EditarEmpleadoComponent } from './userTools/editar-empleado/editar-empleado.component';
 import { CrearTipoExpedientesComponent } from './userTools/crear-tipo-expedientes/crear-tipo-expedientes.component';
+import { CrearDepartamentoComponent } from './userTools/crear-departamento/crear-departamento.component';
 
 const childRoutes:Routes=[
   { path: '', component: InicioAdminComponent, data:{title: 'Dashboard'}},
@@ -87,6 +88,8 @@ const childRoutes:Routes=[
           { path: ':idEmpresa/:idArea/expedientes/crear-tipo', component: CrearTipoExpedientesComponent, canActivate:[AreaPermisosGuard], data:{title: 'seleccione de empresa'}},
           //*Agregar Expediente
           { path: ':idEmpresa/:idArea/:idEmpleado/agregar-expediente', component: AgregarExpedienteComponent, canActivate:[AreaPermisosGuard], data:{title: 'seleccione de empresa'}},
+          //*Agregar Departamento
+          { path: ':idEmpresa/:idArea/agregar-departamento', component: CrearDepartamentoComponent, canActivate:[AreaPermisosGuard], data:{title: 'seleccione de empresa'}},
 
 
 

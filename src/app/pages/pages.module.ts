@@ -34,6 +34,7 @@ import { AgregarExpedienteComponent } from './userTools/agregar-expediente/agreg
 import { CrearTipoExpedientesComponent } from './userTools/crear-tipo-expedientes/crear-tipo-expedientes.component';
 import { DepartamentosUsuarioComponent } from './userTools/departamentos-usuario/departamentos-usuario.component';
 import { CrearDepartamentoAreaComponent } from './userTools/crear-departamento-area/crear-departamento-area.component';
+import { CrearDepartamentoComponent } from './userTools/crear-departamento/crear-departamento.component';
 
 
 @NgModule({
@@ -65,7 +66,8 @@ import { CrearDepartamentoAreaComponent } from './userTools/crear-departamento-a
        CrearTipoExpedientesComponent,
        DepartamentosUsuarioComponent,
        EditarDepartamentoComponent,
-       CrearDepartamentoAreaComponent
+       CrearDepartamentoAreaComponent,
+       CrearDepartamentoComponent
 
 
 

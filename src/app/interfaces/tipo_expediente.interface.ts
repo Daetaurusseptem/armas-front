@@ -9,4 +9,5 @@ export interface TipoExpediente {
   creadoEl: Date;
   actualizadoEl: Date;
   areaId: string;
+  obligatorio?:boolean
 }

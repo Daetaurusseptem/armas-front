@@ -25,6 +25,8 @@ import { TipoExpediente } from 'src/app/interfaces/tipo_expediente.interface';
   styleUrls: ['./empleados.component.css'],
 })
 export class EmpleadosComponent implements OnInit {
+  tabSelected ='empleados'
+  tiposExpedientesArea:TipoExpediente[]
   empleados: Empleado[] = [];
   empleadosTemp: Empleado[] = [];
   areaId: string;
@@ -58,7 +60,23 @@ export class EmpleadosComponent implements OnInit {
       this.obtenerDepartamentos(this.empresaId);
       this.obtenerEmpresa(this.empresaId);
       this.obtenerArea(this.areaId);
+      this.getExpedientesArea();
       this.cambioDepartamento();
+    });
+  }
+
+  getExpedientesArea(){
+    this.expedientesService
+    .getTipoExpedientesArea(this.empresaId,this.areaId)
+    .pipe(
+      map((item) => {
+
+
+        return item.tiposExpediente;
+      })
+    )
+    .subscribe((r) => {
+      this.tiposExpedientesArea = r;
     });
   }
 
@@ -249,5 +267,9 @@ export class EmpleadosComponent implements OnInit {
       return true
     }
     return false
+}
+changeTab(tab:string){
+  this.tabSelected = tab
+  console.log(this.tabSelected);
 }
 }

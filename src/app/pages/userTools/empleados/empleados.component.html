@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col-12 mx-auto text-center mb-2">
-    <div class="card">
+    <div *ngIf="tabSelected=='empleados'" class="card">
       <div class="card-header">
         <div class="card-title text-center">
           <h5>Busqueda</h5>
@@ -33,6 +33,7 @@
       </form>
     </div>
   </div>
+
   <div class="col-12 mx-auto text-center">
     <div class="card">
       <div class="card-title p-4">
@@ -40,7 +41,7 @@
           <h5>Empleados {{empresa.nombre}} - Area {{area.nombre}}</h5>
 
         </div>
-
+        <hr>
         <div class="col">
 
           </div>
@@ -48,7 +49,7 @@
             <a name="" id="" class="btn btn-success m-2" [routerLink]="['/dashboard/',empresaId,areaId, 'crear-empleado']" role="button">
               <i class="bi bi-person-plus"></i>  Añadir Empleado
             </a>
-            <a name="" id="" class="btn btn-success m-2" [routerLink]="['/dashboard/',empresaId,areaId, 'crear-empleado']" role="button">
+            <a name="" id="" class="btn btn-success m-2" [routerLink]="['/dashboard/',empresaId,areaId, 'agregar-departamento']" role="button">
               <i class="bi bi-briefcase"></i>  Añadir Departamento
             </a>
             <a name="" id="" class="btn btn-success m-2" [routerLink]="['/dashboard/',empresaId,areaId,'expedientes','crear-tipo']" role="button">
@@ -56,9 +57,32 @@
             </a>
           </div>
         </div>
-        <hr>
+
       </div>
-      <div class="card-body">
+
+
+
+
+
+<!-- Nav tabs -->
+<ul class="nav nav-tabs" role="tablist">
+
+    <
+    <li class="nav-item" role="presentation">
+        <a class="nav-link pointer"  [class.active]="tabSelected=='empleados'" (click)="changeTab('empleados')" data-target="#empleados" aria-controls="photos" role="tab" target="_self" data-toggle="tab">Empleados</a>
+    </li>
+    <li class="nav-item" role="presentation">
+        <a class="nav-link pointer" [class.active]="tabSelected=='departamentos'" (click)="changeTab('departamentos')" data-target="#departamentos" aria-controls="photos" role="tab" target="_self" data-toggle="tab">Departamento</a>
+    </li>
+    <li class="nav-item" role="presentation">
+        <a class="nav-link pointer" [class.active]="tabSelected=='tipos-expedientes'" (click)="changeTab('tipos-expedientes')" data-target="#tipos-expedientes" aria-controls="a" role="tab" target="_self" data-toggle="tab">Tipos Expedientes</a>
+    </li>
+
+</ul>
+
+<!-- EMPLEADOS -->
+      <div *ngIf="tabSelected=='empleados'" class="card" style="margin-top: 1rem;">
+
         <div *ngIf="empleados.length<=0" class="alert alert-secondary">
           No existen empleados con los parametros ingresados
         </div>
@@ -76,10 +100,7 @@
                 <th scope="col">Expediente</th>
                 <th  *ngIf="tiposExpedientesObligatorios.length>0"  scope="col">
                   Documentacion obligatoria <br>
-                  <select name="" class="form-select" id="">
-                    <option value="">Mostrar Todas</option>
-                    <option *ngFor="let item of tiposExpedientesObligatorios" value="">{{item.tipo}}</option>
-                  </select>
+
                 </th>
               </tr>
             </thead>
@@ -133,5 +154,91 @@
           </table>
         </div>
       </div>
+<!-- EMPLEADOS -->
+<!-- DEPARTAMENTOS -->
+<div *ngIf="tabSelected=='departamentos'" class="card" style="margin-top: 1rem;">
+
+  <div *ngIf="empleados.length<=0" class="alert alert-secondary">
+    No existen empleados con los parametros ingresados
+  </div>
+  <div class="table-responsive">
+    <table class="table">
+      <thead>
+        <tr>
+
+          <th scope="col">Nombre</th>
+          <th scope="col">descripcion</th>
+
+          <th scope="col">Editar</th>
+
+        </tr>
+      </thead>
+      <tbody class="text-left">
+        <tr *ngFor="let departamento of departamentos; index as i">
+
+          <td>{{departamento.nombre}}</td>
+          <td>{{departamento.descripcion}}</td>
+
+
+          <td>
+            <a [routerLink]="['/dashboard/',departamento.empresaId,areaId, departamento.id,'editar-departamento']" name="" id="" class="btn btn-primary" role="button">
+              <i class="bi bi-pencil"></i>
+            </a>
+          </td>
+          <td>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<!-- DEPARTAMENTOS -->
+<!-- TIPOS EXPEDIENTES -->
+<div *ngIf="tabSelected=='tipos-expedientes'" class="card" style="margin-top: 1rem;">
+
+  <div *ngIf="tiposExpedientesArea.length<=0" class="alert alert-secondary">
+    No existen tipos de expedientes con los parametros ingresados
+  </div>
+  <div class="table-responsive">
+    <table class="table">
+      <thead>
+        <tr>
+
+
+          <th scope="col">Tipo</th>
+          <th scope="col">descripcion</th>
+          <th scope="col">obligatorio</th>
+          <th scope="col">actualizo</th>
+          <th scope="col">Editar</th>
+
+        </tr>
+      </thead>
+      <tbody class="text-left">
+        <tr *ngFor="let tipoExp of tiposExpedientesArea; index as i">
+
+
+          <td>{{tipoExp.tipo}}</td>
+          <td>{{tipoExp.descripcion}}</td>
+          <td *ngIf="tipoExp.obligatorio">Si</td>
+          <td *ngIf="!tipoExp.obligatorio">No</td>
+          <td>{{tipoExp.actualizo}}</td>
+
+
+
+
+          <td>
+            <a [routerLink]="['/dashboard/',empresaId,areaId, tipoExp.id_tipo,'editar-departamento']" name="" id="" class="btn btn-primary" role="button">
+              <i class="bi bi-pencil"></i>
+            </a>
+          </td>
+          <td>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<!-- TIPOS EXPEDIENTES -->
+
     </div>
   </div>

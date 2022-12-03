@@ -103,7 +103,7 @@ export class CrearEmpleadoComponent implements OnInit {
         console.log(resp);
 
            Swal.fire({
-             title:'Usuario creado'
+             title:'Empleado creado'
            })
            if( this.empresaId!== '' || undefined  || null ){
              this.router.navigateByUrl(`/dashboard/${this.empresaId}/${this.areaId}/empleados-area`)

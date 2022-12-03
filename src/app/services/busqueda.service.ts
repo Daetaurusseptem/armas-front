@@ -2,7 +2,7 @@ import { UsuarioModel } from './../models/Usuario.model';
 import { Busqueda } from './../interfaces/Busqueda.interface';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { environment } from 'src/environments/environment.prod';
+import { environment } from 'src/environments/environment';
 
 import {map} from 'rxjs/operators';
 

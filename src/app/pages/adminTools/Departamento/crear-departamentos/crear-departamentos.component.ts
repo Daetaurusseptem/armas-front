@@ -62,7 +62,7 @@ export class CrearDepartamentosComponent implements OnInit {
       resp=>{
         console.log(resp);
            Swal.fire({
-             title:'Empresa creada'
+             title:'Departamento creada'
            })
 
            this.router.navigateByUrl('dashboard/admin/departamentos')

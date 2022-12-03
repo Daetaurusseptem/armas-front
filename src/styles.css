@@ -13,3 +13,7 @@ li::before {
   content: '';
   margin-left: -8px;
 }
+
+.pointer{
+  cursor: pointer;
+}

@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  urlBack:'http://10.20.2.195:3001/api/'
+  urlBack:'http://localhost:3001/api/',
+  urlFileServer:'http://localhost:8080/'
 };
 
 /*

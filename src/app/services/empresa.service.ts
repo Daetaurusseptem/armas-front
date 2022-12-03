@@ -3,7 +3,7 @@ import { RegistrarEmpresa } from './../interfaces/empresaRegister.interface';
 
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { environment } from 'src/environments/environment.prod';
+import { environment } from 'src/environments/environment';
 import { ArrayResponse } from '../interfaces/arrayResponse.interface';
 import { itemResponse } from '../interfaces/itemResponse.interface';
 const UrlBase = environment.urlBack

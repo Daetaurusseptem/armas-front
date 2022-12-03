@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { ArrayResponse } from './../interfaces/arrayResponse.interface';
 import { Injectable } from '@angular/core';
-import { environment } from 'src/environments/environment.prod';
+import { environment } from 'src/environments/environment';
 import { UsuariosService } from './usuarios.service';
 import { ExpedienteCreacionResponse } from '../interfaces/expedienteUploadResponse.interface';
 import { TipoExpediente } from '../interfaces/tipo_expediente.interface';
