@@ -52,9 +52,9 @@ const childRoutes:Routes=[
     { path: 'admin/usuarios/crear-usuario', component: CrearUsuarioComponent,canActivate:[AdminGuard], data:{title: 'crear Usuario'}},
     { path: 'usuarios/editar-usuario/:id', component: EditarUsuarioComponent,canActivate:[AdminGuard], data:{title: 'crear Usuario'}},
     //Departaadmin/mentos
-    { path: 'admin/departamentos', component: DepartamentosComponent,canActivate:[AdminOrUserGuard], data:{title: 'catalogo de usuarios'}},
-    { path: 'admin/departamentos/crear-departamento', component: CrearDepartamentosComponent,canActivate:[AdminOrUserGuard], data:{title: 'crear Usuario'}},
-    { path: 'admin/departamentos/editar-departamento/:id', component: EditarDepartamentoComponent,canActivate:[AdminOrUserGuard], data:{title: 'crear Usuario'}},
+    { path: 'admin/departamentos', component: DepartamentosComponent,canActivate:[AdminGuard], data:{title: 'catalogo de usuarios'}},
+    { path: 'admin/departamentos/crear-departamento', component: CrearDepartamentosComponent,canActivate:[AdminGuard], data:{title: 'crear Usuario'}},
+    { path: 'admin/departamentos/editar-departamento/:id', component: EditarDepartamentoComponent,canActivate:[AdminGuard], data:{title: 'crear Usuario'}},
 
   //FINAL ADMIN TOOLS
 

@@ -22,16 +22,17 @@
                         Grupo Armas
                       </a>
                     </div>
-                      <li class="card text-dark" style="content: none;" *ngFor="let menu of menuItems">
-                          <a class="" type="button" data-bs-toggle="collapse" attr.data-bs-target="#{{menu.id}}" aria-expanded="false"
+                      <li class="card text-dark"  style="content: none;border-color: dimgrey;" *ngFor="let menu of menuItems">
+                          <a class="bg-dark text-light" type="button" data-bs-toggle="collapse" attr.data-bs-target="#{{menu.id}}" aria-expanded="false"
                               attr.aria-controls="{{menu.id}}">
 
-                                <i [class]="menu.icon"></i>
                                 {{menu.title}}
+                                 <i class="bi bi-caret-down-fill"> </i>
+
 
                           </a>
                         <div class="collapse text-dark" id="{{menu.id}}">
-                          <a *ngFor="let item of menu.submenu" routerLink="{{item.url}}">
+                          <a class="bg-dark text-light" *ngFor="let item of menu.submenu" routerLink="{{item.url}}">
                             <i [class]="item.title"></i>
                             <h5>
                               {{item.title}}
