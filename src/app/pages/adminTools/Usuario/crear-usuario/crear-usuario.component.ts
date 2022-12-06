@@ -16,9 +16,8 @@ export class CrearUsuarioComponent implements OnInit {
 
 
   public registerUsuarioForm = this.fb.group({
-    nombre:['', Validators.required, Validators.minLength(5),Validators.maxLength(30)],
-    usuario:['',Validators.required, Validators.minLength(5),Validators.maxLength(11)],
-    // email:['', [Validators.email, Validators.required]],
+    nombre:['', [Validators.required, Validators.minLength(5),Validators.maxLength(30)]],
+    usuario:['',[Validators.required, Validators.minLength(5),Validators.maxLength(11)]],
     password:['', [Validators.required, Validators.minLength(5),Validators.maxLength(64)]],
     password2:['', [Validators.required, Validators.minLength(5),Validators.maxLength(64)]],
     actualizo:['admin', [Validators.required]]
@@ -57,20 +56,23 @@ export class CrearUsuarioComponent implements OnInit {
     .subscribe(
       resp=>{
         console.log(resp);
-
-      // idUsuario= resp.id
-      // console.log(idUsuario);
-      // return this.usuariosService.addMaestroMateria(materiaId, idUsuario)
-      // .subscribe(
-      //   resp=>{
+           if(resp.ok==false){
+            Swal.fire({
+              title:resp.msg
+            })
+            return
+           }
            Swal.fire({
-             title:'Usuario creado'
+             title:'Usuario creado',
+
            })
 
            this.router.navigateByUrl('dashboard/admin/usuarios')
-
-      //   }
-      // )
+    },
+    error=>{
+      Swal.fire({
+        title:error.error.msg
+      })
     }
     )
 
@@ -99,6 +101,7 @@ export class CrearUsuarioComponent implements OnInit {
       const pass1Control = formGroup.get(pass1Name);
       const pass2Control = formGroup.get(pass2Name);
 
+
       if ( pass1Control?.value === pass2Control?.value ) {
         pass2Control?.setErrors(null);
       } else {
@@ -109,7 +112,7 @@ export class CrearUsuarioComponent implements OnInit {
     }
   }
   campoNoValido(campo:string):boolean{
-    if ( this.registerUsuarioForm.get(campo)?.invalid ) {
+    if ( this.registerUsuarioForm.get(campo)?.invalid) {
       return true;
     } else {
       return false;

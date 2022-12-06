@@ -18,7 +18,6 @@ state: RouterStateSnapshot):  boolean  {
 if(this.usuarioService.role=='ADMIN_ROLE'){
 return true;
 }else{
-  console.log('nel');
   this.router.navigateByUrl('/dashboard')
   return false
 }

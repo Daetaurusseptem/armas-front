@@ -17,13 +17,13 @@ export class EmpresaService {
   constructor(private http:HttpClient) { }
 
   getEmpresas(){
-    return this.http.get<ArrayResponse>(this.url);
+    return this.http.get<ArrayResponse>(this.url, this.headers);
   }
   getEmpresa(id:string){
-    return this.http.get<itemResponse>(`${this.url}/${id}`);
+    return this.http.get<itemResponse>(`${this.url}/${id}`, this.headers);
   }
   createEmpresa(formData: RegistrarEmpresa){
-    return this.http.post(this.url, formData)
+    return this.http.post(this.url, formData, this.headers  )
     // .pipe(
     //   tap( (resp: any) => {
     //     this.guardarLocalStorage(resp.token, resp.menu)
@@ -32,6 +32,18 @@ export class EmpresaService {
   }
   updateEmpresa(idArea:string, formData:updateEmpresa ){
     console.log(formData);
-    return this.http.put(`${this.url}/${idArea}`, formData);
+    return this.http.put(`${this.url}/${idArea}`, formData, this.headers);
   }
+
+  get headers(): object{
+    return {
+      headers: {
+        'x-token': this.token
+      }
+    };
+  }
+  get token(): string{
+    return localStorage.getItem('token') || '';
+  }
+
 }

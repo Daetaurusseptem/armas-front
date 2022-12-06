@@ -9,6 +9,7 @@ import { registraUsuario } from '../interfaces/userRegister.interface';
 
 import {map, catchError} from 'rxjs/operators';
 import { UsuarioModel } from '../models/Usuario.model';
+import { binaryResponse } from '../interfaces/binaryResponse.interface';
 
 
 
@@ -54,13 +55,13 @@ export class UsuariosService {
   }
 
   getUsuarios(){
-    return this.http.get<ArrayResponse>(this.url);
+    return this.http.get<ArrayResponse>(this.url, this.headers);
   }
   getUsuario(id:string){
-    return this.http.get<itemResponse>(`${this.url}/${id}`);
+    return this.http.get<itemResponse>(`${this.url}/${id}`, this.headers);
   }
   createUser(formData: registraUsuario){
-    return this.http.post(this.url, formData)
+    return this.http.post<binaryResponse>(this.url, formData, this.headers)
     // .pipe(
     //   tap( (resp: any) => {
     //     this.guardarLocalStorage(resp.token, resp.menu)
@@ -69,7 +70,7 @@ export class UsuariosService {
   }
   updateUser(idUsuario:string, formData: updateDatosUsuario){
 
-    return this.http.put(`${this.url}/${idUsuario}`, formData);
+    return this.http.put(`${this.url}/${idUsuario}`, formData, this.headers);
   }
 
   get headers(): object{

@@ -1,22 +1,14 @@
-<section *ngIf="usuario.role=='USER_ROLE'" class="py-5 text-center container">
+<section  class="py-5 text-center container">
   <div class="row py-lg-5">
     <div class="col-lg-6 col-md-8 mx-auto">
-      <h1 class="fw-light">Sistema de Expedientes - Usuario</h1>
+      <h1 *ngIf="usuario.role=='USER_ROLE'" class="fw-light">Sistema de Expedientes - Usuario</h1>
+      <h1 *ngIf="usuario.role=='ADMIN_ROLE'" class="fw-light">Sistema de Expedientes - Admin.</h1>
+      <img class="text-center img-fluid   mainPageIcon" src="/assets/folder.gif" alt="">
       <p class="lead text-muted">Bienvenido al sistema de expediente, aqui podras almacenar, archivo, imagnes y datos pertienentes al area en la que trabajas, los archivos son confidenciales de cada area.</p>
-      <p>
 
-      </p>
+
+
     </div>
   </div>
 </section>
-<section *ngIf="usuario.role=='ADMIN_ROLE'" class="py-5 text-center container">
-  <div class="row py-lg-5">
-    <div class="col-lg-6 col-md-8 mx-auto">
-      <h1 class="fw-light">Sistema de Expedientes - Administrador</h1>
-      <p class="lead text-muted">Bienvenido al sistema de expediente, aqui podras almacenar, archivo, imagnes y datos pertienentes al area en la que trabajas, los archivos son confidenciales de cada area.</p>
-      <p>
 
-      </p>
-    </div>
-  </div>
-</section>

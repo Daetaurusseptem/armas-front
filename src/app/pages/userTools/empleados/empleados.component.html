@@ -8,7 +8,7 @@
       <div class="card-title p-4">
         <div class="card-title mb-3 ">
 
-          <h5>Empleados {{empresa.nombre}} - Area {{area.nombre}}</h5>
+          <h5> {{empresa.nombre}} - Area {{area.nombre}}</h5>
 
         </div>
         <hr>
@@ -16,15 +16,15 @@
 
         </div>
         <div class="text-end">
-          <a name="" id="" class="btn btn-success m-2" [routerLink]="['/dashboard/',empresaId,areaId, 'crear-empleado']"
+          <a *ngIf="tabSelected=='empleados'" name="" id="" class="btn btn-success m-2 animate__animated animate__fadeIn" [routerLink]="['/dashboard/',empresaId,areaId, 'crear-empleado']"
             role="button">
             <i class="bi bi-person-plus"></i> Añadir Empleado
           </a>
-          <a name="" id="" class="btn btn-success m-2"
+          <a *ngIf="tabSelected=='departamentos'" name="" id="" class="btn btn-success m-2 animate__animated animate__fadeIn"
             [routerLink]="['/dashboard/',empresaId,areaId, 'agregar-departamento']" role="button">
             <i class="bi bi-briefcase"></i> Añadir Departamento
           </a>
-          <a name="" id="" class="btn btn-success m-2"
+          <a *ngIf="tabSelected=='tipos-expedientes'" name="" id="" class="btn btn-success m-2 animate__animated animate__fadeIn"
             [routerLink]="['/dashboard/',empresaId,areaId,'expedientes','crear-tipo']" role="button">
             <i class="bi bi-archive"></i> Añadir Tipo Expediente
           </a>
@@ -64,7 +64,7 @@
     <ul class="nav nav-tabs" role="tablist">
 
        <li class="nav-item" role="presentation">
-        <a class="nav-link pointer" style="color: black;" [class.active]="tabSelected=='empleados'" (click)="changeTab('empleados')"
+        <a class="nav-link pointer" [class.active]="tabSelected=='empleados'" (click)="changeTab('empleados')"
           data-target="#empleados" aria-controls="photos" role="tab" target="_self" data-toggle="tab">Empleados</a>
         </li>
         <li class="nav-item" role="presentation">
