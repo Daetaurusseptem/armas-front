@@ -19,8 +19,8 @@ export class EditarAreaComponent implements OnInit {
   formSubmitted=false;
 
   editarAreaForm = this.fb.group({
-    nombre:['',[Validators.required]],
-    descripcion:['']
+    nombre:['',[Validators.required, Validators.minLength(5), Validators.maxLength(30)]],
+    descripcion:['',[Validators.required, Validators.minLength(5), Validators.maxLength(30)] ]
   })
 
 
@@ -82,7 +82,7 @@ export class EditarAreaComponent implements OnInit {
         this.areaService.updateArea(this.area.id, this.editarAreaForm.value)
         .subscribe(r=>{
           this.formSubmitted = false;
-          this.router.navigateByUrl('/dashboard/areas')
+          this.router.navigateByUrl('/dashboard/admin/areas')
         })
       }
     })
@@ -94,7 +94,7 @@ export class EditarAreaComponent implements OnInit {
 
 
    campoNoValido(campo:string):boolean{
-     if ( this.editarAreaForm.get(campo)?.invalid && this.formSubmitted ) {
+     if ( this.editarAreaForm.get(campo)?.invalid) {
        return true;
      } else {
        return false;

@@ -19,7 +19,7 @@ export class CrearAreaComponent implements OnInit {
   empresas:Empresa[]=[];
 
   public registerAreaForm = this.fb.group({
-    id:['', [Validators.required, Validators.minLength(5), Validators.maxLength(20), Validators.pattern(/^(\s+\S+\s*)*(?!\s).*$/)]],
+    id:['', [Validators.required, Validators.minLength(5), Validators.maxLength(8), Validators.pattern(/^(\s+\S+\s*)*(?!\s).*$/)]],
     empresaId:['', [Validators.required, Validators.minLength(5), Validators.maxLength(20), Validators.pattern(/^(\s+\S+\s*)*(?!\s).*$/)]],
     nombre:['',[Validators.required, Validators.minLength(5), Validators.maxLength(30)]],
     descripcion:['', [Validators.required, Validators.minLength(10), Validators.maxLength(30)]],
@@ -93,10 +93,10 @@ export class CrearAreaComponent implements OnInit {
     })
   }
 
-//ESCENCIALES
+//ESENCIALES
 
   campoNoValido(campo:string):boolean{
-    if ( this.registerAreaForm.get(campo)?.invalid && this.formSubmitted ) {
+    if ( this.registerAreaForm.get(campo)?.invalid ) {
       return true;
     } else {
       return false;

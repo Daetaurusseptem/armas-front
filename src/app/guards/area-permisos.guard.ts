@@ -57,7 +57,7 @@ export class AreaPermisosGuard implements CanActivate {
 
 
           this.usuarioModel = this.usuarioService.usuario
-          //obtener array de empresas en las que cuenta algun tipo de permiso
+          //obtener array de empresas en las que cuenta algún tipo de permiso
           this.usuarioModel.Areas.map(r=>{
             this.areasConPermiso.push(r.id)
           })
@@ -68,6 +68,7 @@ export class AreaPermisosGuard implements CanActivate {
           //*comprobar si areasConPermiso incluye el id de el area actual
 
           if(this.areasConPermiso.includes(areaId)){
+
 
           console.log('si');
 

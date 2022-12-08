@@ -38,14 +38,14 @@
 
 
           </div>
-          <div class="card-body">
-            <p *ngIf="campoNoValido('nombre')" class="text-danger">nombre invalido</p>
-            <p *ngIf="campoNoValido('usuario')" class="text-danger">Usuario No valido</p>
-            <p *ngIf="campoNoValido('password2')" class="text-danger">Contraseña deben de coincidir y tener un minimo de 5 caracteres</p>
+          <div class="card-body alert alert-danger">
+            <p *ngIf="campoNoValido('nombre')" class="text-danger">nombre invalido el id debe de ser de min. 5 caracteres, máx. 30 caracteres</p>
+            <p *ngIf="campoNoValido('usuario')" class="text-danger">Usuario No valido el id debe de ser de min. 5 caracteres, máx. 11 caracteres</p>
+            <p *ngIf="campoNoValido('password2')" class="text-danger">Contraseña deben de coincidir y tener un mínimo de 5 caracteres</p>
 
 
-            <p *ngIf="contrasenasNoValidas()" class="text-danger">las contrasenas deben coincidir</p>
-            <p *ngIf="contrasenasNoValidas()" class="text-danger">contrasenas invalidas</p>
+            <p *ngIf="contrasenasNoValidas()" class="text-danger">las contraseñas deben coincidir</p>
+            <p *ngIf="contrasenasNoValidas()" class="text-danger">contraseñas invalidas</p>
           </div>
           <div class="d-grid gap-2">
             <button [disabled]="registerUsuarioForm.invalid" type="submit" name="" id="" class="btn btn-primary">Registrar</button>

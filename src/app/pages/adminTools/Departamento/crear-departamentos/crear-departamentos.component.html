@@ -43,14 +43,17 @@
 
 
           </div>
-          <div class="card-body">
-            <p *ngIf="campoNoValido('id')" class="text-danger">id invalido - el id debe de ser de min. 10 digitos, max
-              20 digitos</p>
-            <p *ngIf="campoNoValido('nombre')" class="text-danger">nombre invalido</p>
-            <p *ngIf="campoNoValido('nombre')" class="text-danger">descripcion invalida</p>
+          <div *ngIf="registerDepartamentoForm.invalid" class="card-body alert alert-danger">
+            <p *ngIf="campoNoValido('empresaId')" class="text-danger">id empresa - Seleccione una empresa por favor</p>
+            <p *ngIf="campoNoValido('id')" class="text-danger">id invalido - el id debe de ser de min. 10 caracteres, máx.
+              20 caracteres</p>
+            <p *ngIf="campoNoValido('nombre')" class="text-danger">nombre invalido - el nombre debe de ser de min. 5 caracteres, máx.
+              30 caracteres</p>
+            <p *ngIf="campoNoValido('descripcion')" class="text-danger">descripción invalida - la descripción debe de ser de min. 10 caracteres, máx.
+              30 caracteres</p>
           </div>
           <div class="d-grid gap-2">
-            <button type="submit" name="" id="" class="btn btn-primary">Registrar</button>
+            <button [disabled]="registerDepartamentoForm.invalid" type="submit" name="" id="" class="btn btn-primary">Registrar</button>
           </div>
 
         </form>

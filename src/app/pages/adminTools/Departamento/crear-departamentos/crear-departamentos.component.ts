@@ -18,8 +18,8 @@ export class CrearDepartamentosComponent implements OnInit {
   empresas:Empresa[]=[];
 
   public registerDepartamentoForm = this.fb.group({
-    id:['', [Validators.required, Validators.minLength(5), Validators.maxLength(20), Validators.pattern(/^(\s+\S+\s*)*(?!\s).*$/)]],
-    empresaId:['', [Validators.required, Validators.minLength(5), Validators.maxLength(20), Validators.pattern(/^(\s+\S+\s*)*(?!\s).*$/)]],
+    id:['', [Validators.required, Validators.minLength(5), Validators.maxLength(8)]],
+    empresaId:['', [Validators.required, Validators.minLength(5), Validators.maxLength(20)]],
     nombre:['',[Validators.required, Validators.minLength(5), Validators.maxLength(30)]],
     descripcion:['', [Validators.required, Validators.minLength(10), Validators.maxLength(30)]],
     actualizo:['admin', [Validators.required]]
@@ -98,7 +98,7 @@ export class CrearDepartamentosComponent implements OnInit {
 //ESCENCIALES
 
   campoNoValido(campo:string):boolean{
-    if ( this.registerDepartamentoForm.get(campo)?.invalid && this.formSubmitted ) {
+    if ( this.registerDepartamentoForm.get(campo)?.invalid ) {
       return true;
     } else {
       return false;

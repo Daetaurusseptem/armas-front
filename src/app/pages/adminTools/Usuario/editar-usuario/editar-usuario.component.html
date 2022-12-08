@@ -45,9 +45,9 @@
 
 
           </div>
-          <div class="card-body">
-            <p *ngIf="campoNoValidoDatosUsuario('nombre')" class="text-danger">nombre invalido</p>
-            <p *ngIf="campoNoValidoDatosUsuario('usuario')" class="text-danger">usuario invalido</p>
+          <div *ngIf="usuarioForm.invalid" class="card-body alert alert-danger">
+            <p *ngIf="campoNoValidoDatosUsuario('nombre')" class="text-danger">nombre invalido - El nombre debe de ser de min. 5 caracteres, máx. 30 caracteres</p>
+            <p *ngIf="campoNoValidoDatosUsuario('usuario')" class="text-danger">usuario invalido - El nombre de usuario debe de ser de min. 5 caracteres, máx. 11 caracteres</p>
 
           </div>
           <!-- <div class="card-body">
@@ -87,7 +87,8 @@
                       <div class="mb-3">
                         <div class="card-body">
                           <p *ngIf="contrasenasNoValidas()" class="text-danger">las contrasenas deben coincidir</p>
-                          <p *ngIf="contrasenasNoValidas()" class="text-danger">contrasenas invalidas</p>
+                          <p *ngIf="campoNoValidoPassword('password2')" class="text-danger">contrasenas invalidas - La contraseña debe tener mínimo 5 caracteres</p>
+                          <p *ngIf="campoNoValidoPassword('password1')" class="text-danger">contrasenas invalidas - La contraseña debe tener mínimo 5 caracteres</p>
                         </div>
                       </div>
                     </div>
@@ -195,7 +196,7 @@
                 </div>
                 <!-- FIN TABLA PERMISOS -->
                 <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                  <button id="botonModal" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
                 </div>
               </div>
             </div>

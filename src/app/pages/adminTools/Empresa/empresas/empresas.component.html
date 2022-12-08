@@ -52,6 +52,9 @@
                   <a [routerLink]="['/dashboard/admin/empresas/editar-empresa',empresa.id]" name="" id="" class="btn btn-primary" role="button">
                     <i class="bi bi-pencil align-middle"></i>
                   </a>
+                  <a style="margin-left:1rem;" (click)="eliminarEmpresa(empresa.id)" name="" id="" class="btn btn-danger" role="button">
+                    <i class="bi bi-trash align-middle"></i>
+                  </a>
                 </td>
               </tr>
             </tbody>

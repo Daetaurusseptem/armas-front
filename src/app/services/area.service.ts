@@ -20,16 +20,16 @@ export class AreaService {
   constructor(private http:HttpClient) { }
 
   getAreas(){
-    return this.http.get<ArrayResponse>(this.url);
+    return this.http.get<ArrayResponse>(this.url, this.headers);
   }
-    getAreasEmpresa(empresaId:string){
-    return this.http.get<ArrayResponse>(`${this.url}/empresa/${empresaId}`);
+  getAreasEmpresa(empresaId:string){
+    return this.http.get<ArrayResponse>(`${this.url}/empresa/${empresaId}`, this.headers);
   }
   getArea(id:string){
-    return this.http.get<itemResponse>(`${this.url}/${id}`);
+    return this.http.get<itemResponse>(`${this.url}/${id}`, this.headers);
   }
   createArea(formData: registraArea){
-    return this.http.post(this.url, formData)
+    return this.http.post(this.url, formData, this.headers)
     // .pipe(
     //   tap( (resp: any) => {
     //     this.guardarLocalStorage(resp.token, resp.menu)
@@ -37,7 +37,22 @@ export class AreaService {
     // );
   }
   updateArea(idArea:string, formData: updateDatosArea){
-
-    return this.http.put(`${this.url}/${idArea}`, formData);
+    console.log(idArea);
+    return this.http.put(`${this.url}/${idArea}`, formData, this.headers);
   }
+  eliminarArea(idArea:string){
+    return this.http.delete(`${this.url}/${idArea}`, this.headers);
+  }
+
+  get headers(): object{
+    return {
+      headers: {
+        'x-token': this.token
+      }
+    };
+  }
+  get token(): string{
+    return localStorage.getItem('token') || '';
+  }
+
 }

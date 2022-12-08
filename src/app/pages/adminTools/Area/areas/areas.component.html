@@ -3,7 +3,7 @@
     <div class="card">
       <div class="card-header">
         <div class="card-title text-center">
-          <h5>Busqueda</h5>
+          <h5>Búsqueda</h5>
         </div>
       </div>
       <form>
@@ -38,9 +38,9 @@
               <tr>
                 <th scope="col">#</th>
                 <th scope="col">Id</th>
-                <th scope="col">Nombre</th>
+                <th scope="col">Nombre del area</th>
                 <th scope="col">Empresa</th>
-                <th scope="col">Descripcion</th>
+                <th scope="col">Descripción</th>
                 <th scope="col">Herramientas</th>
               </tr>
             </thead>
@@ -52,8 +52,11 @@
                 <td>{{area.empresaId}}</td>
                 <td>{{area.descripcion}}</td>
                 <td>
-                  <a [routerLink]="['/dashboard/areas/editar-area',area.id]" name="" id="" class="btn btn-primary" role="button">
+                  <a [routerLink]="['/dashboard/admin/areas/editar-area',area.id]" name="" id="" class="btn btn-primary" role="button">
                     <i class="bi bi-pencil align-middle"></i>
+                  </a>
+                  <a (click)="eliminarArea(area.id)" style="margin-left: 1rem;"  name="" id="" class="btn btn-danger" role="button">
+                    <i class="danger bi bi-trash align-middle"></i>
                   </a>
                 </td>
               </tr>

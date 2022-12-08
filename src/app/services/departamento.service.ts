@@ -5,6 +5,7 @@ import { environment } from 'src/environments/environment';
 import { itemResponse } from '../interfaces/itemResponse.interface';
 import { registraArea } from '../interfaces/areaRegister.interface';
 import { updateDatosArea } from '../interfaces/updateDatosArea.interface';
+import { binaryResponse } from '../interfaces/binaryResponse.interface';
 const UrlBase = environment.urlBack
 @Injectable({
   providedIn: 'root'
@@ -17,16 +18,20 @@ export class DepartamentoService {
 
   getDepartamentos(){
 
-    return this.http.get<ArrayResponse>(this.url);
+    return this.http.get<ArrayResponse>(this.url, this.headers);
+  }
+  deleteDepartamento(id:string){
+
+    return this.http.delete<binaryResponse>(`${this.url}/${id}`, this.headers);
   }
   getDepartamentosEmpresa(idEmpresa:string){
-    return this.http.get<ArrayResponse>(`${this.url}/empresa/${idEmpresa}`);
+    return this.http.get<ArrayResponse>(`${this.url}/empresa/${idEmpresa}`,this.headers);
   }
   getDepartamento(id:string){
-    return this.http.get<itemResponse>(`${this.url}/${id}`);
+    return this.http.get<itemResponse>(`${this.url}/${id}`, this.headers);
   }
   createDepartamento(formData: registraArea){
-    return this.http.post(this.url, formData)
+    return this.http.post(this.url, formData, this.headers)
     // .pipe(
     //   tap( (resp: any) => {
     //     this.guardarLocalStorage(resp.token, resp.menu)
@@ -35,6 +40,19 @@ export class DepartamentoService {
   }
   updateDepartamento(idDepartamento:string, formData: updateDatosArea){
 
-    return this.http.put(`${this.url}/${idDepartamento}`, formData);
+    return this.http.put(`${this.url}/${idDepartamento}`, formData, this.headers);
   }
+
+
+  get headers(): object{
+    return {
+      headers: {
+        'x-token': this.token
+      }
+    };
+  }
+  get token(): string{
+    return localStorage.getItem('token') || '';
+  }
+
 }

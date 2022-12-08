@@ -109,7 +109,7 @@ export class CrearEmpresaComponent implements OnInit {
     }
   }
   campoNoValido(campo:string):boolean{
-    if ( this.registerEmpresaForm.get(campo)?.invalid && this.formSubmitted ) {
+    if ( this.registerEmpresaForm.get(campo)?.invalid ) {
       return true;
     } else {
       return false;

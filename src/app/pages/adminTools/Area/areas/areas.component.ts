@@ -1,8 +1,11 @@
 import { AreaService } from '../../../../services/area.service';
 import { Area } from '../../../../interfaces/area.interface';
 import { Component, OnInit } from '@angular/core';
-import {map} from 'rxjs/operators';
+import {map, reduce} from 'rxjs/operators';
 import { BusquedaService } from 'src/app/services/busqueda.service';
+import Swal from 'sweetalert2';
+import { binaryResponse } from 'src/app/interfaces/binaryResponse.interface';
+import { UtilitiesService } from 'src/app/services/utilities.service';
 
 @Component({
   selector: 'app-areas',
@@ -15,7 +18,8 @@ export class AreasComponent implements OnInit {
 
   constructor(
               private areaService:AreaService,
-              private busquedaService:BusquedaService
+              private busquedaService:BusquedaService,
+              private utilitiesService:UtilitiesService
               ) {
     this.cargarAreas();
 
@@ -55,5 +59,45 @@ export class AreasComponent implements OnInit {
       this.areas = resultados;
     });
   }
+
+  eliminarArea(idArea:string){
+    Swal.fire({
+      title:'Esta Seguro?',
+      text:'Este proceso no se podrá deshacer',
+      icon:'warning',
+      showCancelButton:true,
+      cancelButtonColor:'#F56A52',
+      iconColor:'#F56A52',
+      allowEnterKey:false
+
+    })
+    .then(resp=>{
+      if(resp.isConfirmed){
+        this.areaService.eliminarArea(idArea)
+        .subscribe((resp:binaryResponse)=>{
+          console.log(resp);
+          if(resp.ok==true){
+            Swal.fire({
+              title:'Registro eliminado',
+              icon:'success'
+            })
+          }else if(resp.ok==false){
+            Swal.fire({
+              title:'El registro no pudo ser eliminado',
+              icon:'error'
+            })
+          }
+          this.utilitiesService.redirectTo(`/dashboard/admin/areas`)
+        }, err=>{
+          Swal.fire({
+            title:'Registro no eliminado',
+            icon:'error',
+            text:err.error.msg
+          })
+        })
+      }
+    })
+  }
+
 
 }

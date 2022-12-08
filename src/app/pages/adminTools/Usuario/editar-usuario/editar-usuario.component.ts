@@ -34,8 +34,8 @@ export class EditarUsuarioComponent implements OnInit {
     usuario:['',[Validators.required, Validators.minLength(5), Validators.maxLength(11)]],
   })
   passwordForm = this.fb.group({
-    password:['',[Validators.required]],
-    password2:['',[Validators.required]],
+    password:['',[Validators.required, Validators.minLength(5), Validators.maxLength(64)]],
+    password2:['',[Validators.required, Validators.minLength(5), Validators.maxLength(64)]],
   },
   {
     validators:[this.passwordsIguales('password','password2')]
@@ -117,10 +117,9 @@ export class EditarUsuarioComponent implements OnInit {
         .subscribe(r=>{
           console.log(r);
           this.formSubmitted = false;
+          this.hideModal()
           this.utilitiesService.redirectTo(`/dashboard/usuarios/editar-usuario/${this.usuario.id}`)
-          let element = document.querySelector('.modal-backdrop')
 
-          element.remove();
           Swal.fire({
             title:'Cambios Guardados',
             icon:'success'
@@ -146,9 +145,8 @@ export class EditarUsuarioComponent implements OnInit {
         .subscribe(r=>{
           console.log(r);
           this.formSubmitted = false;
+          this.hideModal()
           this.utilitiesService.redirectTo(`/dashboard/usuarios/editar-usuario/${this.usuario.id}`)
-          let element = document.querySelector('.modal-backdrop')
-          element.remove();
           Swal.fire({
             title:'Cambios Guardados',
             icon:'success'
@@ -160,6 +158,11 @@ export class EditarUsuarioComponent implements OnInit {
     })
 
 
+  }
+
+  hideModal(){
+    let element = document.getElementById('botonModal')
+          element.click()
   }
   obtenerEmpresas(){
     this.empresaService.getEmpresas()
@@ -274,7 +277,7 @@ export class EditarUsuarioComponent implements OnInit {
    contrasenasNoValidas() {
      const pass1 = this.passwordForm.get('password')?.value;
      const pass2 = this.passwordForm.get('password2')?.value;
-     if ( (pass1 !== pass2) && this.formSubmitted ) {
+     if ( (pass1 !== pass2) ) {
        return true;
      } else {
        return false;
@@ -288,7 +291,7 @@ export class EditarUsuarioComponent implements OnInit {
       const pass2Control = formGroup.get(pass2Name);
 
       if ( pass1Control!.value == pass2Control!.value ) {
-        pass2Control!.setErrors(null);
+        pass2Control!.setErrors({ noEsIgual: false });
       } else {
         pass2Control?.setErrors({ noEsIgual: true });
       }
