@@ -12,6 +12,7 @@ import { MatListModule } from '@angular/material/list';
 import { RouterLink } from '@angular/router';
 import { AppRoutingModule } from '../app-routing.module';
 import { FooterComponent } from './footer/footer.component';
+import { ModalImgComponent } from './modal-img/modal-img.component';
 
 
 
@@ -19,13 +20,15 @@ import { FooterComponent } from './footer/footer.component';
   declarations: [
     HeaderComponent,
     NavbarComponent,
-    FooterComponent
+    FooterComponent,
+    ModalImgComponent
   ],
 
   exports:[
     HeaderComponent,
     NavbarComponent,
-    FooterComponent
+    FooterComponent,
+    ModalImgComponent
   ],
   imports: [
     CommonModule,

@@ -8,7 +8,7 @@
       <div class="card-title p-4">
         <div class="card-title mb-3 ">
 
-          <h5> {{empresa.nombre}} - Area {{area.nombre}}</h5>
+          <h5> {{empresa?.nombre}} - Area {{area?.nombre}}</h5>
 
         </div>
         <hr>
@@ -91,7 +91,7 @@
         <table class="table">
           <thead>
             <tr>
-
+              <th class="w100">Avatar</th>
               <th scope="col">Nombre</th>
               <th scope="col">Numero Empleado</th>
               <th scope="col">Jefe Directo</th>
@@ -107,7 +107,12 @@
           </thead>
           <tbody class="text-left">
             <tr *ngFor="let empleado of empleados; index as i">
-
+              <td class="text-center">
+                <img [src]="empleado.img"
+                        alt="Avatar de usuario"
+                        class="avatar cursor"
+                        (click)="abrirModal(empleado)">
+              </td>
               <td>{{empleado.nombre}}</td>
               <td>{{empleado.numero_empleado}}</td>
               <td>{{empleado.numero_jefe}}</td>

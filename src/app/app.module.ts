@@ -36,7 +36,8 @@ import { AuthModule } from './auth/auth.module';
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    AuthModule
+    AuthModule,
+    SharedModule
   ],
   exports:[
     MatSidenavModule

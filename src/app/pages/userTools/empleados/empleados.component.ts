@@ -18,6 +18,7 @@ import { itemResponse } from 'src/app/interfaces/itemResponse.interface';
 import { ArrayResponse } from 'src/app/interfaces/arrayResponse.interface';
 import { ExpedientesService } from 'src/app/services/expedientes.service';
 import { TipoExpediente } from 'src/app/interfaces/tipo_expediente.interface';
+import { ModalImagenService } from 'src/app/services/modal-imagen.service';
 
 @Component({
   selector: 'app-empleados',
@@ -48,7 +49,8 @@ export class EmpleadosComponent implements OnInit {
     private expedientesService: ExpedientesService,
     private busquedaService: BusquedaService,
     private activatedRoute: ActivatedRoute,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private modalImagenService:ModalImagenService
   ) {}
 
   ngOnInit(): void {
@@ -271,5 +273,12 @@ export class EmpleadosComponent implements OnInit {
 changeTab(tab:string){
   this.tabSelected = tab
   console.log(this.tabSelected);
+}
+
+
+abrirModal( empleado: Empleado ) {
+  const {id,numero_empleado,img=''} =empleado
+  console.log(empleado);
+  this.modalImagenService.abrirModal(id,numero_empleado,empleado.Empresa.id, img);
 }
 }
