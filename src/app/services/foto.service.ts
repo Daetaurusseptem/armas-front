@@ -1,14 +1,18 @@
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 const base_url = environment.urlBack
+const urlFs = environment.urlFileServer
 @Injectable({
   providedIn: 'root'
 })
 export class FotoService {
 
-  constructor() { }
+  constructor(
+    private http:HttpClient
+  ) { }
 
-  async actualizarFoto(
+  actualizarFoto(
     archivo: File,
     empresaId: string,
     empleadoId: string,
@@ -16,34 +20,25 @@ export class FotoService {
 
   ) {
 
-    try {
+
       console.log(empleadoId);
       const url = `${ base_url }uploads/img/${empresaId}/${empleadoId}/${empNum}`;
       const formData = new FormData();
       formData.append('imagen', archivo);
 
-      const resp = await fetch( url, {
-        method: 'PUT',
-        headers: {
-          'x-token': localStorage.getItem('token') || ''
-        },
-        body: formData
-      });
-
-      const data = await resp.json();
-      console.log(data);
-
-      if ( data.ok ) {
-        return data.nombreArchivo;
-      } else {
-        console.log(data.msg);
-        return false;
-      }
-
-    } catch (error) {
-      console.log(error);
-      return false;
-    }
+      return this.http.put(url, formData, this.headers)
 
   }
+
+  get headers(): object{
+    return {
+      headers: {
+        'x-token': this.token
+      }
+    };
+  }
+  get token(): string{
+    return localStorage.getItem('token') || '';
+  }
+
 }

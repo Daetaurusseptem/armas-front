@@ -108,7 +108,7 @@
           <tbody class="text-left">
             <tr *ngFor="let empleado of empleados; index as i">
               <td class="text-center">
-                <img [src]="empleado.img"
+                <img [src]="this.getFoto(empleado.img)"
                         alt="Avatar de usuario"
                         class="avatar cursor"
                         (click)="abrirModal(empleado)">

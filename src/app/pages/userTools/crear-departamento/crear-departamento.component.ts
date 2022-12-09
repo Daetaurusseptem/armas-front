@@ -93,7 +93,7 @@ export class CrearDepartamentoComponent implements OnInit {
 
   campoNoValido(campo:string):boolean{
     console.log(campo+': '+this.registerDepartamentoForm.get(campo).valid);
-    if ( this.registerDepartamentoForm.get(campo)?.invalid && this.formSubmitted ) {
+    if ( this.registerDepartamentoForm.get(campo)?.invalid ) {
       return true;
     } else {
       return false;

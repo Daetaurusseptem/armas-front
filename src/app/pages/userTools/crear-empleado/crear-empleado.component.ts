@@ -28,10 +28,10 @@ export class CrearEmpleadoComponent implements OnInit {
 
 
   public registerEmpleadoForm = this.fb.group({
-    nombre:['', Validators.required],
-    numero_empleado:['',Validators.required],
-    numero_jefe:['', []],
-    departamentoId:['', [Validators.required]],
+    nombre:['', [Validators.required, Validators.minLength(5), Validators.maxLength(30)]],
+    numero_empleado:['',[Validators.required,Validators.minLength(1), Validators.maxLength(8)]],
+    numero_jefe:['', [Validators.required,Validators.minLength(1), Validators.maxLength(8)]],
+    departamentoId:['', [Validators.required, Validators.minLength(5), Validators.maxLength(9)]],
     empresaId:['', [Validators.required]],
     status:[1, [Validators.required]],
     actualizo:['admin', [Validators.required]],
@@ -132,7 +132,7 @@ export class CrearEmpleadoComponent implements OnInit {
 
 
   campoNoValido(campo:string):boolean{
-    if ( this.registerEmpleadoForm.get(campo)?.invalid && this.formSubmitted ) {
+    if ( this.registerEmpleadoForm.get(campo)?.invalid ) {
       return true;
     } else {
       return false;

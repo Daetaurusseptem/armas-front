@@ -35,7 +35,7 @@
 
 
           </div>
-          <div class="card-body alert alert-danger">
+          <div *ngIf="registerDepartamentoForm.invalid" class="card-body alert alert-danger">
             <p *ngIf="campoNoValido('id')" class="text-danger">id invalido - el id debe de ser de min. 5 digitos, max
               8 digitos</p>
             <p *ngIf="campoNoValido('nombre')" class="text-danger">nombre invalido</p>
@@ -43,7 +43,7 @@
             <p *ngIf="campoNoValido('empresaId')" class="text-danger">empresaId invalida</p>
           </div>
           <div class="d-grid gap-2">
-            <button type="submit"  name="" id="" class="btn btn-primary">Registrar</button>
+            <button [disabled]="registerDepartamentoForm.invalid" type="submit"  name="" id="" class="btn btn-primary">Registrar</button>
           </div>
 
         </form>

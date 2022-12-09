@@ -19,6 +19,9 @@ import { ArrayResponse } from 'src/app/interfaces/arrayResponse.interface';
 import { ExpedientesService } from 'src/app/services/expedientes.service';
 import { TipoExpediente } from 'src/app/interfaces/tipo_expediente.interface';
 import { ModalImagenService } from 'src/app/services/modal-imagen.service';
+import { environment } from 'src/environments/environment';
+
+const urlFS = environment.urlFileServer
 
 @Component({
   selector: 'app-empleados',
@@ -26,6 +29,7 @@ import { ModalImagenService } from 'src/app/services/modal-imagen.service';
   styleUrls: ['./empleados.component.css'],
 })
 export class EmpleadosComponent implements OnInit {
+  urlFotos = `${urlFS}/fotos/`
   tabSelected ='empleados'
   tiposExpedientesArea:TipoExpediente[]
   empleados: Empleado[] = [];
@@ -280,5 +284,9 @@ abrirModal( empleado: Empleado ) {
   const {id,numero_empleado,img=''} =empleado
   console.log(empleado);
   this.modalImagenService.abrirModal(id,numero_empleado,empleado.Empresa.id, img);
+}
+
+getFoto(foto:string){
+  return `${this.urlFotos}/${foto}`
 }
 }

@@ -3,12 +3,12 @@
     <div class="card">
       <div class="card-header">
         <div class="card-title">
-          Registro de usuarios
+          Registro de Empleados
         </div>
       </div>
       <div *ngIf="departamentos.length<=0" class="card-body">
         <div class="alert alert-danger" role="alert">
-          No se encontraron departamentos registrados, porfavor registre uno, antes de proceder a registra empleados, en este area
+          No se encontraron departamentos registrados, por favor registre uno, antes de proceder a registra empleados, en este area
         </div>
       </div>
       <div *ngIf="departamentos.length>0" class="card-body">
@@ -53,10 +53,10 @@
 
 
           </div>
-          <div class="card-body alert alert-danger">
-            <p *ngIf="campoNoValido('nombre')" class="text-danger">nombre invalido</p>
-            <p *ngIf="campoNoValido('numero_empleado')" class="text-danger">Numero Empleado invalido</p>
-            <p *ngIf="campoNoValido('jefeId')" class="text-danger">Jefe inmediato invalido</p>
+          <div *ngIf="registerEmpleadoForm.invalid" class="card-body alert alert-danger">
+            <p *ngIf="campoNoValido('nombre')" class="text-danger">nombre invalido - min. 5 caracteres, máx. 30</p>
+            <p *ngIf="campoNoValido('numero_empleado')" class="text-danger">Numero Empleado invalido - min. 1 carácter, máx. 8 caracteres</p>
+            <p *ngIf="campoNoValido('numero_jefe')" class="text-danger">Numero Jefe invalido - min. 1 carácter, máx. 8 caracteres</p>
             <p *ngIf="campoNoValido('departamentoId')" class="text-danger">Departamento requerido</p>
             <div *ngIf="!empresaId">
               <p *ngIf="campoNoValido('empresaId')" class="text-danger">Empresa requerida</p>
@@ -64,7 +64,7 @@
 
           </div>
           <div class="d-grid gap-2">
-            <button type="submit" name="" id="" class="btn btn-primary">Registrar</button>
+            <button [disabled]="registerEmpleadoForm.invalid" type="submit" name="" id="" class="btn btn-primary">Registrar</button>
           </div>
 
         </form>
