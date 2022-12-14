@@ -99,10 +99,10 @@ export class AgregarExpedienteComponent implements OnInit {
              title:'Expediente Agregado'
            })
            if( this.empresaId!== '' || undefined  || null ){
-             this.router.navigateByUrl(`/dashboard/${this.empresaId}/${this.areaId}/empleados-area`)
+             this.router.navigateByUrl(`/dashboard/${this.empresaId}/${this.areaId}/${this.empleadoId}/expediente`)
             }else{
 
-              this.router.navigateByUrl(`/dashboard`)
+              this.router.navigateByUrl(`/dashboard/`)
            }
 
            //   }

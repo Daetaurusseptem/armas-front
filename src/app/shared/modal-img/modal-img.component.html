@@ -12,15 +12,16 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title" id="exampleModalLabel1">Cargar imagen</h4>
-                <button type="button"
-                        class="close"
+                <a style="font-size: 2rem;" class="pointer text-danger" type=""
                         data-dismiss="modal"
                         aria-label="Close"
                         (click)="cerrarModal()">
-                        <span aria-hidden="true">×</span>
-                </button>
+                        <span aria-hidden="true">
+                          <i class="bi bi-x-circle"></i>
+                        </span>
+                </a>
             </div>
-            <div class="modal-body">
+            <div class="modal-body text-center">
 
                 <h3>Seleccione una imagen</h3>
 
@@ -29,7 +30,7 @@
                     <img *ngIf="imgTemp" [src]="imgTemp" class="img-avatar">
                 </div>
 
-                <input type="file" id="uploadFile"
+                <input class="mt-2" type="file" id="uploadFile"
                         (change)="cambiarImagen($any($event).target.files[0])">
 
 

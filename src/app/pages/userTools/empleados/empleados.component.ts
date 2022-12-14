@@ -2,9 +2,9 @@ import { Expediente } from 'src/app/interfaces/empresa.interface copy';
 import { Empleado } from './../../../interfaces/empleado.interface';
 import { BusquedaService } from 'src/app/services/busqueda.service';
 import { EmpleadosService } from './../../../services/empleados.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 
-import {map} from 'rxjs/operators';
+import {delay, map} from 'rxjs/operators';
 import { ActivatedRoute } from '@angular/router';
 import { Empresa } from 'src/app/interfaces/empresa.interface';
 import { EmpresaService } from 'src/app/services/empresa.service';
@@ -20,6 +20,10 @@ import { ExpedientesService } from 'src/app/services/expedientes.service';
 import { TipoExpediente } from 'src/app/interfaces/tipo_expediente.interface';
 import { ModalImagenService } from 'src/app/services/modal-imagen.service';
 import { environment } from 'src/environments/environment';
+import { Subscription } from 'rxjs';
+import { UsuariosService } from 'src/app/services/usuarios.service';
+import { Usuario } from 'src/app/interfaces/usuario.interface';
+import { UsuarioModel } from 'src/app/models/Usuario.model';
 
 const urlFS = environment.urlFileServer
 
@@ -28,8 +32,11 @@ const urlFS = environment.urlFileServer
   templateUrl: './empleados.component.html',
   styleUrls: ['./empleados.component.css'],
 })
-export class EmpleadosComponent implements OnInit {
-  urlFotos = `${urlFS}/fotos/`
+export class EmpleadosComponent implements OnInit, OnDestroy {
+  usuarioModel:UsuarioModel
+  permiso:'l'|'e'
+  public imgSubs: Subscription;
+  urlFotos = `${urlFS}fotos`
   tabSelected ='empleados'
   tiposExpedientesArea:TipoExpediente[]
   empleados: Empleado[] = [];
@@ -54,11 +61,20 @@ export class EmpleadosComponent implements OnInit {
     private busquedaService: BusquedaService,
     private activatedRoute: ActivatedRoute,
     private fb: FormBuilder,
-    private modalImagenService:ModalImagenService
-  ) {}
+    private modalImagenService:ModalImagenService,
+    private usuarioService: UsuariosService
+  ) {
+    this.usuarioModel = this.usuarioService.usuario
+  }
+
+  ngOnDestroy(): void {
+    this.imgSubs.unsubscribe();
+  }
 
   ngOnInit(): void {
-    this.activatedRoute.params.subscribe((params) => {
+    console.log('id de usuario' + this.usuarioService.id);
+
+      this.activatedRoute.params.subscribe((params) => {
       this.empresaId = params['idEmpresa'];
       this.areaId = params['idArea'];
       this.getTiposObligaorios(this.areaId, this.empresaId)
@@ -68,7 +84,17 @@ export class EmpleadosComponent implements OnInit {
       this.obtenerArea(this.areaId);
       this.getExpedientesArea();
       this.cambioDepartamento();
+      this.getTipoPermisoUsuario()
+      console.log(this.permiso);
+
+      this.imgSubs = this.modalImagenService.nuevaImagen
+      .pipe(delay(100))
+      .subscribe( img =>this.cargarEmpleados(this.empresaId));
+
     });
+
+
+
   }
 
   getExpedientesArea(){
@@ -166,7 +192,7 @@ export class EmpleadosComponent implements OnInit {
     //* NO TERMINO y SI DEPARTAMENTO
     if(
 
-        this.departamentoBusquedaSelect.get('termino').value == ''||undefined
+        this.departamentoBusquedaSelect.get('termino').value == ''|| undefined
 
       &&
       (this.departamentoBusquedaSelect.get('departamentoId').value !== 'nodep'
@@ -287,6 +313,22 @@ abrirModal( empleado: Empleado ) {
 }
 
 getFoto(foto:string){
-  return `${this.urlFotos}/${foto}`
+  if(foto!=null){
+
+    return `${this.urlFotos}/${foto}`
+  }
+  return `${this.urlFotos}/no-img.png`
+}
+
+getTipoPermisoUsuario(){
+
+  this.usuarioService.getUsuarioTipoPermiso(this.usuarioModel!.id, this.areaId)
+  .pipe(map(item=>{
+    console.log(item);
+    return item.tipo
+  }))
+  .subscribe(tipo=>{
+    this.permiso = tipo
+  })
 }
 }

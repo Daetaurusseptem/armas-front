@@ -14,12 +14,15 @@ import { MatListModule } from '@angular/material/list';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthModule } from './auth/auth.module';
+import { PipesModule } from './pipes/pipes.module';
+
+
 
 
 
 @NgModule({
   declarations: [
-    AppComponent,
+    AppComponent
   ],
   imports: [
     BrowserModule,
@@ -37,7 +40,8 @@ import { AuthModule } from './auth/auth.module';
     FormsModule,
     ReactiveFormsModule,
     AuthModule,
-    SharedModule
+    SharedModule,
+    PipesModule
   ],
   exports:[
     MatSidenavModule

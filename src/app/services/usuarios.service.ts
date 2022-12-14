@@ -10,6 +10,7 @@ import { registraUsuario } from '../interfaces/userRegister.interface';
 import {map, catchError} from 'rxjs/operators';
 import { UsuarioModel } from '../models/Usuario.model';
 import { binaryResponse } from '../interfaces/binaryResponse.interface';
+import { permisosUser } from '../interfaces/permisoUser.interface';
 
 
 
@@ -21,7 +22,7 @@ const urlBase= environment.urlBack
   providedIn: 'root'
 })
 export class UsuariosService {
-
+  public idUsuario:string
   public usuario!:UsuarioModel;
   url:string = `${urlBase}usuarios`
 
@@ -40,12 +41,12 @@ export class UsuariosService {
     return this.http.get(`${ urlBase }auth/renew`, this.headers)
     .pipe(
       map( (resp: any) => {
+        this.idUsuario = resp.id
         const id = resp.id;
-        console.log(resp);
-        console.log(id);
+
         const {nombre, usuario, img= '', role, Areas} = resp.usuario;
-        this.usuario = new UsuarioModel(id,usuario, nombre, role,'', img, Areas);
-        console.log(this.usuario);
+        this.usuario = new UsuarioModel(id, usuario, nombre, role,'', img, Areas);
+
         this.guardarLocalStorage(resp.token, resp.menu)
         return true;
       }),
@@ -59,6 +60,9 @@ export class UsuariosService {
   }
   getUsuario(id:string){
     return this.http.get<itemResponse>(`${this.url}/${id}`, this.headers);
+  }
+  getUsuarioTipoPermiso(idUsuario:string, idArea:string){
+    return this.http.get<permisosUser>(`${this.url}/permiso/${idArea}/${idUsuario}`, this.headers);
   }
   createUser(formData: registraUsuario){
     return this.http.post<binaryResponse>(this.url, formData, this.headers)

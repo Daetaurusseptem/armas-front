@@ -13,6 +13,12 @@ import {map} from 'rxjs/operators';
 import { Expediente } from 'src/app/interfaces/empresa.interface copy';
 import { saveAs } from 'file-saver';
 import Swal from 'sweetalert2';
+import { environment } from 'src/environments/environment';
+import { UsuariosService } from 'src/app/services/usuarios.service';
+import { Usuario } from 'src/app/interfaces/usuario.interface';
+import { UsuarioModel } from 'src/app/models/Usuario.model';
+
+const urlFS = environment.urlFileServer
 
 
 @Component({
@@ -21,8 +27,8 @@ import Swal from 'sweetalert2';
   styleUrls: ['./expediente-empleado.component.css']
 })
 export class ExpedienteEmpleadoComponent implements OnInit {
-
-
+  usuario:UsuarioModel
+  urlFotos = `${urlFS}fotos`
   areaId: string;
   empresaId: string;
   empleadoId: string;
@@ -36,8 +42,10 @@ export class ExpedienteEmpleadoComponent implements OnInit {
     private empleadoService:EmpleadosService,
     private areaService:AreaService,
     private activatedRoute: ActivatedRoute,
-    private downloadService:DownloadService
+    private downloadService:DownloadService,
+    private usuarioService:UsuariosService
   ) {
+    this.usuario = usuarioService.usuario;
     this.activatedRoute.params.subscribe((params) => {
       this.empresaId = params['idEmpresa'];
       this.areaId = params['idArea'];
@@ -49,8 +57,6 @@ export class ExpedienteEmpleadoComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
-
 
   }
 
@@ -122,6 +128,14 @@ export class ExpedienteEmpleadoComponent implements OnInit {
       }
     })
 
+  }
+
+  getFoto(foto:string){
+    if(foto!=null){
+
+      return `${this.urlFotos}/${foto}`
+    }
+    return `${this.urlFotos}/no-img.png`
   }
 }
 

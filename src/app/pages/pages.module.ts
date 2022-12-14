@@ -35,6 +35,7 @@ import { CrearTipoExpedientesComponent } from './userTools/crear-tipo-expediente
 import { DepartamentosUsuarioComponent } from './userTools/departamentos-usuario/departamentos-usuario.component';
 import { CrearDepartamentoAreaComponent } from './userTools/crear-departamento-area/crear-departamento-area.component';
 import { CrearDepartamentoComponent } from './userTools/crear-departamento/crear-departamento.component';
+import { PipesModule } from '../pipes/pipes.module';
 
 
 @NgModule({
@@ -80,7 +81,8 @@ import { CrearDepartamentoComponent } from './userTools/crear-departamento/crear
     NgxCaptchaModule,
     ReactiveFormsModule,
     FormsModule,
-    SharedModule
+    SharedModule,
+    PipesModule
   ]
 })
 export class PagesModule { }
