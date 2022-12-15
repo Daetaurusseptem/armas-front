@@ -31,7 +31,7 @@ import { EmpleadosDepartamentoComponent } from './navigationTools/empleados-depa
 import { EditarEmpleadoComponent } from './userTools/editar-empleado/editar-empleado.component';
 import { CrearTipoExpedientesComponent } from './userTools/crear-tipo-expedientes/crear-tipo-expedientes.component';
 import { CrearDepartamentoComponent } from './userTools/crear-departamento/crear-departamento.component';
-import { UserGuard } from '../guards/user.guard';
+import { EditarTipoExpedienteComponent } from './userTools/editar-tipo-expediente/editar-tipo-expediente.component';
 
 const childRoutes:Routes=[
   { path: '', component: InicioAdminComponent, data:{title: 'Dashboard'}},
@@ -57,7 +57,7 @@ const childRoutes:Routes=[
     { path: 'admin/departamentos/crear-departamento', component: CrearDepartamentosComponent,canActivate:[AdminGuard], data:{title: 'crear Usuario'}},
     { path: 'admin/departamentos/editar-departamento/:id', component: EditarDepartamentoComponent,canActivate:[AdminGuard], data:{title: 'crear Usuario'}},
 
-    //FINAL ADMIN TOOLS
+  //FINAL ADMIN TOOLS
 
 
 
@@ -69,17 +69,16 @@ const childRoutes:Routes=[
 
   //*Select Area de la Empresa
 
-  //*Empleados
-  { path: ':idEmpresa/areas-select', component: SeleccionAreaComponent, canActivate:[EmpresaPermisoGuard], data:{title: 'seleccione de empresa'}},
-  //*Select Empresa
-  { path: 'empresas', component: SeleccionEmpresaComponent, canActivate:[AdminOrUserGuard], data:{title: 'seleccione de empresa'}},
-  //*Select departamento
-  { path: 'departamentos/:empresaId', component: SeleccionDepartamentosComponent,canActivate:[AdminOrUserGuard], data:{title: 'seleccione de empresa'}},
-  //*Catalogo empleados por departamento
-  { path: ':empresaId/:departamentoId/empleados-departamento', component: EmpleadosDepartamentoComponent,canActivate:[AdminOrUserGuard], data:{title: 'seleccione de empresa'}},
-  //*Departamentos seleccion
-  { path: ':idEmpresa/:idArea/:idEmpleado/editar-empleado', component: EditarEmpleadoComponent,canActivate:[AdminOrUserGuard], data:{title: 'crear Empleado'}},
-
+    //*Empleados
+      { path: ':idEmpresa/areas-select', component: SeleccionAreaComponent, canActivate:[EmpresaPermisoGuard], data:{title: 'seleccione de empresa'}},
+        //*Select Empresa
+          { path: 'empresas', component: SeleccionEmpresaComponent, canActivate:[AdminOrUserGuard], data:{title: 'seleccione de empresa'}},
+          //*Select departamento
+            { path: 'departamentos/:empresaId', component: SeleccionDepartamentosComponent,canActivate:[AdminOrUserGuard], data:{title: 'seleccione de empresa'}},
+            	//*Catalogo empleados por departamento
+            	  { path: ':empresaId/:departamentoId/empleados-departamento', component: EmpleadosDepartamentoComponent,canActivate:[AdminOrUserGuard], data:{title: 'seleccione de empresa'}},
+                  //*Departamentos seleccion
+                    { path: ':idEmpresa/:idArea/:idEmpleado/editar-empleado', component: EditarEmpleadoComponent,canActivate:[AdminOrUserGuard], data:{title: 'crear Empleado'}},
 
 
           //*Select Area
@@ -92,6 +91,11 @@ const childRoutes:Routes=[
           { path: ':idEmpresa/:idArea/:idEmpleado/agregar-expediente', component: AgregarExpedienteComponent, canActivate:[AreaPermisosGuard], data:{title: 'seleccione de empresa'}},
           //*Agregar Departamento
           { path: ':idEmpresa/:idArea/agregar-departamento', component: CrearDepartamentoComponent, canActivate:[AreaPermisosGuard], data:{title: 'seleccione de empresa'}},
+
+          //*Editar Departamento
+          { path: ':idEmpresa/:idArea/:id/editar-departamento', component: EditarDepartamentoComponent, canActivate:[AreaPermisosGuard], data:{title: 'seleccione de empresa'}},
+          //*Editar Tipo Documento
+          { path: ':idEmpresa/:idArea/:idTipoExpediente/editar-tipo-expediente', component: EditarTipoExpedienteComponent, canActivate:[AreaPermisosGuard], data:{title: 'seleccione de empresa'}},
 
 
 

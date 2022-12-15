@@ -71,7 +71,7 @@
             </a>
           </div>
           <div class="text-end">
-            <a name="" id="" class="btn btn-success"
+            <a *ngIf="permiso=='e'" name="" id="" class="btn btn-success"
               [routerLink]="['/dashboard/',empresaId,areaId,empleadoId,'agregar-expediente']" role="button">
               <i class="bi bi-file-earmark-plus"></i> Añadir Expediente
             </a>
@@ -103,7 +103,7 @@
 
 
                 <td>
-                  <a (click)="eliminarExpediente(expediente.id)" style="margin-right: .5rem;" name="" id=""
+                  <a *ngIf="permiso=='e'" (click)="eliminarExpediente(expediente.id)" style="margin-right: .5rem;" name="" id=""
                     class="btn btn-danger" role="button">
                     <i class="bi bi-trash align-middle"></i>
                   </a>

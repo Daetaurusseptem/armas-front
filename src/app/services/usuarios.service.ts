@@ -42,9 +42,9 @@ export class UsuariosService {
     .pipe(
       map( (resp: any) => {
         this.idUsuario = resp.id
-        const id = resp.id;
 
-        const {nombre, usuario, img= '', role, Areas} = resp.usuario;
+        const {nombre, usuario, img= '', role, Areas, id} = resp.usuario;
+        console.log(resp.usuario);
         this.usuario = new UsuarioModel(id, usuario, nombre, role,'', img, Areas);
 
         this.guardarLocalStorage(resp.token, resp.menu)

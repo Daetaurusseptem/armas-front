@@ -39,10 +39,9 @@ export class EditarEmpleadoComponent implements OnInit {
 }
 
   empleadoForm = this.fb.group({
-    nombre:['',[Validators.required]],
-    numero_empleado:['',[Validators.required]],
-    numero_jefe:['',[Validators.required]],
-    departamentoId:['',[Validators.required]],
+    nombre:['',[Validators.required, Validators.minLength(5), Validators.maxLength(30)]],
+    numero_jefe:['',[Validators.required, Validators.minLength(1), Validators.maxLength(8)]],
+    departamentoId:['',[Validators.required, Validators.minLength(1), Validators.maxLength(8)]],
     status:[true,[Validators.required]]
   })
 
@@ -67,7 +66,7 @@ export class EditarEmpleadoComponent implements OnInit {
       this.empleado = empleado
       this.obtenerDepartamentosEmpresa(this.empresaId)
       console.log('empleado: '+ this.empleado);
-      this.empleadoForm.get('numero_empleado').patchValue(this.empleado.numero_empleado)
+
       this.empleadoForm.get('numero_jefe').patchValue(this.empleado.numero_jefe)
       this.empleadoForm.get('nombre').patchValue(this.empleado.nombre)
       this.empleadoForm.get('status').patchValue(this.empleado.status)
@@ -129,5 +128,13 @@ export class EditarEmpleadoComponent implements OnInit {
         }
       })
     })
+  }
+
+  campoNoValido(campo:string):boolean{
+    if ( this.empleadoForm.get(campo)?.invalid ) {
+      return true;
+    } else {
+      return false;
+    }
   }
 }

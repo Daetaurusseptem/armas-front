@@ -1,0 +1,47 @@
+<div class="row animate__animated animate__fadeIn">
+  <div class="col-8 mx-auto">
+    <div class="card text-center">
+      <div class="card-header">
+        <div class="card-title">
+          <h3>
+            Editar Tipo Expediente
+          </h3>
+        </div>
+      </div>
+      <div class="card-body">
+        <form id="registerUsuarioForm" [formGroup]="tipoExpedienteForm" (ngSubmit)="guardarTipoExpediente()">
+          <div class="mb-3">
+
+            <div class="mb-3">
+              <label for="" class="form-label text-left">Nombre del Tipo:</label>
+              <input type="text" name="" id="" class="form-control" placeholder="Ej: Jose Antonio Ramirez Salas"
+                formControlName="tipo">
+              <small id="" class="text-muted">Ingrese un descripción, mínimo 5 caracteres, máximo 50 caracteres</small>
+            </div>
+            <div class="mb-3">
+              <label for="" class="form-label">Descripción </label>
+              <input type="text" name="" id="" class="form-control" placeholder="Ej:812" aria-describedby="helpId"
+                formControlName="descripcion">
+              <small id="" class="text-muted">Ingrese una descripción, mínimo 5 caracteres, máximo 30 caracteres</small>
+            </div>
+
+            <div class="mb-3">
+              <label for="" class="form-label">Estatus: </label>
+              <input type="checkbox" name="" id="" class="form-check-input" placeholder="Ej:73" aria-describedby="helpId"
+                formControlName="obligatorio"><br>
+
+            </div>
+
+
+
+          </div>
+          <div *ngIf="tipoExpedienteForm.invalid" class="card-body alert alert-danger">
+            <p *ngIf="campoNoValido('tipo')" class="text-danger">Nombre del tipo no valido,  mín. 5 caracteres, máx. 50 caracteres</p>
+            <p *ngIf="campoNoValido('descripcion')" class="text-danger">Descripción no valida, mín. 5 caracteres, máx. 30 caracteres</p>
+
+          </div>
+          <div class="d-grid gap-2">
+            <button [disabled]="tipoExpedienteForm.invalid" type="submit" name="" id="" class="btn btn-primary">Guardar Cambios</button>
+          </div>
+
+        </form>

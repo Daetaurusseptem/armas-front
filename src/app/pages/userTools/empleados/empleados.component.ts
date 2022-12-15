@@ -24,6 +24,9 @@ import { Subscription } from 'rxjs';
 import { UsuariosService } from 'src/app/services/usuarios.service';
 import { Usuario } from 'src/app/interfaces/usuario.interface';
 import { UsuarioModel } from 'src/app/models/Usuario.model';
+import Swal from 'sweetalert2';
+import { binaryResponse } from 'src/app/interfaces/binaryResponse.interface';
+import { UtilitiesService } from 'src/app/services/utilities.service';
 
 const urlFS = environment.urlFileServer
 
@@ -33,8 +36,10 @@ const urlFS = environment.urlFileServer
   styleUrls: ['./empleados.component.css'],
 })
 export class EmpleadosComponent implements OnInit, OnDestroy {
-  usuarioModel:UsuarioModel
+  usuarioModel: UsuarioModel;
   permiso:'l'|'e'
+
+
   public imgSubs: Subscription;
   urlFotos = `${urlFS}fotos`
   tabSelected ='empleados'
@@ -62,7 +67,8 @@ export class EmpleadosComponent implements OnInit, OnDestroy {
     private activatedRoute: ActivatedRoute,
     private fb: FormBuilder,
     private modalImagenService:ModalImagenService,
-    private usuarioService: UsuariosService
+    private usuarioService: UsuariosService,
+    private utilitiesService: UtilitiesService
   ) {
     this.usuarioModel = this.usuarioService.usuario
   }
@@ -72,7 +78,6 @@ export class EmpleadosComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    console.log('id de usuario' + this.usuarioService.id);
 
       this.activatedRoute.params.subscribe((params) => {
       this.empresaId = params['idEmpresa'];
@@ -85,12 +90,10 @@ export class EmpleadosComponent implements OnInit, OnDestroy {
       this.getExpedientesArea();
       this.cambioDepartamento();
       this.getTipoPermisoUsuario()
-      console.log(this.permiso);
 
       this.imgSubs = this.modalImagenService.nuevaImagen
       .pipe(delay(100))
       .subscribe( img =>this.cargarEmpleados(this.empresaId));
-
     });
 
 
@@ -201,9 +204,7 @@ export class EmpleadosComponent implements OnInit, OnDestroy {
        )
 
       ){
-        console.log(this.departamentoBusquedaSelect.get('departamentoId').value);
 
-        console.log('NO TERMINO y SI DEPARTAMENTO');
 
 
 
@@ -214,13 +215,13 @@ export class EmpleadosComponent implements OnInit, OnDestroy {
            )
           .pipe(
             map(r=>{
-              console.log(r);
+
               return r.empleados
             })
             )
             .subscribe(empleados=>{
               this.empleados = empleados
-              console.log(empleados);
+
           })
       }
 
@@ -231,8 +232,7 @@ export class EmpleadosComponent implements OnInit, OnDestroy {
     this.expedientesService.getTipoObligatorioExpedientesArea(this.empresaId, this.areaId)
     .pipe(
       map(r=>{
-        console.log('asdasdas');
-        console.log('asdasdas'+r);
+
         return r.tiposExpediente})
     )
     .subscribe(tiposObligarios=>{
@@ -245,7 +245,7 @@ export class EmpleadosComponent implements OnInit, OnDestroy {
     this.departamentoBusquedaSelect
       .get('departamentoId')
       .valueChanges.subscribe((departamento) => {
-        console.log(departamento);
+
         this.departamentoSelected = departamento;
 
           this.buscar(this.departamentoBusquedaSelect.get('termino').value)
@@ -271,7 +271,7 @@ export class EmpleadosComponent implements OnInit, OnDestroy {
       .getDepartamentosEmpresa(id)
       .pipe(
         map((r: ArrayResponse) => {
-          console.log(r);
+
           return r.departamentos;
         })
       )
@@ -302,13 +302,12 @@ export class EmpleadosComponent implements OnInit, OnDestroy {
 }
 changeTab(tab:string){
   this.tabSelected = tab
-  console.log(this.tabSelected);
+
 }
 
 
 abrirModal( empleado: Empleado ) {
-  const {id,numero_empleado,img=''} =empleado
-  console.log(empleado);
+  const {id,numero_empleado,img=''} = empleado
   this.modalImagenService.abrirModal(id,numero_empleado,empleado.Empresa.id, img);
 }
 
@@ -321,14 +320,53 @@ getFoto(foto:string){
 }
 
 getTipoPermisoUsuario(){
-
+  this.usuarioModel = this.usuarioService.usuario
   this.usuarioService.getUsuarioTipoPermiso(this.usuarioModel!.id, this.areaId)
   .pipe(map(item=>{
-    console.log(item);
+
     return item.tipo
   }))
   .subscribe(tipo=>{
     this.permiso = tipo
+    console.log(this.permiso);
+  })
+}
+eliminarDepartamento(id:string){
+  Swal.fire({
+    title:'Esta Seguro?',
+    text:'Este proceso no se podrá deshacer',
+    icon:'warning',
+    showCancelButton:true,
+    cancelButtonColor:'#F56A52',
+    iconColor:'#F56A52',
+    allowEnterKey:false
+
+  })
+  .then(resp=>{
+    if(resp.isConfirmed){
+      this.departamentosService.deleteDepartamento(id)
+      .subscribe((resp:binaryResponse)=>{
+        console.log(resp);
+        if(resp.ok==true){
+          Swal.fire({
+            title:'Registro eliminado',
+            icon:'success'
+          })
+        }else if(resp.ok==false){
+          Swal.fire({
+            title:'El registro no pudo ser eliminado',
+            icon:'error'
+          })
+        }
+        this.utilitiesService.redirectTo(`/dashboard/${this.empresaId}/${this.areaId}/empleados-area`)
+      }, err=>{
+        Swal.fire({
+          title:'Registro no eliminado',
+          icon:'error',
+          text:err.error.msg
+        })
+      })
+    }
   })
 }
 }

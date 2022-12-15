@@ -27,6 +27,9 @@ const urlFS = environment.urlFileServer
   styleUrls: ['./expediente-empleado.component.css']
 })
 export class ExpedienteEmpleadoComponent implements OnInit {
+  usuarioModel: UsuarioModel;
+  permiso:'l'|'e'
+
   usuario:UsuarioModel
   urlFotos = `${urlFS}fotos`
   areaId: string;
@@ -45,8 +48,8 @@ export class ExpedienteEmpleadoComponent implements OnInit {
     private downloadService:DownloadService,
     private usuarioService:UsuariosService
   ) {
-    this.usuario = usuarioService.usuario;
-    this.activatedRoute.params.subscribe((params) => {
+      this.usuario = usuarioService.usuario;
+      this.activatedRoute.params.subscribe((params) => {
       this.empresaId = params['idEmpresa'];
       this.areaId = params['idArea'];
       this.empleadoId = params['idEmpleado'];
@@ -136,6 +139,18 @@ export class ExpedienteEmpleadoComponent implements OnInit {
       return `${this.urlFotos}/${foto}`
     }
     return `${this.urlFotos}/no-img.png`
+  }
+  getTipoPermisoUsuario(){
+    this.usuarioModel = this.usuarioService.usuario
+    this.usuarioService.getUsuarioTipoPermiso(this.usuarioModel!.id, this.areaId)
+    .pipe(map(item=>{
+
+      return item.tipo
+    }))
+    .subscribe(tipo=>{
+      this.permiso = tipo
+      console.log(this.permiso);
+    })
   }
 }
 

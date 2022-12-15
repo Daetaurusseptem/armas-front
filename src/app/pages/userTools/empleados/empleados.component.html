@@ -12,10 +12,8 @@
 
         </div>
         <hr>
-        <div class="col">
 
-        </div>
-        <div class="text-end">
+        <div *ngIf="permiso=='e'"  class="text-end">
           <a *ngIf="tabSelected=='empleados'" name="" id="" class="btn btn-success m-2 animate__animated animate__fadeIn" [routerLink]="['/dashboard/',empresaId,areaId, 'crear-empleado']"
             role="button">
             <i class="bi bi-person-plus"></i> Añadir Empleado
@@ -34,7 +32,9 @@
     </div>
 
     <div class="col-12 mx-auto text-center m-2">
+
       <div *ngIf="tabSelected=='empleados'" class="card">
+        <h1 class="mt-2">Búsqueda Empleado</h1>
         <form [formGroup]="departamentoBusquedaSelect">
           <div class="m-5">
             <label for="busqueda" class="form-label">Termino de Busqueda</label>
@@ -91,27 +91,35 @@
         <table class="table">
           <thead>
             <tr>
-              <th class="w100">Avatar</th>
+              <th class="w100">Foto</th>
               <th scope="col">Nombre</th>
               <th scope="col">Numero Empleado</th>
               <th scope="col">Jefe Directo</th>
               <th scope="col">Estatus</th>
               <th scope="col">Departamento</th>
-              <th scope="col">Editar</th>
+              <th scope="col" *ngIf="permiso=='e'">Editar</th>
               <th scope="col">Expediente</th>
               <th *ngIf="tiposExpedientesObligatorios.length>0" scope="col">
-                Documentacion obligatoria <br>
+                Documentación obligatoria <br>
 
               </th>
             </tr>
           </thead>
           <tbody class="text-left">
             <tr *ngFor="let empleado of empleados; index as i">
-              <td class="text-center">
+              <td *ngIf="permiso=='e'" class="text-center">
                 <img [src]="this.getFoto(empleado.img)"
                         alt="Avatar de usuario"
                         class="avatar pointer"
                         (click)="abrirModal(empleado)">
+
+              </td>
+              <td *ngIf="permiso=='l'" class="text-center">
+
+                <img [src]="this.getFoto(empleado.img)"
+                                alt="Avatar de usuario"
+                                class="avatar"
+                                >
               </td>
               <td>{{empleado.nombre}}</td>
               <td>{{empleado.numero_empleado}}</td>
@@ -121,8 +129,8 @@
 
 
               <td>{{empleado.Departamento.nombre}}</td>
-              <td>
-                <a style="margin-right: .5rem;"
+              <td *ngIf="permiso=='e'">
+                <a  style="margin-right: .5rem;"
                   [routerLink]="['/dashboard/',empleado.Empresa.id,areaId, empleado.id,'editar-empleado']" name="" id=""
                   class="btn btn-primary" role="button">
                   <i class="bi bi-pencil align-middle"></i>
@@ -176,7 +184,7 @@
             <tr>
 
               <th scope="col">Nombre</th>
-              <th scope="col">descripcion</th>
+              <th scope="col">descripción</th>
 
               <th scope="col">Editar</th>
 
@@ -191,8 +199,12 @@
 
               <td>
                 <a [routerLink]="['/dashboard/',departamento.empresaId,areaId, departamento.id,'editar-departamento']"
+
                   name="" id="" class="btn btn-primary" role="button">
                   <i class="bi bi-pencil"></i>
+                </a>
+                <a style="margin-left:1rem;" (click)="eliminarDepartamento(departamento.id)" name="" id="" class="btn btn-danger" role="button">
+                  <i class="bi bi-trash align-middle"></i>
                 </a>
               </td>
               <td>
@@ -237,7 +249,7 @@
 
 
               <td>
-                <a [routerLink]="['/dashboard/',empresaId,areaId, tipoExp.id_tipo,'editar-departamento']" name="" id=""
+                <a [routerLink]="['/dashboard/',empresaId,areaId, tipoExp.id_tipo,'editar-tipo-expediente']" name="" id=""
                   class="btn btn-primary" role="button">
                   <i class="bi bi-pencil"></i>
                 </a>

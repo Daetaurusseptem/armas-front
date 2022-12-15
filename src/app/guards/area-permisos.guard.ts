@@ -45,7 +45,7 @@ export class AreaPermisosGuard implements CanActivate {
        this.router.navigateByUrl('/')
        return false;
      } else {
-       console.log('Permitida');
+
        return true;
      }
   }
@@ -63,14 +63,14 @@ export class AreaPermisosGuard implements CanActivate {
           })
 
 
-          console.log('areas permitidas', this.areasConPermiso);
+
 
           //*comprobar si areasConPermiso incluye el id de el area actual
 
           if(this.areasConPermiso.includes(areaId)){
 
 
-          console.log('si');
+
 
           resp = true
           this.areasConPermiso=[]

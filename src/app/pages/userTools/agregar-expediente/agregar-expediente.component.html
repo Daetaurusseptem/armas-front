@@ -6,7 +6,7 @@
           Agregar Expediente
         </div>
       </div>
-      <div class="card-body">
+      <div *ngIf="permiso=='e'" class="card-body">
         <form
               id="registerUsuarioForm"
               [formGroup]="expedienteForm"

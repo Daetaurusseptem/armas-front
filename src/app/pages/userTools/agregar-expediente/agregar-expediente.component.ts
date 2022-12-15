@@ -14,6 +14,8 @@ import {map} from 'rxjs/operators';
 import { ExpedientesService } from 'src/app/services/expedientes.service';
 import { TipoExpediente } from 'src/app/interfaces/tipo_expediente.interface';
 import Swal from 'sweetalert2';
+import { UsuarioModel } from 'src/app/models/Usuario.model';
+import { UsuariosService } from 'src/app/services/usuarios.service';
 
 
 @Component({
@@ -25,7 +27,8 @@ export class AgregarExpedienteComponent implements OnInit {
 
   public archivoSubir!:File
   public archivoActualizar!:any
-
+  usuarioModel: UsuarioModel;
+  permiso:'l'|'e'
   areaId: string;
   empresaId: string;
   empleadoId:string;
@@ -50,7 +53,8 @@ export class AgregarExpedienteComponent implements OnInit {
     private departamentosService: DepartamentoService,
     private activatedRoute: ActivatedRoute,
     private fb: FormBuilder,
-    private router:Router
+    private router:Router,
+    private usuarioService:UsuariosService
   ) {}
 
   ngOnInit(): void {
@@ -202,5 +206,17 @@ export class AgregarExpedienteComponent implements OnInit {
     } else {
       return false;
     }
+  }
+  getTipoPermisoUsuario(){
+    this.usuarioModel = this.usuarioService.usuario
+    this.usuarioService.getUsuarioTipoPermiso(this.usuarioModel!.id, this.areaId)
+    .pipe(map(item=>{
+
+      return item.tipo
+    }))
+    .subscribe(tipo=>{
+      this.permiso = tipo
+      console.log(this.permiso);
+    })
   }
 }

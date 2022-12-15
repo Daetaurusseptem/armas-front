@@ -36,6 +36,8 @@ import { DepartamentosUsuarioComponent } from './userTools/departamentos-usuario
 import { CrearDepartamentoAreaComponent } from './userTools/crear-departamento-area/crear-departamento-area.component';
 import { CrearDepartamentoComponent } from './userTools/crear-departamento/crear-departamento.component';
 import { PipesModule } from '../pipes/pipes.module';
+import { EditarTipoExpedienteComponent } from './userTools/editar-tipo-expediente/editar-tipo-expediente.component';
+
 
 
 @NgModule({
@@ -68,7 +70,9 @@ import { PipesModule } from '../pipes/pipes.module';
        DepartamentosUsuarioComponent,
        EditarDepartamentoComponent,
        CrearDepartamentoAreaComponent,
-       CrearDepartamentoComponent
+       CrearDepartamentoComponent,
+       EditarTipoExpedienteComponent,
+
 
 
 

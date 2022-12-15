@@ -23,6 +23,7 @@ export class AuthGuardGuard implements CanActivate {
             console.log('token invalido');
           }
 
+
         })
       );
   }
