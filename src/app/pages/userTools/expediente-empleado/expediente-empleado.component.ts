@@ -55,6 +55,7 @@ export class ExpedienteEmpleadoComponent implements OnInit {
       this.empleadoId = params['idEmpleado'];
       this.obtenerEmpleado(this.empleadoId)
       this.obtenerExpedientes(this.empresaId, this.areaId, this.empleadoId)
+      this.getTipoPermisoUsuario()
 
     });
   }

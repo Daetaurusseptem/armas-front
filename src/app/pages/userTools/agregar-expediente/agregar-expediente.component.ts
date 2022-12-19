@@ -69,6 +69,7 @@ export class AgregarExpedienteComponent implements OnInit {
       this.obtenerArea(this.areaId);
       this.obtenerEmpleado(this.empleadoId);
       this.obtenerTiposExpedientes(this.empresaId,this.areaId);
+      this.getTipoPermisoUsuario();
     });
   }
 

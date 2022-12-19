@@ -10,7 +10,16 @@
 
           <h5> {{empresa?.nombre}} - Area {{area?.nombre}}</h5>
 
+          <h3 *ngIf="permiso=='e'"><span class="badge bg-success">
+            <i class="bi bi-pencil"></i>
+            MODO ESCRITURA
+          </span></h3>
+          <h3 *ngIf="permiso=='l'"><span class="badge bg-warning">
+            <i class="bi bi-book"></i>
+            MODO LECTURA
+          </span></h3>
         </div>
+
         <hr>
 
         <div *ngIf="permiso=='e'"  class="text-end">
@@ -175,7 +184,7 @@
     <!-- DEPARTAMENTOS -->
     <div *ngIf="tabSelected=='departamentos'" class="card animate__animated animate__fadeIn" style="margin-top: 1rem;">
 
-      <div *ngIf="empleados.length<=0" class="alert alert-secondary">
+      <div *ngIf="departamentos.length<=0" class="alert alert-secondary">
         No existen empleados con los parametros ingresados
       </div>
       <div class="table-responsive">
@@ -186,7 +195,7 @@
               <th scope="col">Nombre</th>
               <th scope="col">descripción</th>
 
-              <th scope="col">Editar</th>
+              <th *ngIf="permiso=='e'" scope="col">Editar</th>
 
             </tr>
           </thead>
@@ -197,13 +206,13 @@
               <td>{{departamento.descripcion}}</td>
 
 
-              <td>
+              <td *ngIf="permiso=='e'">
                 <a [routerLink]="['/dashboard/',departamento.empresaId,areaId, departamento.id,'editar-departamento']"
 
                   name="" id="" class="btn btn-primary" role="button">
                   <i class="bi bi-pencil"></i>
                 </a>
-                <a style="margin-left:1rem;" (click)="eliminarDepartamento(departamento.id)" name="" id="" class="btn btn-danger" role="button">
+                <a  style="margin-left:1rem;" (click)="eliminarDepartamento(departamento.id)" name="" id="" class="btn btn-danger" role="button">
                   <i class="bi bi-trash align-middle"></i>
                 </a>
               </td>
@@ -231,7 +240,7 @@
               <th scope="col">descripcion</th>
               <th scope="col">obligatorio</th>
               <th scope="col">actualizo</th>
-              <th scope="col">Editar</th>
+              <th *ngIf="permiso=='e'" scope="col">Editar</th>
 
             </tr>
           </thead>
@@ -249,7 +258,7 @@
 
 
               <td>
-                <a [routerLink]="['/dashboard/',empresaId,areaId, tipoExp.id_tipo,'editar-tipo-expediente']" name="" id=""
+                <a *ngIf="permiso=='e'"[routerLink]="['/dashboard/',empresaId,areaId, tipoExp.id_tipo,'editar-tipo-expediente']" name="" id=""
                   class="btn btn-primary" role="button">
                   <i class="bi bi-pencil"></i>
                 </a>

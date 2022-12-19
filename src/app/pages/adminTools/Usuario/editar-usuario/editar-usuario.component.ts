@@ -291,7 +291,7 @@ export class EditarUsuarioComponent implements OnInit {
       const pass2Control = formGroup.get(pass2Name);
 
       if ( pass1Control!.value == pass2Control!.value ) {
-        pass2Control!.setErrors({ noEsIgual: false });
+        pass2Control!.setErrors(null);
       } else {
         pass2Control?.setErrors({ noEsIgual: true });
       }
