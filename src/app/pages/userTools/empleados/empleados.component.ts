@@ -331,6 +331,82 @@ getTipoPermisoUsuario(){
     console.log(this.permiso);
   })
 }
+eliminarTipoExpediente(id:string){
+  Swal.fire({
+    title:'Esta Seguro?',
+    text:'Este proceso no se podrá deshacer',
+    icon:'warning',
+    showCancelButton:true,
+    cancelButtonColor:'#F56A52',
+    iconColor:'#F56A52',
+    allowEnterKey:false
+
+  })
+  .then(resp=>{
+    if(resp.isConfirmed){
+      this.expedientesService.eliminarTipoExpediente(id)
+      .subscribe((resp:binaryResponse)=>{
+        console.log(resp);
+        if(resp.ok==true){
+          Swal.fire({
+            title:'Registro eliminado',
+            icon:'success'
+          })
+        }else if(resp.ok==false){
+          Swal.fire({
+            title:'El registro no pudo ser eliminado',
+            icon:'error'
+          })
+        }
+        this.utilitiesService.redirectTo(`/dashboard/${this.empresaId}/${this.areaId}/empleados-area`)
+      }, err=>{
+        Swal.fire({
+          title:'Registro no eliminado',
+          icon:'error',
+          text:err.error.msg
+        })
+      })
+    }
+  })
+}
+eliminarEmpleado(id:string){
+  Swal.fire({
+    title:'Esta Seguro?',
+    text:'Este proceso no se podrá deshacer',
+    icon:'warning',
+    showCancelButton:true,
+    cancelButtonColor:'#F56A52',
+    iconColor:'#F56A52',
+    allowEnterKey:false
+
+  })
+  .then(resp=>{
+    if(resp.isConfirmed){
+      this.empleadoService.deleteEmpleado(id)
+      .subscribe((resp:binaryResponse)=>{
+        console.log(resp);
+        if(resp.ok==true){
+          Swal.fire({
+            title:'Registro eliminado',
+            icon:'success'
+          })
+        }else if(resp.ok==false){
+          Swal.fire({
+            title:'El registro no pudo ser eliminado',
+            icon:'error'
+          })
+        }
+        this.utilitiesService.redirectTo(`/dashboard/${this.empresaId}/${this.areaId}/empleados-area`)
+      }, err=>{
+        Swal.fire({
+          title:'Registro no eliminado',
+          icon:'error',
+          text:err.error.msg
+        })
+      })
+    }
+  })
+}
 eliminarDepartamento(id:string){
   Swal.fire({
     title:'Esta Seguro?',

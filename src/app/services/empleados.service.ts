@@ -1,3 +1,4 @@
+import { binaryResponse } from 'src/app/interfaces/binaryResponse.interface';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
@@ -27,26 +28,24 @@ export class EmpleadosService {
 
   }
   getEmpleadosDepartamentoId(id: string) {
-    return this.http.get<ArrayResponse>(`${this.url}/departamento/${id}`);
+    return this.http.get<ArrayResponse>(`${this.url}/departamento/${id}`, this.headers);
   }
   getEmpleadosEmpresaId(id: string) {
 
-    return this.http.get<ArrayResponse>(`${this.url}/empresa/${id}`);
+    return this.http.get<ArrayResponse>(`${this.url}/empresa/${id}`, this.headers);
   }
   getEmpleados() {
-    return this.http.get<ArrayResponse>(`${this.url}`);
+    return this.http.get<ArrayResponse>(`${this.url}`, this.headers);
   }
   getEmpleado(id: string) {
-    return this.http.get<itemResponse>(`${this.url}/${id}`)
+    return this.http.get<itemResponse>(`${this.url}/${id}`, this.headers)
 
   }
   createEmpleado(formData: EmpleadoRegistrar) {
-    return this.http.post(this.url, formData)
-    // .pipe(
-    //   tap( (resp: any) => {
-    //     this.guardarLocalStorage(resp.token, resp.menu)
-    //   })
-    // );
+    return this.http.post(this.url, formData, this.headers)
+  }
+  deleteEmpleado(idEmpleado:string){
+    return this.http.delete<binaryResponse>(`${this.url}/${idEmpleado}`,  this.headers)
   }
   buscarEmpleadoEmpresa(idEmpresa: string, termino?: string, idDepartamento?:string) {
     if(idDepartamento && termino){
@@ -89,7 +88,7 @@ export class EmpleadosService {
   }
   updateEmpleado(empleadoId: string, formData: updateDatosUsuario) {
 
-    return this.http.put(`${this.url}/${empleadoId}`, formData);
+    return this.http.put(`${this.url}/${empleadoId}`, formData, this.headers);
   }
 
 }
